@@ -1,53 +1,124 @@
-# LOGSET — Workout Set, Rest & Day Tracker
+# CHIKISET — ระบบบันทึกการออกกำลังกาย ติดตามเซต พัก และตารางฝึก
 
-A single-file HTML workout tracker: log sets and reps, run a rest timer, and
-build your own training-day schedule (e.g. a 5-day split) with per-date
-history.
+CHIKISET เป็นเว็บแอปพลิเคชันสำหรับบันทึกการออกกำลังกายแบบไฟล์ HTML เดียว (Single-file HTML) รองรับการบันทึกน้ำหนัก จำนวนครั้ง (Reps) ในแต่ละเซต ระบบจับเวลาพัก และการสร้างตารางฝึกส่วนตัว เช่น โปรแกรมฝึกแบบ 5 วัน (5-Day Split) พร้อมบันทึกประวัติการออกกำลังกายแยกตามวันที่
 
-วิธีเปิดใช้งาน
-คอม (Windows/Mac): หาไฟล์ workout-tracker.html ในโฟลเดอร์ Downloads แล้วดับเบิลคลิก — มันจะเปิดในเบราว์เซอร์ (Chrome/Edge/Safari) อัตโนมัติ ใช้ได้เลย
-มือถือ (Android/iOS): เปิดแอป Files แล้วแตะไฟล์ → เลือก "เปิดด้วย" Chrome หรือ Safari
+> **หมายเหตุ:** เครื่องมือนี้เป็นโปรเจกต์ส่วนบุคคล ไม่ใช่โปรแกรมฝึกอย่างเป็นทางการ และไม่สามารถใช้ทดแทนคำแนะนำจากผู้ฝึกสอนหรือบุคลากรทางการแพทย์ ควรปรับน้ำหนักและปริมาณการฝึกให้เหมาะสมกับสภาพร่างกายของแต่ละบุคคล
 
-**Note:** Unofficial personal tool. Not a substitute for coaching or medical
-advice — adjust weights and volume to your own condition.
+---
 
-## Usage
+## 🚀 วิธีเปิดใช้งาน
 
-Open `workout-tracker.html` in any browser — no install, no server needed.
+### คอมพิวเตอร์ (Windows / macOS)
 
-### คลังท่าออกกำลังกาย (Exercise Library)
-- ~140 exercises across 12 muscle-group categories (Chest, Back, Shoulders,
-  Biceps, Triceps, Forearms, Abs/Core, Quads, Hamstrings, Glutes, Calves,
-  Cardio & Plyo, Olympic & Power).
-- Filter by category tab or search by name.
-- Tap an exercise to expand it, log weight (kg) and reps per set, delete sets
-  individually.
+1. ค้นหาไฟล์ `workout-tracker.html`
+2. ดับเบิลคลิกที่ไฟล์
+3. ระบบจะเปิดผ่านเว็บเบราว์เซอร์ (เช่น Chrome, Microsoft Edge หรือ Safari) พร้อมใช้งานทันที
 
-### ตารางของฉัน (My Schedule)
-- Create your own training days (e.g. `Day 1 - Chest/Triceps`).
-- Add exercises to each day from the full library via the picker.
-- Each day has a date selector (defaults to today) — sets are logged **per
-  date**, so history doesn't overwrite itself.
-- History chips let you jump back to any previously logged date for that day.
-- A 7-day streak strip shows which days this week you actually trained.
+### โทรศัพท์มือถือ (Android / iOS)
 
-### Rest Timer
-- Floating widget, collapsible.
-- Presets: 30 / 60 / 90 / 120 / 180 seconds, or trigger straight from any
-  exercise's "⏱ พัก 90s" button.
-- Beeps (and vibrates, on supported devices) when the countdown hits zero.
+1. เปิดแอป **Files**
+2. แตะไฟล์ `workout-tracker.html`
+3. เลือกเปิดด้วย Chrome หรือ Safari
 
-## Data & storage
+ไม่ต้องติดตั้งโปรแกรมหรือรันเซิร์ฟเวอร์เพิ่มเติม
 
-Everything — logged sets, custom days, and session history — is saved to your
-browser's `localStorage`. It stays on this device/browser only:
-- Clearing browser data or switching devices resets everything.
-- Nothing is sent over the network; all calculation and storage is local.
+---
 
-## What it does not do (yet)
+## ✨ คุณสมบัติ
 
-- No cloud sync or multi-device support.
-- No progress charts (e.g. weight lifted over time per exercise).
-- No export to PDF/CSV.
+### 🏋️ คลังท่าออกกำลังกาย (Exercise Library)
 
-Let me know if you'd like any of these added.
+- รวมท่าออกกำลังกายกว่า **140 ท่า**
+- ครอบคลุม **12 กลุ่มกล้ามเนื้อ**
+  - หน้าอก (Chest)
+  - หลัง (Back)
+  - ไหล่ (Shoulders)
+  - ไบเซปส์ (Biceps)
+  - ไตรเซปส์ (Triceps)
+  - ปลายแขน (Forearms)
+  - หน้าท้อง (Abs/Core)
+  - ต้นขาด้านหน้า (Quads)
+  - ต้นขาด้านหลัง (Hamstrings)
+  - สะโพก (Glutes)
+  - น่อง (Calves)
+  - คาร์ดิโอและพลัยโอเมตริก (Cardio & Plyometric)
+  - Olympic & Power
+
+- ค้นหาท่าออกกำลังกายตามชื่อ
+- กรองตามหมวดหมู่
+- บันทึกน้ำหนักและจำนวนครั้งในแต่ละเซต
+- ลบเซตที่ไม่ต้องการได้
+
+---
+
+### 📅 ตารางฝึกส่วนตัว (My Schedule)
+
+- สร้างตารางฝึกได้ตามต้องการ
+- ตัวอย่าง เช่น
+  - Day 1 - Chest / Triceps
+  - Day 2 - Back / Biceps
+- เพิ่มท่าออกกำลังกายจากคลังท่าได้
+- รองรับการเลือกวันที่ของการฝึก
+- บันทึกประวัติแยกตามแต่ละวัน
+- สามารถย้อนดูประวัติการฝึกย้อนหลังได้
+- แสดงสถิติการฝึกต่อเนื่อง (Training Streak) ภายใน 7 วัน
+
+---
+
+### ⏱️ ระบบจับเวลาพัก (Rest Timer)
+
+- วิดเจ็ตลอย (Floating Widget)
+- สามารถย่อหรือขยายได้
+- ตั้งเวลาล่วงหน้าได้
+  - 30 วินาที
+  - 60 วินาที
+  - 90 วินาที
+  - 120 วินาที
+  - 180 วินาที
+- สามารถเริ่มจับเวลาพักจากหน้าท่าออกกำลังกายได้ทันที
+- แจ้งเตือนด้วยเสียง และสั่นบนอุปกรณ์ที่รองรับเมื่อครบเวลา
+
+---
+
+## 💾 การจัดเก็บข้อมูล
+
+ข้อมูลทั้งหมดจะถูกบันทึกไว้ใน **Local Storage** ของเว็บเบราว์เซอร์ ได้แก่
+
+- ประวัติการออกกำลังกาย
+- ตารางฝึก
+- เซตและจำนวนครั้ง
+- ประวัติย้อนหลัง
+
+ข้อมูลทั้งหมดจะถูกเก็บไว้เฉพาะบนอุปกรณ์และเบราว์เซอร์ที่ใช้งาน
+
+**หมายเหตุ**
+
+- หากล้างข้อมูลเบราว์เซอร์ ข้อมูลทั้งหมดจะถูกลบ
+- ไม่รองรับการซิงก์ข้อมูลระหว่างอุปกรณ์
+- ไม่มีการส่งข้อมูลออกไปยังเซิร์ฟเวอร์ภายนอก
+
+---
+
+## 📋 ข้อจำกัดของระบบ
+
+- ไม่รองรับ Cloud Sync
+- ไม่มีกราฟแสดงพัฒนาการของการฝึก
+- ไม่รองรับการส่งออกข้อมูลเป็น PDF หรือ CSV
+
+---
+
+## 🛠️ เทคโนโลยีที่ใช้
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+---
+
+## 📁 โครงสร้างไฟล์
+
+```text
+/
+├── workout-tracker.html
+└── README.md
+```
