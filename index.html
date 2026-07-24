@@ -488,6 +488,30 @@ h1 span {
 
 .cat-title:first-child { margin-top: 0; }
 
+/* Simple Clean Exercise Card for Library View */
+.ex-card-simple {
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.ex-card-simple:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+.ex-name { font-size: 14.5px; font-weight: 600; color: var(--text-main); }
+.ex-eq { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+
+/* Full Expandable Exercise Card for Schedule View */
 .ex-card {
   background: var(--panel-bg);
   backdrop-filter: var(--glass-blur);
@@ -512,9 +536,6 @@ h1 span {
   cursor: pointer;
   gap: 10px;
 }
-
-.ex-name { font-size: 14.5px; font-weight: 600; color: var(--text-main); }
-.ex-eq { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
 
 .set-count {
   font-family: 'JetBrains Mono', monospace;
@@ -1472,48 +1493,23 @@ function renderLibrary(){
   if (!any) libView.innerHTML = '<div class="empty">ไม่พบท่าออกกำลังกายที่คุณค้นหา ลองคำอื่นดูครับ</div>';
 }
 
+/* Simple Clean Card for Browsing Library View (No set recorder rows here) */
 function buildExCard(cat,name,eq){
-  const k = keyFor(cat,name);
-  const sets = logs[k] || [];
-  const card = document.createElement('div'); card.className='ex-card';
+  const card = document.createElement('div'); card.className='ex-card-simple';
   card.innerHTML = `
-    <div class="ex-head">
-      <div><div class="ex-name">${name}</div><div class="ex-eq">${eq}</div></div>
-      <div class="ex-meta"><span class="set-count">${sets.length} เซ็ต</span><span class="chevron">▾</span></div>
+    <div>
+      <div class="ex-name">${name}</div>
+      <div class="ex-eq">${eq}</div>
     </div>
-    <div class="ex-body">
-      <div class="set-labels"><span>#</span><span>น้ำหนัก (กก.)</span><span>จำนวนครั้ง</span><span></span></div>
-      <div class="sets-holder"></div>
-      <div class="ex-actions">
-        <button class="btn-mini accent" data-act="add">+ เพิ่มเซ็ต</button>
-        <button class="btn-mini" data-act="rest">⏱ พัก 90s</button>
-      </div>
-    </div>`;
-  const setsHolder = card.querySelector('.sets-holder');
-  function paint(){
-    setsHolder.innerHTML='';
-    sets.forEach((s,i)=>{
-      const row = document.createElement('div'); row.className='set-row';
-      row.innerHTML = `<span class="idx">${i+1}</span>
-        <input type="number" step="0.5" placeholder="กก." value="${s.w??''}">
-        <input type="number" step="1" placeholder="ครั้ง" value="${s.r??''}">
-        <button class="del-set">×</button>`;
-      const [,wInp,rInp,delBtn] = row.children;
-      wInp.addEventListener('input', e=>{ s.w=e.target.value; logs[k]=sets; saveLogs(); });
-      rInp.addEventListener('input', e=>{ s.r=e.target.value; logs[k]=sets; saveLogs(); });
-      delBtn.addEventListener('click', ()=>{ sets.splice(i,1); logs[k]=sets; saveLogs();
-        card.querySelector('.set-count').textContent=sets.length+' เซ็ต'; paint(); });
-      setsHolder.appendChild(row);
-    });
-  }
-  paint();
-  card.querySelector('.ex-head').addEventListener('click', ()=> card.classList.toggle('open'));
-  card.querySelector('[data-act="add"]').addEventListener('click', e=>{
-    e.stopPropagation(); sets.push({w:'',r:''}); logs[k]=sets; saveLogs();
-    card.querySelector('.set-count').textContent=sets.length+' เซ็ต'; paint();
-  });
-  card.querySelector('[data-act="rest"]').addEventListener('click', e=>{
-    e.stopPropagation(); startHeaderTimer(90);
+    <button class="btn-mini accent" data-act="quickadd" title="เพิ่มท่านี้เข้าตารางฝึก">+ เพิ่มเข้าตาราง</button>
+  `;
+  card.querySelector('[data-act="quickadd"]').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    if(schedule.length === 0) {
+      alert('คุณยังไม่มีวันฝึกในหน้า "ตารางของฉัน" — สามารถกดสลับหน้า "ตารางของฉัน" เพื่อเลือกสร้างโปรแกรมสำเร็จรูปใน 1 คลิกได้เลยครับ!');
+    } else {
+      openPicker(schedule[0]);
+    }
   });
   return card;
 }
