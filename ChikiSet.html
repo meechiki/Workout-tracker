@@ -852,13 +852,13 @@ h1 span {
 
 .streak-day.hit { background: var(--accent-subtle); border-color: var(--accent-primary); color: var(--accent-primary); font-weight: 700; }
 
-/* Quiz Recommendation Modal Styles */
+/* Personal Trainer Quiz Recommendation Modal Styles */
 .quiz-box {
   background: var(--panel-solid);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  width: 100%; max-width: 520px;
-  padding: 22px; max-height: 85vh; overflow-y: auto;
+  width: 100%; max-width: 580px;
+  padding: 22px; max-height: 88vh; overflow-y: auto;
   box-shadow: var(--shadow-lg);
 }
 
@@ -1999,17 +1999,17 @@ headerTimerBtn.addEventListener('click', () => {
   }
 });
 
-/* ================= PERSONALIZED QUIZ RECOMMENDATION ENGINE ================= */
+/* ================= PERSONAL TRAINER QUIZ ENGINE ================= */
 const quizOverlay = document.getElementById('quizOverlay');
 const quizClose = document.getElementById('quizClose');
 const quizContent = document.getElementById('quizContent');
 
-let quizAnswers = { goal: null, days: null, location: null, level: null };
+let quizAnswers = { goal: null, days: null, location: null, bench: null, focus: null, level: null };
 let quizStep = 1;
 
 function openQuizModal() {
   quizStep = 1;
-  quizAnswers = { goal: null, days: null, location: null, level: null };
+  quizAnswers = { goal: null, days: null, location: null, bench: null, focus: null, level: null };
   quizOverlay.classList.add('open');
   renderQuizStep();
 }
@@ -2022,27 +2022,27 @@ function renderQuizStep() {
 
   if (quizStep === 1) {
     quizContent.innerHTML = `
-      <div class="quiz-step-title">คำถามที่ 1/4: เป้าหมายหลักในการฝึกของคุณคืออะไร?</div>
-      <div class="quiz-step-desc">เลือกรูปแบบผลลัพธ์ที่คุณต้องการเน้นย้ำมากที่สุด</div>
+      <div class="quiz-step-title">คำถามที่ 1/6: เป้าหมายหลัก & ผลลัพธ์ที่คุณต้องการ?</div>
+      <div class="quiz-step-desc">เทรนเนอร์จะออกแบบโครงสร้างจำนวนเซ็ต และช่วง Reps ให้เหมาะกับเป้าหมาย</div>
       <div class="quiz-options">
         <button class="quiz-opt-btn" onclick="setQuizAnswer('goal', 'muscle', 2)">
           <div>
-            <div class="opt-title">🏋️‍♂️ สร้างกล้ามเนื้อ (Hypertrophy)</div>
-            <div class="opt-sub">เน้นเพิ่มขนาดมัดกล้ามเนื้อให้ใหญ่และคมชัดขึ้น</div>
+            <div class="opt-title">🏋️‍♂️ สร้างกล้ามเนื้อ & มวลกาย (Hypertrophy)</div>
+            <div class="opt-sub">เน้นเพิ่มขนาดมัดกล้ามเนื้อให้ใหญ่ แน่น และคมชัด (ช่วง 8-12 reps)</div>
           </div>
           <span>➔</span>
         </button>
         <button class="quiz-opt-btn" onclick="setQuizAnswer('goal', 'strength', 2)">
           <div>
-            <div class="opt-title">⚡ เพิ่มความแข็งแรง & พลัง (Strength & Power)</div>
-            <div class="opt-sub">เน้นยกหนักขึ้น เล่นท่า Compound หลักได้แข็งแกร่ง</div>
+            <div class="opt-title">⚡ เพิ่มพละกำลังสูงสุด (Strength & Power)</div>
+            <div class="opt-sub">เน้นยกหนักขึ้น เล่นท่า Compound หลักได้แข็งแกร่ง (ช่วง 3-6 reps)</div>
           </div>
           <span>➔</span>
         </button>
         <button class="quiz-opt-btn" onclick="setQuizAnswer('goal', 'fatloss', 2)">
           <div>
             <div class="opt-title">🔥 ลดไขมัน & กระชับสัดส่วน (Fat Loss & Toning)</div>
-            <div class="opt-sub">เน้นเผาผลาญแคลอรี เพิ่มความกระชับและความอึด</div>
+            <div class="opt-sub">เน้นเผาผลาญแคลอรี เพิ่มความกระชับและความอึด (ช่วง 12-15 reps)</div>
           </div>
           <span>➔</span>
         </button>
@@ -2050,27 +2050,27 @@ function renderQuizStep() {
     `;
   } else if (quizStep === 2) {
     quizContent.innerHTML = `
-      <div class="quiz-step-title">คำถามที่ 2/4: คุณมีเวลาฝึกกี่วันต่อสัปดาห์?</div>
-      <div class="quiz-step-desc">ระบบจะจัดตารางวันที่เหมาะสมกับตารางชีวิตของคุณ</div>
+      <div class="quiz-step-title">คำถามที่ 2/6: เวลาและตารางที่คุณสะดวกฝึก?</div>
+      <div class="quiz-step-desc">คำนวณการพักผ่อนและการกระจายความถี่ (Frequency) ต่อสัปดาห์</div>
       <div class="quiz-options">
         <button class="quiz-opt-btn" onclick="setQuizAnswer('days', '2-3', 3)">
           <div>
-            <div class="opt-title">📅 2 - 3 วันต่อสัปดาห์</div>
-            <div class="opt-sub">เหมาะสำหรับผู้มีเวลาน้อย แต่เก็บครบทุกมัดกล้ามเนื้อ</div>
+            <div class="opt-title">📅 2 - 3 วันต่อสัปดาห์ (Full Body Frequency)</div>
+            <div class="opt-sub">เหมาะสำหรับผู้มีเวลาน้อย เล่นทั่วร่างกายเพื่อกระตุ้นสังเคราะห์โปรตีนสม่ำเสมอ</div>
           </div>
           <span>➔</span>
         </button>
         <button class="quiz-opt-btn" onclick="setQuizAnswer('days', '4', 3)">
           <div>
-            <div class="opt-title">📅 4 วันต่อสัปดาห์</div>
-            <div class="opt-sub">จัดตารางแบบแบ่ง Upper / Lower เล่นกำลังดี พักผ่อนเต็มที่</div>
+            <div class="opt-title">📅 4 วันต่อสัปดาห์ (Upper / Lower Split)</div>
+            <div class="opt-sub">แบ่งส่วนบนและส่วนล่าง สมดุลการฝึกและการพักผ่อนอย่างลงตัว</div>
           </div>
           <span>➔</span>
         </button>
         <button class="quiz-opt-btn" onclick="setQuizAnswer('days', '5-6', 3)">
           <div>
-            <div class="opt-title">📅 5 - 6 วันต่อสัปดาห์</div>
-            <div class="opt-sub">สำหรับสายขยัน จัดตาราง PPL เจาะจงแต่ละมัดแบบจัดเต็ม</div>
+            <div class="opt-title">📅 5 - 6 วันต่อสัปดาห์ (Push / Pull / Legs Split)</div>
+            <div class="opt-sub">สำหรับสายขยัน เจาะจงแต่ละมัดกล้ามเนื้อได้เข้มข้นที่สุด</div>
           </div>
           <span>➔</span>
         </button>
@@ -2081,20 +2081,27 @@ function renderQuizStep() {
     `;
   } else if (quizStep === 3) {
     quizContent.innerHTML = `
-      <div class="quiz-step-title">คำถามที่ 3/4: สถานที่และอุปกรณ์ที่คุณใช้?</div>
-      <div class="quiz-step-desc">เพื่อเลือกท่าที่มีอุปกรณ์รองรับจริงในสถานที่ฝึกของคุณ</div>
+      <div class="quiz-step-title">คำถามที่ 3/6: อุปกรณ์หลักในสถานที่ฝึกของคุณ?</div>
+      <div class="quiz-step-desc">คัดสรรท่าฝึกที่มีอุปกรณ์รองรับจริงในสถานที่ฝึกของคุณ</div>
       <div class="quiz-options">
         <button class="quiz-opt-btn" onclick="setQuizAnswer('location', 'gym', 4)">
           <div>
-            <div class="opt-title">🏛 ยิมใหญ่ / ฟิตเนส (Full Gym)</div>
-            <div class="opt-sub">มีอุปกรณ์ครบ บาร์เบล, ดัมเบล, เครื่องเล่น และสายเคเบิล</div>
+            <div class="opt-title">🏛 ยิมใหญ่ / ฟิตเนส (Full Commercial Gym)</div>
+            <div class="opt-sub">มีอุปกรณ์ครบ บาร์เบล, ดัมเบล, เครื่องเล่น Machines, สายเคเบิล และสมิธแมชชีน</div>
           </div>
           <span>➔</span>
         </button>
-        <button class="quiz-opt-btn" onclick="setQuizAnswer('location', 'home', 4)">
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('location', 'dumbbell', 4)">
           <div>
-            <div class="opt-title">🏠 โฮมยิม / ฝึกที่บ้าน (Home Workout)</div>
-            <div class="opt-sub">มีดัมเบล บาร์โหน หรือเน้นใช้น้ำหนักตัว (Bodyweight)</div>
+            <div class="opt-title">🧱 โฮมยิมเน้นดัมเบล (Home Gym - Dumbbell Focus)</div>
+            <div class="opt-sub">เน้นดัมเบล บาร์เบล หรือชุดน้ำหนักฟรีเวทที่บ้าน</div>
+          </div>
+          <span>➔</span>
+        </button>
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('location', 'bodyweight', 4)">
+          <div>
+            <div class="opt-title">🤸‍♂️ บอดี้เวท & น้ำหนักตัว (Calisthenics & Bodyweight)</div>
+            <div class="opt-sub">ใช้น้ำหนักตัว บาร์โหน ล้อเอบ หรือแร็คแรงต้าน</div>
           </div>
           <span>➔</span>
         </button>
@@ -2105,20 +2112,20 @@ function renderQuizStep() {
     `;
   } else if (quizStep === 4) {
     quizContent.innerHTML = `
-      <div class="quiz-step-title">คำถามที่ 4/4: ระดับประสบการณ์ของคุณ?</div>
-      <div class="quiz-step-desc">ปรับความเข้มข้นและจำนวนท่าให้พอดีกับร่างกาย</div>
+      <div class="quiz-step-title">คำถามที่ 4/6: เช็กอุปกรณ์ม้านั่ง/เก้าอี้ (Bench & Chair Check)?</div>
+      <div class="quiz-step-desc">เพื่อให้ท่าฝึกที่แนะนำสอดคล้องกับท่านั่ง/นอนที่คุณทำได้จริง</div>
       <div class="quiz-options">
-        <button class="quiz-opt-btn" onclick="setQuizAnswer('level', 'beginner', 5)">
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('bench', 'yes', 5)">
           <div>
-            <div class="opt-title">🔰 มือใหม่ (Beginner)</div>
-            <div class="opt-sub">เพิ่งเริ่มฝึกหรือเล่นไม่เกิน 6 เดือน เน้นท่าพื้นฐานที่ถูกต้อง</div>
+            <div class="opt-title">🛋️ มีม้านั่ง / เก้าอี้ปรับระดับได้ (Adjustable Bench)</div>
+            <div class="opt-sub">สามารถทำท่า Bench Press, Incline Press, Seated Row ฯลฯ ได้ครบถ้วน</div>
           </div>
           <span>➔</span>
         </button>
-        <button class="quiz-opt-btn" onclick="setQuizAnswer('level', 'intermediate', 5)">
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('bench', 'no', 5)">
           <div>
-            <div class="opt-title">⚡ ระดับปานกลาง - ขยัน (Intermediate)</div>
-            <div class="opt-sub">ฝึกต่อเนื่องเกิน 6 เดือน ร่างกายคุ้นเคยกับน้ำหนักหนัก</div>
+            <div class="opt-title">🧘‍♂️ ไม่มีม้านั่ง (เล่นบนพื้น / ยืนเล่นเท่านั้น)</div>
+            <div class="opt-sub">คัดเฉพาะท่ายืน ท่านั่งพื้น หรือ Floor Press โดยไม่ต้องใชัเก้าอี้</div>
           </div>
           <span>➔</span>
         </button>
@@ -2128,6 +2135,68 @@ function renderQuizStep() {
       </div>
     `;
   } else if (quizStep === 5) {
+    quizContent.innerHTML = `
+      <div class="quiz-step-title">คำถามที่ 5/6: มัดกล้ามเนื้อที่ต้องการเน้นเป็นพิเศษ?</div>
+      <div class="quiz-step-desc">ปรับสัดส่วนจำนวนท่า (Volume) ให้เน้นจุดที่คุณต้องการสร้างเสริม</div>
+      <div class="quiz-options">
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('focus', 'overall', 6)">
+          <div>
+            <div class="opt-title">🎯 ทั่วร่างกายสมดุล (Overall Balanced Physique)</div>
+            <div class="opt-sub">กระจายความเข้มข้นเท่ากันทุกส่วน สร้างหุ่นได้รูปทรงมาตรฐาน</div>
+          </div>
+          <span>➔</span>
+        </button>
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('focus', 'upper', 6)">
+          <div>
+            <div class="opt-title">🏋️‍♂️ เน้นช่วงบน (Chest, Back & Shoulders Focus)</div>
+            <div class="opt-sub">เน้นเพิ่มมวลอก ปีกกว้าง และไหล่กว้างสร้างทรง V-Taper</div>
+          </div>
+          <span>➔</span>
+        </button>
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('focus', 'lower', 6)">
+          <div>
+            <div class="opt-title">🦵 เน้นช่วงล่าง & สะโพก (Legs & Glutes Focus)</div>
+            <div class="opt-sub">เน้นความแข็งแกร่งของต้นขา สะโพก และก้นที่ได้รูปทรงสวยงาม</div>
+          </div>
+          <span>➔</span>
+        </button>
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('focus', 'arms', 6)">
+          <div>
+            <div class="opt-title">💪 เน้นแขน & ไหล่ (Arms & Delts Specialization)</div>
+            <div class="opt-sub">เน้นไบเซ็ป ไตรเซ็ป และไหล่ข้างให้ดูเต็มเสื้อ</div>
+          </div>
+          <span>➔</span>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-mini" onclick="quizStep=4;renderQuizStep();">← ย้อนกลับ</button>
+      </div>
+    `;
+  } else if (quizStep === 6) {
+    quizContent.innerHTML = `
+      <div class="quiz-step-title">คำถามที่ 6/6: ระดับประสบการณ์การฝึกของคุณ?</div>
+      <div class="quiz-step-desc">ประเมินระดับความเข้มข้นเพื่อป้องกันการฝึกเกินกำลัง (Overtraining)</div>
+      <div class="quiz-options">
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('level', 'beginner', 7)">
+          <div>
+            <div class="opt-title">🔰 มือใหม่ (Beginner: 0 - 6 เดือน)</div>
+            <div class="opt-sub">เน้นท่า Compound พื้นฐาน ซ้อมฟอร์มที่ถูกต้องและสร้างเส้นประสาทกล้ามเนื้อ</div>
+          </div>
+          <span>➔</span>
+        </button>
+        <button class="quiz-opt-btn" onclick="setQuizAnswer('level', 'intermediate', 7)">
+          <div>
+            <div class="opt-title">⚡ ระดับปานกลาง (Intermediate: 6 เดือน - 2 ปี)</div>
+            <div class="opt-sub">คุ้นเคยกับฟอร์มท่า พร้อมเพิ่ม Progressive Overload และปริมาณความเข้มข้น</div>
+          </div>
+          <span>➔</span>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-mini" onclick="quizStep=5;renderQuizStep();">← ย้อนกลับ</button>
+      </div>
+    `;
+  } else if (quizStep === 7) {
     generatePersonalizedProgram();
   }
 }
@@ -2139,195 +2208,224 @@ function setQuizAnswer(key, val, nextStep) {
 }
 
 function generatePersonalizedProgram() {
-  const { goal, days, location, level } = quizAnswers;
+  const { goal, days, location, bench, focus, level } = quizAnswers;
   let recName = "";
   let recDesc = "";
+  let trainerAdvice = [];
   let generatedDays = [];
 
-  const isHome = location === 'home';
+  const hasBench = bench === 'yes';
+  const isGym = location === 'gym';
+  const isBW = location === 'bodyweight';
 
+  /* Personal Trainer Insight Analysis */
+  if (goal === 'muscle') {
+    trainerAdvice.push("💡 **กลยุทธ์สร้างกล้ามเนื้อ**: ควบคุมจังหวะยก (Tempo) ลง 2 วินาที ขึ้น 1 วินาที พัก 90 วินาทีต่อเซ็ต เพื่อกระตุ้น Hypertrophy เต็มที่");
+  } else if (goal === 'strength') {
+    trainerAdvice.push("⚡ **กลยุทธ์เพิ่มพละกำลัง**: เน้นยกน้ำหนักหนัก (RPE 8-9) ท่าหลักพัก 2-3 นาที เพื่อฟื้นฟูระบบประสาทให้ยกได้หนักขึ้นเรื่อยๆ");
+  } else {
+    trainerAdvice.push("🔥 **กลยุทธ์ลดไขมัน & กระชับ**: รักษาระยะเวลาพักสั้นลง (60 วินาที) ทำช่วง Reps 12-15 ครั้ง เพื่อเพิ่ม Heart Rate และการเผาผลาญ");
+  }
+
+  if (hasBench) {
+    trainerAdvice.push("🛋️ **การใช้อุปกรณ์**: เลือกใช้ท่ากดบนม้านั่งปรับระดับ (Incline/Flat Bench) เพื่อสร้างมิติกล้ามเนื้อช่วงอกและไหล่ได้ครบมิติ");
+  } else {
+    trainerAdvice.push("🧘‍♂️ **คำแนะนำพิเศษไร้ม้านั่ง**: ปรับเป็นท่า Floor Press และท่ายืน เพื่อเน้นเสถียรภาพโดยไม่ต้องใชัเก้าอี้ม้านั่ง");
+  }
+
+  if (level === 'beginner') {
+    trainerAdvice.push("🔰 **ระดับมือใหม่**: โฟกัสฟอร์มการเล่นให้ถูกต้อง ไม่จำเป็นต้องยกหนักเกินไป เน้นการโฟกัสกล้ามเนื้อเป้าหมาย (Mind-Muscle Connection)");
+  } else {
+    trainerAdvice.push("⚡ **ระดับปานกลาง**: ทำ Progressive Overload สม่ำเสมอ เพิ่มน้ำหนัก 1-2.5 กก. หรือเพิ่ม Reps เมื่อยกได้ครบเซ็ต");
+  }
+
+  /* Program Architecture Generation */
   if (days === '2-3') {
-    recName = goal === 'fatloss' ? "🔥 Full Body Cardio & Tone (3 วัน)" : "🏆 Personalized Full Body (3 วัน)";
-    recDesc = `คำแนะนำเฉพาะบุคคล: เหมาะกับฝึก 2-3 วัน/สัปดาห์ ที่ ${isHome ? 'บ้าน' : 'ยิม'} (${goal === 'muscle' ? 'เน้นสร้างกล้ามเนื้อ' : goal === 'strength' ? 'เน้นเพิ่มพละกำลัง' : 'เน้นเผาผลาญลดไขมัน'})`;
+    recName = goal === 'fatloss' ? "🔥 Trainer Special: Full Body Cardio Tone (3 วัน)" : "🏆 Trainer Special: Personalized Full Body (3 วัน)";
+    recDesc = `คำแนะนำจากเทรนเนอร์: ตาราง Full Body 3 วัน กระตุ้นสังเคราะห์โปรตีนทั่วร่างกาย ${isGym ? 'ยิมอุปกรณ์ครบ' : 'โฮมยิม'} (${hasBench ? 'ใชัเก้าอี้ม้านั่ง' : 'ไม่ใชัเก้าอี้'})`;
     
     generatedDays = [
       {
-        name: "Day 1 - Full Body A (อก/หลัง/ขา)",
-        exercises: isHome ? [
-          {cat:"อก (Chest)", name:"Dumbbell Bench Press", eq:"ดัมเบล"},
-          {cat:"ปีก (Lats)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
+        name: "Day 1 - Full Body A (เน้นสร้างแรงกด Compound)",
+        exercises: isBW ? [
+          {cat:"อก (Chest)", name:"Standard Push-Up", eq:"น้ำหนักตัว"},
+          {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
           {cat:"ต้นขาหน้า (Quads)", name:"Goblet Squat", eq:"ดัมเบล/เคทเทิลเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Pike Push-Up", eq:"น้ำหนักตัว"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
-        ] : [
-          {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
+        ] : hasBench ? [
+          {cat:"อก (Chest)", name: isGym ? "Barbell Bench Press" : "Dumbbell Bench Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
+          {cat:"ปีก (Lats)", name: isGym ? "Lat Pulldown (Wide Grip)" : "Single-Arm Dumbbell Row", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ต้นขาหน้า (Quads)", name: isGym ? "Barbell Back Squat" : "Goblet Squat", eq: isGym ? "บาร์เบล" : "ดัมเบล/เคทเทิลเบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Hanging Leg Raise", eq:"บาร์โหน"}
+        ] : [
+          {cat:"อก (Chest)", name:"Floor Press (Dumbbell)", eq:"ดัมเบล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Front Squat", eq:"บาร์เบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Standing Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
         ]
       },
       {
-        name: "Day 2 - Full Body B (ขาหลัง/ไหล่/แขน)",
-        exercises: isHome ? [
+        name: "Day 2 - Full Body B (เน้นดึง & สะโพกช่วงล่าง)",
+        exercises: isBW ? [
+          {cat:"หลังบน (Upper Back)", name:"Inverted Row (Australian Pull-Up)", eq:"น้ำหนักตัว"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Nordic Hamstring Curl", eq:"น้ำหนักตัว"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Resistance Band Lateral Raise", eq:"ยางยืด"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Resistance Band Curl", eq:"ยางยืด"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Diamond Push-Up", eq:"น้ำหนักตัว"}
+        ] : hasBench ? [
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
+          {cat:"หลังบน (Upper Back)", name: isGym ? "Seated Wide-Grip Cable Row" : "Chest-Supported Dumbbell Row", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name: isGym ? "Cable Lateral Raise" : "Dumbbell Lateral Raise", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name: isGym ? "Tricep Rope Pushdown" : "Overhead Dumbbell Tricep Extension", eq: isGym ? "เคเบิล" : "ดัมเบล"}
+        ] : [
           {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
-          {cat:"หลังบน (Upper Back)", name:"Chest-Supported Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"หลังบน (Upper Back)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
           {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
           {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Bicep Curl (Alternating)", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Dumbbell Tricep Extension", eq:"ดัมเบล"}
-        ] : [
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
-          {cat:"หลังบน (Upper Back)", name:"Seated Wide-Grip Cable Row", eq:"เคเบิล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Cable Lateral Raise", eq:"เคเบิล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
+          {cat:"ไตรเซ็ป (Triceps)", name:"Dumbbell Kickback", eq:"ดัมเบล"}
         ]
       },
       {
-        name: "Day 3 - Full Body C (เก็บมัดสร้างทรง)",
-        exercises: isHome ? [
-          {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล/บาร์เบล"},
+        name: "Day 3 - Full Body C (เน้นสร้างมิติ & ปรับรูปทรง)",
+        exercises: hasBench ? [
+          {cat:"อกบน (Upper Chest)", name: isGym ? "Incline Barbell Bench Press" : "Incline Dumbbell Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
+          {cat:"ต้นขาหน้า (Quads)", name: isGym ? "Leg Press" : "Bulgarian Split Squat", eq: isGym ? "เครื่อง" : "ดัมเบล/บาร์เบล"},
           {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Dumbbell Rear Delt Fly (Bent-Over)", eq:"ดัมเบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name: isGym ? "Face Pull (Rope)" : "Dumbbell Rear Delt Fly (Bent-Over)", eq: isGym ? "เคเบิล" : "ดัมเบล"},
           {cat:"หน้าท้องข้าง (Obliques)", name:"Russian Twist (Weight/Dumbbell)", eq:"น้ำหนักตัว/ดัมเบล"}
         ] : [
-          {cat:"อกบน (Upper Chest)", name:"Incline Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Leg Press", eq:"เครื่อง"},
+          {cat:"อก (Chest)", name:"Push-Up (Standard)", eq:"น้ำหนักตัว"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Walking Lunge", eq:"ดัมเบล/บาร์เบล"},
           {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
-          {cat:"หน้าท้องข้าง (Obliques)", name:"Cable Woodchopper (High-to-Low)", eq:"เคเบิล"}
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Band Pull-Apart", eq:"ยางยืด"},
+          {cat:"หน้าท้องข้าง (Obliques)", name:"Side Plank", eq:"น้ำหนักตัว"}
         ]
       }
     ];
   } else if (days === '4') {
-    recName = "⚡ Upper / Lower Split (4 วัน)";
-    recDesc = `คำแนะนำเฉพาะบุคคล: โปรแกรมส่วนบนและส่วนล่าง 4 วัน (${isHome ? 'ใช้อุปกรณ์ดัมเบลที่บ้าน' : 'ใช้อุปกรณ์ยิมเต็มรูปแบบ'})`;
+    recName = "⚡ Trainer Special: Upper / Lower Split (4 วัน)";
+    recDesc = `คำแนะนำจากเทรนเนอร์: ตารางแบ่งส่วนบนส่วนล่าง 4 วัน สมดุลความเข้มข้นและการพักผ่อนสูงสุด (${hasBench ? 'ใชัเก้าอี้ม้านั่ง' : 'ไม่ใชัเก้าอี้'})`;
     
     generatedDays = [
       {
-        name: "Day 1 - Upper Body A (เน้นอก/ปีก)",
-        exercises: isHome ? [
-          {cat:"อก (Chest)", name:"Dumbbell Bench Press", eq:"ดัมเบล"},
-          {cat:"ปีก (Lats)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Hammer Curl", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Dumbbell Tricep Extension", eq:"ดัมเบล"}
-        ] : [
-          {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
+        name: "Day 1 - Upper Body A (เน้นอกกลาง/ปีกกว้าง)",
+        exercises: hasBench ? [
+          {cat:"อก (Chest)", name: isGym ? "Barbell Bench Press" : "Dumbbell Bench Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
+          {cat:"ปีก (Lats)", name: isGym ? "Lat Pulldown (Wide Grip)" : "Single-Arm Dumbbell Row", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name: isGym ? "Overhead Press (Military Press)" : "Seated Dumbbell Shoulder Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
           {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
-        ]
-      },
-      {
-        name: "Day 2 - Lower Body A (เน้นต้นขาหน้า/ก้น)",
-        exercises: isHome ? [
-          {cat:"ต้นขาหน้า (Quads)", name:"Goblet Squat", eq:"ดัมเบล/เคทเทิลเบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Walking Lunge", eq:"ดัมเบล/บาร์เบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
+          {cat:"ไตรเซ็ป (Triceps)", name: isGym ? "Tricep Rope Pushdown" : "Overhead Dumbbell Tricep Extension", eq: isGym ? "เคเบิล" : "ดัมเบล"}
         ] : [
-          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension Machine", eq:"เครื่อง"},
-          {cat:"น่อง (Calves)", name:"Standing Calf Raise Machine", eq:"เครื่อง"}
-        ]
-      },
-      {
-        name: "Day 3 - Upper Body B (เน้นหลังบน/ไหล่ข้าง)",
-        exercises: isHome ? [
-          {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"หลังบน (Upper Back)", name:"Chest-Supported Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Dumbbell Rear Delt Fly (Bent-Over)", eq:"ดัมเบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Bicep Curl (Alternating)", eq:"ดัมเบล"}
-        ] : [
-          {cat:"อกบน (Upper Chest)", name:"Incline Barbell Bench Press", eq:"บาร์เบล"},
+          {cat:"อก (Chest)", name:"Floor Press (Dumbbell)", eq:"ดัมเบล"},
           {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Cable Lateral Raise", eq:"เคเบิล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Close-Grip Barbell Bench Press", eq:"บาร์เบล"}
+          {cat:"ไหล่หน้า (Front Delts)", name:"Standing Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Hammer Curl", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Dips (Tricep-focused)", eq:"น้ำหนักตัว"}
         ]
       },
       {
-        name: "Day 4 - Lower Body B (เน้นต้นขาหลัง/แกนกลาง)",
-        exercises: isHome ? [
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล/บาร์เบล"},
-          {cat:"สะโพก (Glutes)", name:"Glute Bridge", eq:"บาร์เบล/น้ำหนักตัว"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Ab Wheel Rollout", eq:"ล้อเอบ"}
+        name: "Day 2 - Lower Body A (เน้นต้นขาหน้า/แกนกลาง)",
+        exercises: [
+          {cat:"ต้นขาหน้า (Quads)", name: isGym ? "Barbell Back Squat" : "Goblet Squat", eq: isGym ? "บาร์เบล" : "ดัมเบล/เคทเทิลเบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name: isGym ? "Leg Extension Machine" : "Walking Lunge", eq: isGym ? "เครื่อง" : "ดัมเบล/บาร์เบล"},
+          {cat:"น่อง (Calves)", name: isGym ? "Standing Calf Raise Machine" : "Single-Leg Dumbbell Calf Raise", eq: isGym ? "เครื่อง" : "ดัมเบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
+        ]
+      },
+      {
+        name: "Day 3 - Upper Body B (เน้นอกบน/หลังบน/ไหล่ข้าง)",
+        exercises: hasBench ? [
+          {cat:"อกบน (Upper Chest)", name: isGym ? "Incline Barbell Bench Press" : "Incline Dumbbell Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
+          {cat:"หลังบน (Upper Back)", name: isGym ? "Seated Wide-Grip Cable Row" : "Chest-Supported Dumbbell Row", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name: isGym ? "Cable Lateral Raise" : "Dumbbell Lateral Raise", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name: isGym ? "Face Pull (Rope)" : "Dumbbell Rear Delt Fly (Bent-Over)", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name: isGym ? "Close-Grip Barbell Bench Press" : "Bench Dips", eq: isGym ? "บาร์เบล" : "น้ำหนักตัว"}
         ] : [
+          {cat:"อก (Chest)", name:"Push-Up (Wide-Grip)", eq:"น้ำหนักตัว"},
+          {cat:"หลังบน (Upper Back)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Band Pull-Apart", eq:"ยางยืด"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Bicep Curl (Alternating)", eq:"ดัมเบล"}
+        ]
+      },
+      {
+        name: "Day 4 - Lower Body B (เน้นหลังล่าง/สะโพก/ท้อง)",
+        exercises: [
           {cat:"หลังล่าง (Lower Back)", name:"Deadlift (Conventional)", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl Machine", eq:"เครื่อง"},
-          {cat:"สะโพก (Glutes)", name:"Barbell Hip Thrust", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name: isGym ? "Lying Leg Curl Machine" : "Single-Leg Romanian Deadlift", eq: isGym ? "เครื่อง" : "ดัมเบล"},
+          {cat:"สะโพก (Glutes)", name: isGym ? "Barbell Hip Thrust" : "Glute Bridge", eq: isGym ? "บาร์เบล" : "บาร์เบล/น้ำหนักตัว"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Hanging Leg Raise", eq:"บาร์โหน"}
         ]
       }
     ];
   } else {
-    recName = "🔥 Push / Pull / Legs (PPL Custom)";
-    recDesc = `คำแนะนำเฉพาะบุคคล: โปรแกรม PPL ขยันจัดเต็ม 5-6 วัน (${isHome ? 'เวอร์ชันดัมเบลโฮมยิม' : 'เวอร์ชันยิมครบวงจร'})`;
+    recName = "🔥 Trainer Special: Push / Pull / Legs (PPL 6 วัน)";
+    recDesc = `คำแนะนำจากเทรนเนอร์: ตาราง PPL สายขยันจัดเต็ม 5-6 วัน (${hasBench ? 'ใชัเก้าอี้ม้านั่ง' : 'ไม่ใชัเก้าอี้'})`;
     
     generatedDays = [
       {
         name: "Day 1 - Push (อก/ไหล่หน้า/ไตรเซ็ป)",
-        exercises: isHome ? [
-          {cat:"อก (Chest)", name:"Dumbbell Bench Press", eq:"ดัมเบล"},
-          {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Dumbbell Tricep Extension", eq:"ดัมเบล"}
+        exercises: hasBench ? [
+          {cat:"อก (Chest)", name: isGym ? "Barbell Bench Press" : "Dumbbell Bench Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
+          {cat:"อกบน (Upper Chest)", name: isGym ? "Incline Dumbbell Press" : "Incline Push-Up", eq: isGym ? "ดัมเบล" : "น้ำหนักตัว"},
+          {cat:"ไหล่หน้า (Front Delts)", name: isGym ? "Overhead Press (Military Press)" : "Seated Dumbbell Shoulder Press", eq: isGym ? "บาร์เบล" : "ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name: isGym ? "Cable Lateral Raise" : "Dumbbell Lateral Raise", eq: isGym ? "เคเบิล" : "ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name: isGym ? "Tricep Rope Pushdown" : "Overhead Dumbbell Tricep Extension", eq: isGym ? "เคเบิล" : "ดัมเบล"}
         ] : [
-          {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Cable Lateral Raise", eq:"เคเบิล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
+          {cat:"อก (Chest)", name:"Floor Press (Dumbbell)", eq:"ดัมเบล"},
+          {cat:"อกล่าง (Lower Chest)", name:"Dips (Chest-focused)", eq:"น้ำหนักตัว"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Standing Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Diamond Push-Up", eq:"น้ำหนักตัว"}
         ]
       },
       {
         name: "Day 2 - Pull (หลัง/ปีก/ไหล่หลัง/ไบเซ็ป)",
-        exercises: isHome ? [
-          {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
-          {cat:"หลังบน (Upper Back)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Dumbbell Rear Delt Fly (Bent-Over)", eq:"ดัมเบล"},
+        exercises: [
+          {cat:"ปีก (Lats)", name: isGym ? "Lat Pulldown (Wide Grip)" : "Pull-Up", eq: isGym ? "เคเบิล" : "น้ำหนักตัว"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name: isGym ? "Face Pull (Rope)" : "Dumbbell Rear Delt Fly (Bent-Over)", eq: isGym ? "เคเบิล" : "ดัมเบล"},
           {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
           {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Hammer Curl", eq:"ดัมเบล"}
-        ] : [
-          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
-          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Preacher Curl (EZ-Bar)", eq:"อีซี่บาร์"}
         ]
       },
       {
         name: "Day 3 - Legs & Abs (ขา/ท้อง)",
-        exercises: isHome ? [
-          {cat:"ต้นขาหน้า (Quads)", name:"Goblet Squat", eq:"ดัมเบล/เคทเทิลเบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล/บาร์เบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
-        ] : [
-          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
+        exercises: [
+          {cat:"ต้นขาหน้า (Quads)", name: isGym ? "Barbell Back Squat" : "Goblet Squat", eq: isGym ? "บาร์เบล" : "ดัมเบล/เคทเทิลเบล"},
           {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension Machine", eq:"เครื่อง"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl Machine", eq:"เครื่อง"},
-          {cat:"น่อง (Calves)", name:"Standing Calf Raise Machine", eq:"เครื่อง"}
+          {cat:"ต้นขาหน้า (Quads)", name: isGym ? "Leg Extension Machine" : "Bulgarian Split Squat", eq: isGym ? "เครื่อง" : "ดัมเบล/บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name: isGym ? "Lying Leg Curl Machine" : "Single-Leg Romanian Deadlift", eq: isGym ? "เครื่อง" : "ดัมเบล"},
+          {cat:"น่อง (Calves)", name: isGym ? "Standing Calf Raise Machine" : "Single-Leg Dumbbell Calf Raise", eq: isGym ? "เครื่อง" : "ดัมเบล"}
         ]
       }
     ];
   }
 
   quizContent.innerHTML = `
-    <div style="text-align:center;padding:10px 0;">
-      <div style="font-size:40px;margin-bottom:8px;">✨</div>
-      <div style="font-size:18px;font-weight:700;color:var(--accent-orange);margin-bottom:4px;">${recName}</div>
-      <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:18px;line-height:1.5;">${recDesc}</div>
+    <div style="padding:4px 0;">
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:36px;margin-bottom:4px;">🏋️‍♂️</div>
+        <div style="font-size:18px;font-weight:700;color:var(--accent-orange);margin-bottom:2px;">${recName}</div>
+        <div style="font-size:12.5px;color:var(--text-muted);line-height:1.4;">${recDesc}</div>
+      </div>
       
-      <div style="background:var(--panel-sub);border:1px solid var(--border-line);border-radius:var(--radius-md);padding:14px;text-align:left;margin-bottom:20px;max-height:220px;overflow-y:auto;">
+      <!-- Personal Trainer Advice Card -->
+      <div style="background:var(--accent-subtle);border:1px solid var(--accent-primary);border-radius:var(--radius-md);padding:14px;margin-bottom:16px;">
+        <div style="font-size:13.5px;font-weight:700;color:var(--accent-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+          <span>📋</span> คำแนะนำ & วิเคราะห์จากเทรนเนอร์ส่วนตัว:
+        </div>
+        <div style="font-size:12px;color:var(--text-main);line-height:1.6;display:flex;flex-direction:column;gap:6px;">
+          ${trainerAdvice.map(a => `<div>${a}</div>`).join('')}
+        </div>
+      </div>
+
+      <div style="background:var(--panel-sub);border:1px solid var(--border-line);border-radius:var(--radius-md);padding:14px;text-align:left;margin-bottom:18px;max-height:200px;overflow-y:auto;">
         <div style="font-size:13px;font-weight:600;color:var(--text-main);margin-bottom:8px;">รายการวันฝึกในโปรแกรมนี้:</div>
         ${generatedDays.map(d => `
           <div style="font-size:12.5px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border-line);">
@@ -2338,7 +2436,7 @@ function generatePersonalizedProgram() {
       </div>
 
       <button class="btn-recommend" style="width:100%;justify-content:center;padding:12px;font-size:14px;" id="applyQuizProgramBtn">
-        🚀 ยืนยันสร้างโปรแกรมนี้เข้า "ตารางของฉัน"
+        🚀 ยืนยันสร้างตารางตามคำแนะนำเทรนเนอร์
       </button>
     </div>
   `;
@@ -2599,7 +2697,7 @@ function openPicker(day){
   pickerSearch.focus();
 }
 document.getElementById('pickerClose').addEventListener('click', ()=> pickerOverlay.classList.remove('open'));
-pickerOverlay.addEventListener('click', e=>{ if(e.target===pickerOverlay) pickerOverlay.classList.remove('open'); });
+pickerOverlay.addEventListener('click', e=>{ if(e.target===pickerOverlay) pickerOverlay.classList.remove('open')); });
 pickerSearch.addEventListener('input', paintPicker);
 
 function paintPicker(){
@@ -2621,7 +2719,6 @@ function paintPicker(){
       btn.textContent='เพิ่มแล้ว'; btn.disabled=true;
       renderSchedule();
       setTimeout(()=>{
-        const allCards = document.createElement('div');
         const allCardsList = document.querySelectorAll('.day-card');
         allCardsList.forEach(c=>{ if(c.querySelector('.day-name').textContent===pickerTargetDay.name) c.classList.add('open'); });
       },0);
