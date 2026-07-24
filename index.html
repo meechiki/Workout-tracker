@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChikiSet — Pro Muscle Anatomy & Workout Tracker</title>
+<title>ChikiSet — 3D Hyper-Realistic Muscle Anatomy Workout Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,12 +21,12 @@
   --text-muted: #64748b;
   --text-light: #94a3b8;
   
-  --accent-primary: #6366f1;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --accent-primary: #0284c7;
+  --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
   --accent-orange: #ff5e3a;
   --accent-orange-grad: linear-gradient(135deg, #ff7e5f 0%, #ff5e3a 100%);
-  --accent-subtle: rgba(99, 102, 241, 0.12);
-  --accent-glow: rgba(99, 102, 241, 0.25);
+  --accent-subtle: rgba(2, 132, 199, 0.12);
+  --accent-glow: rgba(2, 132, 199, 0.25);
   
   --good-green: #10b981;
   --good-bg: rgba(16, 185, 129, 0.12);
@@ -56,8 +56,8 @@
   --text-muted: #94a3b8;
   --text-light: #64748b;
   
-  --accent-primary: #818cf8;
-  --accent-subtle: rgba(129, 140, 248, 0.15);
+  --accent-primary: #38bdf8;
+  --accent-subtle: rgba(56, 189, 248, 0.15);
   --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 }
 
@@ -304,7 +304,7 @@ h1 span {
 .view { display: none; }
 .view.active { display: block; }
 
-/* Clean Pro Muscle Anatomy Glassmorphism Panel */
+/* 3D Hyper-Realistic Muscle Anatomy Panel */
 .anatomy-panel {
   position: sticky;
   top: 130px;
@@ -361,20 +361,20 @@ h1 span {
   box-shadow: var(--shadow-sm);
 }
 
-/* 1:1 Pixel-Calibrated Image & Hotspot Container */
-.clean-anatomy-container {
+/* 1:1 Calibrated 3D Blue Model Container (290 x 780 aspect ratio) */
+.blue-anatomy-container {
   position: relative;
   width: 100%;
   max-width: 250px;
   margin: 0 auto;
-  aspect-ratio: 279 / 556;
+  aspect-ratio: 290 / 780;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
 }
 
-.clean-body-img {
+.blue-body-img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -391,8 +391,8 @@ h1 span {
 }
 
 .hotspot-path {
-  fill: rgba(99, 102, 241, 0.12);
-  stroke: rgba(99, 102, 241, 0.4);
+  fill: rgba(2, 132, 199, 0.15);
+  stroke: rgba(2, 132, 199, 0.5);
   stroke-width: 1.5;
   stroke-linejoin: round;
   cursor: pointer;
@@ -400,17 +400,17 @@ h1 span {
 }
 
 .hotspot-path:hover {
-  fill: rgba(255, 94, 58, 0.45);
+  fill: rgba(255, 94, 58, 0.5);
   stroke: #ff5e3a;
-  stroke-width: 2;
-  filter: drop-shadow(0 0 6px rgba(255, 94, 58, 0.7));
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 8px rgba(255, 94, 58, 0.8));
 }
 
 .hotspot-path.active {
-  fill: rgba(255, 94, 58, 0.55);
+  fill: rgba(255, 94, 58, 0.6);
   stroke: #ff5e3a;
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 8px rgba(255, 94, 58, 0.9));
+  filter: drop-shadow(0 0 10px rgba(255, 94, 58, 0.95));
 }
 
 .active-muscle-badge {
@@ -457,7 +457,7 @@ h1 span {
 
 .ex-card:hover {
   box-shadow: var(--shadow-md);
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(2, 132, 199, 0.3);
 }
 
 .ex-head {
@@ -781,77 +781,88 @@ footer { max-width: 1280px; margin: 30px auto 0; padding: 0 20px; color: var(--t
     <div class="split-container">
       <div id="library-list-col"></div>
       
-      <!-- Clean Pro Anatomy Glassmorphism Model -->
+      <!-- 3D Blue Hyper-Realistic Muscle Model Panel -->
       <div class="anatomy-panel">
         <div class="anatomy-header">
-          <div class="anatomy-title"><span>💪</span> จิ้มมัดกล้ามเนื้อ (Pro Body)</div>
+          <div class="anatomy-title"><span>🧬</span> จิ้มมัดกล้ามเนื้อ (3D Model)</div>
           <div class="view-toggle">
             <button class="toggle-btn active" id="btnFront">ด้านหน้า</button>
             <button class="toggle-btn" id="btnBack">ด้านหลัง</button>
           </div>
         </div>
 
-        <div class="clean-anatomy-container">
-          <!-- Front Body Clean Image -->
-          <img src="front_clean.png" alt="Pro Front Muscle Model" class="clean-body-img" id="imgFront">
+        <div class="blue-anatomy-container">
+          <!-- Blue Model Front Image -->
+          <img src="blue_front.png" alt="3D Blue Muscle Front Model" class="blue-body-img" id="imgFront">
           
-          <!-- Back Body Clean Image -->
-          <img src="back_clean.png" alt="Pro Back Muscle Model" class="clean-body-img" id="imgBack" style="display:none;">
+          <!-- Blue Model Back Image -->
+          <img src="blue_back.png" alt="3D Blue Muscle Back Model" class="blue-body-img" id="imgBack" style="display:none;">
 
-          <!-- 1:1 Pixel Calibrated Front Hotspots (279 x 556) -->
-          <svg class="svg-hotspot-overlay" id="svgFront" viewBox="0 0 279 556">
+          <!-- 1:1 Pixel-Calibrated Front Hotspots (290 x 780) -->
+          <svg class="svg-hotspot-overlay" id="svgFront" viewBox="0 0 290 780">
             <!-- Chest (อก) -->
-            <path class="hotspot-path" data-cat="อก (Chest)" d="M88 95 Q139.5 90 139.5 145 L92 145 Q85 120 88 95 Z" title="อก (Chest)"/>
-            <path class="hotspot-path" data-cat="อก (Chest)" d="M191 95 Q139.5 90 139.5 145 L187 145 Q194 120 191 95 Z" title="อก (Chest)"/>
+            <path class="hotspot-path" data-cat="อก (Chest)" d="M96 112 Q145 105 145 180 L98 180 Q90 145 96 112 Z" title="อก (Chest)"/>
+            <path class="hotspot-path" data-cat="อก (Chest)" d="M194 112 Q145 105 145 180 L192 180 Q200 145 194 112 Z" title="อก (Chest)"/>
 
-            <!-- Shoulders / Front Delts (ไหล่) -->
-            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M52 92 Q85 86 88 98 L72 135 Q48 118 52 92 Z" title="ไหล่ (Deltoids)"/>
-            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M227 92 Q194 86 191 98 L207 135 Q231 118 227 92 Z" title="ไหล่ (Deltoids)"/>
+            <!-- Shoulders / Front Delts (ไหล่หน้า) -->
+            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M52 110 Q94 102 96 118 L78 165 Q48 145 52 110 Z" title="ไหล่หน้า (Front Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M238 110 Q196 102 194 118 L212 165 Q242 145 238 110 Z" title="ไหล่หน้า (Front Delts)"/>
+
+            <!-- Shoulders / Side Delts (ไหล่ข้าง) -->
+            <path class="hotspot-path" data-cat="ไหล่ข้าง (Side Delts)" d="M34 122 Q54 112 56 125 L40 172 Q24 150 34 122 Z" title="ไหล่ข้าง (Side Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่ข้าง (Side Delts)" d="M256 122 Q236 112 234 125 L250 172 Q266 150 256 122 Z" title="ไหล่ข้าง (Side Delts)"/>
 
             <!-- Biceps (ไบเซ็ป) -->
-            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M42 136 Q68 144 58 196 L40 188 Q36 156 42 136 Z" title="ไบเซ็ป (Biceps)"/>
-            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M237 136 Q211 144 221 196 L239 188 Q243 156 237 136 Z" title="ไบเซ็ป (Biceps)"/>
+            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M26 182 Q60 192 48 262 L28 252 Q20 210 26 182 Z" title="ไบเซ็ป (Biceps)"/>
+            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M264 182 Q230 192 242 262 L262 252 Q270 210 264 182 Z" title="ไบเซ็ป (Biceps)"/>
 
             <!-- Forearms (ปลายแขน) -->
-            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M24 198 Q54 204 42 278 L26 270 Q18 230 24 198 Z" title="ปลายแขน (Forearms)"/>
-            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M255 198 Q225 204 237 278 L253 270 Q261 230 255 198 Z" title="ปลายแขน (Forearms)"/>
+            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M12 268 Q46 276 34 372 L16 362 Q6 310 12 268 Z" title="ปลายแขน (Forearms)"/>
+            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M278 268 Q244 276 256 372 L274 362 Q284 310 278 268 Z" title="ปลายแขน (Forearms)"/>
 
-            <!-- Abs / Core (แกนกลางลำตัว / หน้าท้อง) -->
-            <path class="hotspot-path" data-cat="แกนกลางลำตัว (Abs/Core)" d="M92 148 L187 148 L176 268 L103 268 Z" title="หน้าท้อง/แกนกลาง (Abs/Core)"/>
+            <!-- Abs / Core (แกนกลางลำตัว / หน้าท้อง 6-pack) -->
+            <path class="hotspot-path" data-cat="แกนกลางลำตัว (Abs/Core)" d="M98 185 L192 185 L182 342 L108 342 Z" title="หน้าท้อง/แกนกลาง (Abs/Core)"/>
 
             <!-- Quads / Thighs (ต้นขาหน้า) -->
-            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M82 272 Q136 272 136 415 L88 405 Q72 340 82 272 Z" title="ต้นขาหน้า (Quads)"/>
-            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M197 272 Q143 272 143 415 L191 405 Q207 340 197 272 Z" title="ต้นขาหน้า (Quads)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M78 348 Q143 348 143 555 L90 540 Q70 450 78 348 Z" title="ต้นขาหน้า (Quads)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M212 348 Q147 348 147 555 L200 540 Q220 450 212 348 Z" title="ต้นขาหน้า (Quads)"/>
 
             <!-- Calves (น่อง) -->
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M82 422 Q126 422 118 535 L90 525 Q78 480 82 422 Z" title="น่อง (Calves)"/>
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M197 422 Q153 422 161 535 L189 525 Q201 480 197 422 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M82 568 Q136 568 128 720 L96 710 Q80 650 82 568 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M208 568 Q154 568 162 720 L194 710 Q210 650 208 568 Z" title="น่อง (Calves)"/>
           </svg>
 
-          <!-- 1:1 Pixel Calibrated Back Hotspots (279 x 556) -->
-          <svg class="svg-hotspot-overlay" id="svgBack" viewBox="0 0 279 556" style="display:none;">
+          <!-- 1:1 Pixel-Calibrated Back Hotspots (290 x 780) -->
+          <svg class="svg-hotspot-overlay" id="svgBack" viewBox="0 0 290 780" style="display:none;">
             <!-- Traps / Upper Back (หลังบน) -->
-            <path class="hotspot-path" data-cat="หลังบน (Upper Back/Traps)" d="M85 75 L194 75 L215 135 L139.5 175 L64 135 Z" title="หลังบน/สะบัก (Traps)"/>
+            <path class="hotspot-path" data-cat="หลังบน (Upper Back/Traps)" d="M88 88 L202 88 L225 168 L145 208 L65 168 Z" title="หลังบน/สะบัก (Traps)"/>
+
+            <!-- Rear Delts (ไหล่หลัง) -->
+            <path class="hotspot-path" data-cat="ไหล่หลัง (Rear Delts)" d="M45 108 Q88 102 92 118 L76 162 Q45 145 45 108 Z" title="ไหล่หลัง (Rear Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่หลัง (Rear Delts)" d="M245 108 Q202 102 198 118 L214 162 Q245 145 245 108 Z" title="ไหล่หลัง (Rear Delts)"/>
 
             <!-- Lats (ปีก) -->
-            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M64 137 L139.5 177 L134 245 L78 220 Z" title="ปีก (Lats)"/>
-            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M215 137 L139.5 177 L145 245 L201 220 Z" title="ปีก (Lats)"/>
+            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M65 172 L145 212 L138 308 L78 275 Z" title="ปีก (Lats)"/>
+            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M225 172 L145 212 L152 308 L212 275 Z" title="ปีก (Lats)"/>
+
+            <!-- Lower Back (หลังล่าง) -->
+            <path class="hotspot-path" data-cat="หลังล่าง (Lower Back)" d="M122 250 L168 250 L164 340 L126 340 Z" title="หลังล่าง (Lower Back)"/>
 
             <!-- Triceps Back (ไตรเซ็ป) -->
-            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M42 115 Q65 125 56 185 L36 175 Z" title="ไตรเซ็ป (Triceps)"/>
-            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M237 115 Q214 125 223 185 L243 175 Z" title="ไตรเซ็ป (Triceps)"/>
+            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M20 162 Q62 172 52 248 L26 238 Z" title="ไตรเซ็ป (Triceps)"/>
+            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M270 162 Q228 172 238 248 L264 238 Z" title="ไตรเซ็ป (Triceps)"/>
 
             <!-- Glutes (สะโพก) -->
-            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M78 270 L139.5 270 L134 340 L84 330 Z" title="สะโพก (Glutes)"/>
-            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M201 270 L139.5 270 L145 340 L195 330 Z" title="สะโพก (Glutes)"/>
+            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M80 342 L145 342 L138 430 L84 420 Z" title="สะโพก (Glutes)"/>
+            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M210 342 L145 342 L152 430 L206 420 Z" title="สะโพก (Glutes)"/>
 
             <!-- Hamstrings (ต้นขาหลัง) -->
-            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M82 342 L134 342 L128 425 L88 415 Z" title="ต้นขาหลัง (Hamstrings)"/>
-            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M197 342 L145 342 L151 425 L191 415 Z" title="ต้นขาหลัง (Hamstrings)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M82 432 L138 432 L130 568 L88 558 Z" title="ต้นขาหลัง (Hamstrings)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M208 432 L152 432 L160 568 L202 558 Z" title="ต้นขาหลัง (Hamstrings)"/>
 
             <!-- Calves Back (น่อง) -->
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M84 430 L126 430 L118 535 L90 525 Z" title="น่อง (Calves)"/>
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M195 430 L153 430 L161 535 L189 525 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M75 572 L135 572 L125 725 L92 715 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M215 572 L155 572 L165 725 L198 715 Z" title="น่อง (Calves)"/>
           </svg>
         </div>
 
@@ -1108,7 +1119,7 @@ function buildExCard(cat,name,eq){
 }
 renderLibrary();
 
-/* ---------- Pro Clean Body Hotspots & Toggle ---------- */
+/* ---------- 3D Blue Model Hotspots & Toggle ---------- */
 const btnFront = document.getElementById('btnFront');
 const btnBack = document.getElementById('btnBack');
 const imgFront = document.getElementById('imgFront');
@@ -1403,7 +1414,7 @@ function paintPicker(){
       btn.textContent='เพิ่มแล้ว'; btn.disabled=true;
       renderSchedule();
       setTimeout(()=>{
-        const cards = document.createElement('.day-card');
+        const cards = document.querySelectorAll('.day-card');
         cards.forEach(c=>{ if(c.querySelector('.day-name').textContent===pickerTargetDay.name) c.classList.add('open'); });
       },0);
     });
