@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChikiSet — 3D Hyper-Realistic Muscle Anatomy Workout Tracker</title>
+<title>ChikiSet — 3D Muscle Anatomy Workout Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@ body {
   color: var(--text-main);
   font-family: 'Kanit', sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   overflow-x: hidden;
 }
 
@@ -292,7 +292,7 @@ h1 span {
 
 .split-container {
   display: grid;
-  grid-template-columns: 1fr 310px;
+  grid-template-columns: 1fr 320px;
   gap: 16px;
   align-items: start;
 }
@@ -375,7 +375,7 @@ h1 span {
   box-shadow: var(--shadow-sm);
 }
 
-/* 1:1 Perfectly Calibrated Eye-Level Container */
+/* Organic Precise Calibrated Container */
 .blue-anatomy-container {
   position: relative;
   width: 100%;
@@ -406,8 +406,8 @@ h1 span {
 }
 
 .hotspot-path {
-  fill: rgba(2, 132, 199, 0.15);
-  stroke: rgba(2, 132, 199, 0.5);
+  fill: rgba(2, 132, 199, 0.08);
+  stroke: rgba(255, 94, 58, 0.4);
   stroke-width: 1.5;
   stroke-linejoin: round;
   cursor: pointer;
@@ -415,7 +415,7 @@ h1 span {
 }
 
 .hotspot-path:hover {
-  fill: rgba(255, 94, 58, 0.5);
+  fill: rgba(255, 94, 58, 0.45);
   stroke: #ff5e3a;
   stroke-width: 2.2;
   filter: drop-shadow(0 0 8px rgba(255, 94, 58, 0.8));
@@ -424,7 +424,7 @@ h1 span {
 .hotspot-path.active {
   fill: rgba(255, 94, 58, 0.6);
   stroke: #ff5e3a;
-  stroke-width: 2.5;
+  stroke-width: 2.8;
   filter: drop-shadow(0 0 10px rgba(255, 94, 58, 0.95));
 }
 
@@ -796,7 +796,7 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
     <div class="split-container">
       <div id="library-list-col"></div>
       
-      <!-- Compact Eye-Level 3D Blue Muscle Model Panel -->
+      <!-- Organic Precise Calibrated 3D Blue Muscle Model Panel -->
       <div class="anatomy-panel">
         <div class="anatomy-header">
           <div class="anatomy-title"><span>🧬</span> จิ้มมัดกล้ามเนื้อ (3D Model)</div>
@@ -813,71 +813,75 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
           <!-- Fixed Intact Head Blue Model Back Image -->
           <img src="back_head_ok.png" alt="3D Blue Muscle Back Model" class="blue-body-img" id="imgBack" style="display:none;">
 
-          <!-- 1:1 Pixel-Calibrated Front Hotspots (380 x 1024) -->
+          <!-- 1:1 Organic Muscle Outline Front Hotspots (380 x 1024) -->
           <svg class="svg-hotspot-overlay" id="svgFront" viewBox="0 0 380 1024">
+            <!-- Traps / Neck (คอ/สะบักหน้า) -->
+            <path class="hotspot-path" data-cat="หลังบน (Upper Back/Traps)" d="M 145 140 C 120 155 105 170 85 180 L 125 185 L 155 160 Z" title="คอ/สะบัก (Traps)"/>
+            <path class="hotspot-path" data-cat="หลังบน (Upper Back/Traps)" d="M 235 140 C 260 155 275 170 295 180 L 255 185 L 225 160 Z" title="คอ/สะบัก (Traps)"/>
+
             <!-- Chest (อก) -->
-            <path class="hotspot-path" data-cat="อก (Chest)" d="M135 170 Q190 160 190 260 L135 260 Q120 215 135 170 Z" title="อก (Chest)"/>
-            <path class="hotspot-path" data-cat="อก (Chest)" d="M245 170 Q190 160 190 260 L245 260 Q260 215 245 170 Z" title="อก (Chest)"/>
+            <path class="hotspot-path" data-cat="อก (Chest)" d="M 125 185 L 188 185 C 188 235 185 262 135 260 C 115 255 110 220 125 185 Z" title="อก (Chest)"/>
+            <path class="hotspot-path" data-cat="อก (Chest)" d="M 255 185 L 192 185 C 192 235 195 262 245 260 C 265 255 270 220 255 185 Z" title="อก (Chest)"/>
 
             <!-- Shoulders / Front Delts (ไหล่หน้า) -->
-            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M75 170 Q130 160 135 180 L110 240 Q65 210 75 170 Z" title="ไหล่หน้า (Front Delts)"/>
-            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M305 170 Q250 160 245 180 L270 240 Q315 210 305 170 Z" title="ไหล่หน้า (Front Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M 85 180 C 65 185 55 205 60 235 C 70 255 90 260 115 250 C 130 220 120 195 85 180 Z" title="ไหล่หน้า (Front Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่หน้า (Front Delts)" d="M 295 180 C 315 185 325 205 320 235 C 310 255 290 260 265 250 C 250 220 260 195 295 180 Z" title="ไหล่หน้า (Front Delts)"/>
 
             <!-- Shoulders / Side Delts (ไหล่ข้าง) -->
-            <path class="hotspot-path" data-cat="ไหล่ข้าง (Side Delts)" d="M45 190 Q75 175 80 195 L55 260 Q35 230 45 190 Z" title="ไหล่ข้าง (Side Delts)"/>
-            <path class="hotspot-path" data-cat="ไหล่ข้าง (Side Delts)" d="M335 190 Q305 175 300 195 L325 260 Q345 230 335 190 Z" title="ไหล่ข้าง (Side Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่ข้าง (Side Delts)" d="M 60 185 C 45 195 40 220 48 245 C 55 255 65 250 68 235 Z" title="ไหล่ข้าง (Side Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่ข้าง (Side Delts)" d="M 320 185 C 335 195 340 220 332 245 C 325 255 315 250 312 235 Z" title="ไหล่ข้าง (Side Delts)"/>
 
             <!-- Biceps (ไบเซ็ป) -->
-            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M35 260 Q80 275 65 370 L35 355 Q25 295 35 260 Z" title="ไบเซ็ป (Biceps)"/>
-            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M345 260 Q300 275 315 370 L345 355 Q355 295 345 260 Z" title="ไบเซ็ป (Biceps)"/>
+            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M 52 240 C 45 260 40 300 50 340 C 65 355 80 340 75 300 C 70 265 65 248 52 240 Z" title="ไบเซ็ป (Biceps)"/>
+            <path class="hotspot-path" data-cat="ไบเซ็ป (Biceps)" d="M 328 240 C 335 260 340 300 330 340 C 315 355 300 340 305 300 C 310 265 315 248 328 240 Z" title="ไบเซ็ป (Biceps)"/>
 
             <!-- Forearms (ปลายแขน) -->
-            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M18 370 Q60 380 45 510 L22 495 Q10 425 18 370 Z" title="ปลายแขน (Forearms)"/>
-            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M362 370 Q320 380 335 510 L358 495 Q370 425 362 370 Z" title="ปลายแขน (Forearms)"/>
+            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M 42 345 C 28 375 20 430 32 490 C 45 500 62 485 58 435 C 52 385 55 360 42 345 Z" title="ปลายแขน (Forearms)"/>
+            <path class="hotspot-path" data-cat="ปลายแขน (Forearms)" d="M 338 345 C 352 375 360 430 348 490 C 335 500 318 485 322 435 C 328 385 325 360 338 345 Z" title="ปลายแขน (Forearms)"/>
 
-            <!-- Abs / Core (แกนกลางลำตัว / หน้าท้อง 6-pack) -->
-            <path class="hotspot-path" data-cat="แกนกลางลำตัว (Abs/Core)" d="M135 260 L245 260 L232 470 L148 470 Z" title="หน้าท้อง/แกนกลาง (Abs/Core)"/>
+            <!-- Abs / Core (หน้าท้อง 6-Pack & แกนกลาง) -->
+            <path class="hotspot-path" data-cat="แกนกลางลำตัว (Abs/Core)" d="M 130 265 L 250 265 C 255 330 250 410 235 460 C 190 480 145 460 145 460 C 130 410 125 330 130 265 Z" title="หน้าท้อง/แกนกลาง (Abs/Core)"/>
 
             <!-- Quads / Thighs (ต้นขาหน้า) -->
-            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M100 470 Q188 470 188 770 L120 750 Q90 630 100 470 Z" title="ต้นขาหน้า (Quads)"/>
-            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M280 470 Q192 470 192 770 L260 750 Q290 630 280 470 Z" title="ต้นขาหน้า (Quads)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M 132 468 C 105 480 90 530 92 630 C 95 720 120 765 142 765 C 165 765 178 720 180 630 C 182 530 160 480 132 468 Z" title="ต้นขาหน้า (Quads)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหน้า (Quads)" d="M 248 468 C 275 480 290 530 288 630 C 285 720 260 765 238 765 C 215 765 202 720 200 630 C 198 530 220 480 248 468 Z" title="ต้นขาหน้า (Quads)"/>
 
             <!-- Calves (น่อง) -->
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M105 775 Q178 775 168 970 L128 955 Q105 880 105 775 Z" title="น่อง (Calves)"/>
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M275 775 Q202 775 212 970 L252 955 Q275 880 275 775 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M 108 775 C 95 800 95 850 102 920 C 115 950 150 950 162 920 C 172 850 172 800 158 775 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M 272 775 C 285 800 285 850 278 920 C 265 950 230 950 218 920 C 208 850 208 800 222 775 Z" title="น่อง (Calves)"/>
           </svg>
 
-          <!-- 1:1 Pixel-Calibrated Back Hotspots (366 x 1024) -->
+          <!-- 1:1 Organic Muscle Outline Back Hotspots (366 x 1024) -->
           <svg class="svg-hotspot-overlay" id="svgBack" viewBox="0 0 366 1024" style="display:none;">
-            <!-- Traps / Upper Back (หลังบน) -->
-            <path class="hotspot-path" data-cat="หลังบน (Upper Back/Traps)" d="M110 170 L256 170 L286 280 L183 330 L80 280 Z" title="หลังบน/สะบัก (Traps)"/>
+            <!-- Traps / Upper Back (หลังบน/สะบัก) -->
+            <path class="hotspot-path" data-cat="หลังบน (Upper Back/Traps)" d="M 100 170 L 266 170 L 296 260 L 183 310 L 70 260 Z" title="หลังบน/สะบัก (Traps)"/>
 
             <!-- Rear Delts (ไหล่หลัง) -->
-            <path class="hotspot-path" data-cat="ไหล่หลัง (Rear Delts)" d="M55 190 Q110 180 115 200 L95 250 Q55 230 55 190 Z" title="ไหล่หลัง (Rear Delts)"/>
-            <path class="hotspot-path" data-cat="ไหล่หลัง (Rear Delts)" d="M311 190 Q256 180 251 200 L271 250 Q311 230 311 190 Z" title="ไหล่หลัง (Rear Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่หลัง (Rear Delts)" d="M 50 185 C 95 175 105 195 90 240 Q 55 220 50 185 Z" title="ไหล่หลัง (Rear Delts)"/>
+            <path class="hotspot-path" data-cat="ไหล่หลัง (Rear Delts)" d="M 316 185 C 271 175 261 195 276 240 Q 311 220 316 185 Z" title="ไหล่หลัง (Rear Delts)"/>
 
-            <!-- Lats (ปีก) -->
-            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M80 280 L183 330 L175 420 L98 380 Z" title="ปีก (Lats)"/>
-            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M286 280 L183 330 L191 420 L268 380 Z" title="ปีก (Lats)"/>
+            <!-- Lats / Wings (ปีก) -->
+            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M 75 265 L 183 315 L 175 410 L 92 370 Z" title="ปีก (Lats)"/>
+            <path class="hotspot-path" data-cat="ปีก (Lats)" d="M 291 265 L 183 315 L 191 410 L 274 370 Z" title="ปีก (Lats)"/>
 
             <!-- Lower Back (หลังล่าง) -->
-            <path class="hotspot-path" data-cat="หลังล่าง (Lower Back)" d="M150 340 L216 340 L210 450 L156 450 Z" title="หลังล่าง (Lower Back)"/>
+            <path class="hotspot-path" data-cat="หลังล่าง (Lower Back)" d="M 148 330 L 218 330 L 212 445 L 154 445 Z" title="หลังล่าง (Lower Back)"/>
 
             <!-- Triceps Back (ไตรเซ็ป) -->
-            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M25 230 Q80 245 68 350 L35 335 Z" title="ไตรเซ็ป (Triceps)"/>
-            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M341 230 Q286 245 298 350 L331 335 Z" title="ไตรเซ็ป (Triceps)"/>
+            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M 30 220 C 70 235 62 335 38 320 Z" title="ไตรเซ็ป (Triceps)"/>
+            <path class="hotspot-path" data-cat="ไตรเซ็ป (Triceps)" d="M 336 220 C 296 235 304 335 328 320 Z" title="ไตรเซ็ป (Triceps)"/>
 
-            <!-- Glutes (สะโพก) -->
-            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M100 450 L183 450 L175 570 L105 555 Z" title="สะโพก (Glutes)"/>
-            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M266 450 L183 450 L191 570 L261 555 Z" title="สะโพก (Glutes)"/>
+            <!-- Glutes (สะโพก/ก้น) -->
+            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M 95 440 L 183 440 L 175 560 L 100 545 Z" title="สะโพก (Glutes)"/>
+            <path class="hotspot-path" data-cat="สะโพก (Glutes)" d="M 271 440 L 183 440 L 191 560 L 266 545 Z" title="สะโพก (Glutes)"/>
 
             <!-- Hamstrings (ต้นขาหลัง) -->
-            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M105 570 L178 570 L168 770 L112 755 Z" title="ต้นขาหลัง (Hamstrings)"/>
-            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M261 570 L188 570 L198 770 L254 755 Z" title="ต้นขาหลัง (Hamstrings)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M 100 562 L 175 562 L 165 760 L 108 745 Z" title="ต้นขาหลัง (Hamstrings)"/>
+            <path class="hotspot-path" data-cat="ต้นขาหลัง (Hamstrings)" d="M 266 562 L 191 562 L 201 760 L 258 745 Z" title="ต้นขาหลัง (Hamstrings)"/>
 
-            <!-- Calves Back (น่อง) -->
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M95 770 L170 770 L158 970 L115 955 Z" title="น่อง (Calves)"/>
-            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M271 770 L196 770 L208 970 L251 955 Z" title="น่อง (Calves)"/>
+            <!-- Calves Back (น่องหลัง) -->
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M 92 765 L 165 765 L 152 960 L 110 945 Z" title="น่อง (Calves)"/>
+            <path class="hotspot-path" data-cat="น่อง (Calves)" d="M 274 765 L 201 765 L 214 960 L 256 945 Z" title="น่อง (Calves)"/>
           </svg>
         </div>
 
