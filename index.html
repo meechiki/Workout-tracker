@@ -703,54 +703,6 @@ h1 span {
   box-shadow: 0 0 0 3px var(--accent-subtle);
 }
 
-.template-section {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-line);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.template-title {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.template-chips {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.tmpl-chip {
-  font-family: 'Kanit', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  background: var(--panel-sub);
-  border: 1px solid var(--border-line);
-  color: var(--text-main);
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.tmpl-chip:hover {
-  background: var(--accent-subtle);
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-}
-
 .preset-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -2354,22 +2306,6 @@ function renderSchedule(){
     <div class="new-day-form">
       <input id="newDayName" placeholder="พิมพ์ชื่อวันฝึกใหม่ เช่น Day 1 - อก/ไตรเซ็ป...">
       <button class="btn-mini accent" id="addDayBtn">+ สร้างวันใหม่</button>
-    </div>
-    <div class="template-section">
-      <div>
-        <div class="template-title" style="margin-bottom:8px;">⚡ ปุ่มลัดสร้างชื่อวันฝึกแบบเร็ว:</div>
-        <div class="template-chips">
-          <button class="tmpl-chip" data-name="Upper Body (ส่วนบน)">💪 Upper Body</button>
-          <button class="tmpl-chip" data-name="Lower Body (ส่วนล่าง)">🦵 Lower Body</button>
-          <button class="tmpl-chip" data-name="Push (อก/ไหล่/ไตรเซ็ป)">🔥 Push</button>
-          <button class="tmpl-chip" data-name="Pull (หลัง/ปีก/ไบเซ็ป)">🎯 Pull</button>
-          <button class="tmpl-chip" data-name="Legs (ขา/ท้อง)">🦵 Legs</button>
-          <button class="tmpl-chip" data-name="Full Body (รวมทุกส่วน)">🏆 Full Body</button>
-        </div>
-      </div>
-      <button class="btn-recommend" id="openQuizBtn">
-        <span>🤖</span> แนะนำโปรแกรมสำหรับคุณ
-      </button>
     </div>`;
   schedView.appendChild(toolbar);
 
@@ -2379,14 +2315,6 @@ function renderSchedule(){
     if(!name) return;
     createQuickDay(name);
     inp.value='';
-  });
-
-  document.getElementById('openQuizBtn').addEventListener('click', openQuizModal);
-
-  toolbar.querySelectorAll('.tmpl-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      createQuickDay(btn.dataset.name);
-    });
   });
 
   if(schedule.length===0){
