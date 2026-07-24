@@ -879,15 +879,22 @@ h1 span {
   outline: none;
 }
 
-.pick-item { display: flex; justify-content: space-between; align-items: center; padding: 7px 4px; border-bottom: 1px solid var(--border-line); font-size: 13px; }
-.pick-item .p-cat { font-size: 10px; color: var(--text-muted); }
+.pick-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 6px; border-bottom: 1px solid var(--border-line); font-size: 13px; }
+.pick-item .p-cat { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
 .pick-add {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   color: var(--text-main);
   border-radius: var(--radius-sm);
-  padding: 4px 9px; font-size: 11.5px; cursor: pointer;
+  padding: 5px 12px; font-size: 12px; cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.pick-add:hover {
+  background: var(--accent-gradient);
+  color: #fff;
+  border-color: transparent;
 }
 
 footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--text-muted); font-size: 11px; text-align: center; }
@@ -1073,7 +1080,18 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
   รายการท่าออกกำลังกายครอบคลุมท่าหลักในยิม (~140 ท่า) | บันทึกประวัติและตารางในเบราว์เซอร์อัตโนมัติ (localStorage)
 </footer>
 
-<!-- Modal Picker -->
+<!-- Modal Target Day Selector -->
+<div class="picker-overlay" id="dayTargetOverlay">
+  <div class="picker-box">
+    <div class="picker-head">
+      <h3 id="dayTargetTitle">เลือกว่าจะเพิ่มเข้าวันไหน</h3>
+      <button class="picker-close" id="dayTargetClose">×</button>
+    </div>
+    <div id="dayTargetList"></div>
+  </div>
+</div>
+
+<!-- Modal Exercise Picker for Schedule View -->
 <div class="picker-overlay" id="pickerOverlay">
   <div class="picker-box">
     <div class="picker-head">
@@ -1386,18 +1404,21 @@ function todayStr(){
   const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
 
+function switchTab(viewName) {
+  document.querySelectorAll('.main-tab').forEach(x => x.classList.remove('active'));
+  const targetTab = document.querySelector(`.main-tab[data-view="${viewName}"]`);
+  if (targetTab) targetTab.classList.add('active');
+
+  document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+  document.getElementById('view-' + viewName).classList.add('active');
+  document.getElementById('groupTabs').style.display = viewName === 'library' ? 'flex' : 'none';
+  document.getElementById('subTabs').style.display = viewName === 'library' ? 'flex' : 'none';
+  document.querySelector('.search-wrap').style.display = viewName === 'library' ? 'block' : 'none';
+}
+
 /* ---------- Main Tab Switching ---------- */
-document.querySelectorAll('.main-tab').forEach(t=>{
-  t.addEventListener('click', ()=>{
-    document.querySelectorAll('.main-tab').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    const v = t.dataset.view;
-    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-    document.getElementById('view-'+v).classList.add('active');
-    document.getElementById('groupTabs').style.display = v==='library' ? 'flex' : 'none';
-    document.getElementById('subTabs').style.display = v==='library' ? 'flex' : 'none';
-    document.querySelector('.search-wrap').style.display = v==='library' ? 'block' : 'none';
-  });
+document.querySelectorAll('.main-tab').forEach(t => {
+  t.addEventListener('click', () => switchTab(t.dataset.view));
 });
 
 /* ================= LIBRARY VIEW ================= */
@@ -1493,6 +1514,61 @@ function renderLibrary(){
   if (!any) libView.innerHTML = '<div class="empty">ไม่พบท่าออกกำลังกายที่คุณค้นหา ลองคำอื่นดูครับ</div>';
 }
 
+/* Modal Selector for Day Target */
+const dayTargetOverlay = document.getElementById('dayTargetOverlay');
+const dayTargetTitle = document.getElementById('dayTargetTitle');
+const dayTargetList = document.getElementById('dayTargetList');
+
+function openDayTargetPicker(cat, name, eq) {
+  dayTargetOverlay.classList.add('open');
+  dayTargetList.innerHTML = '';
+
+  if (schedule.length === 0) {
+    dayTargetTitle.textContent = "ยังไม่ได้สร้างวันฝึกในตารางของฉัน";
+    dayTargetList.innerHTML = `
+      <div style="text-align:center;padding:16px 8px;">
+        <div style="font-size:36px;margin-bottom:8px;">📌</div>
+        <div style="font-size:14px;color:var(--text-main);font-weight:600;margin-bottom:6px;">คุณยังไม่ได้สร้างวันฝึกในตารางออกกำลังกาย</div>
+        <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:16px;">กรุณาสร้างวันฝึกหรือเลือกโปรแกรมสำเร็จรูปก่อนเพื่อเพิ่มท่า "${name}" เข้าตารางครับ</div>
+        <button class="btn-mini accent" style="width:100%;padding:10px;" id="gotoScheduleBtn">🚀 ไปสร้างวันฝึกใน "ตารางของฉัน"</button>
+      </div>
+    `;
+    document.getElementById('gotoScheduleBtn').addEventListener('click', () => {
+      dayTargetOverlay.classList.remove('open');
+      switchTab('schedule');
+    });
+  } else {
+    dayTargetTitle.textContent = `เพิ่มท่า "${name}" เข้าวันไหนดี?`;
+    schedule.forEach(day => {
+      const k = keyFor(cat, name);
+      const alreadyHas = day.exercises.some(e => keyFor(e.cat, e.name) === k);
+      const row = document.createElement('div');
+      row.className = 'pick-item';
+      row.innerHTML = `
+        <div>
+          <div style="font-weight:600;font-size:14px;color:var(--text-main);">${day.name}</div>
+          <div class="p-cat">${day.exercises.length} ท่าที่มีอยู่ในวันนี้</div>
+        </div>
+        <button class="pick-add">${alreadyHas ? 'มีแล้ว ✓' : '+ เพิ่มเข้าวันนี้'}</button>
+      `;
+      const btn = row.querySelector('.pick-add');
+      if (alreadyHas) btn.disabled = true;
+
+      btn.addEventListener('click', () => {
+        day.exercises.push({ cat, name, eq });
+        saveSchedule();
+        btn.textContent = 'เพิ่มสำเร็จ! ✓';
+        btn.disabled = true;
+        renderSchedule();
+      });
+      dayTargetList.appendChild(row);
+    });
+  }
+}
+
+document.getElementById('dayTargetClose').addEventListener('click', () => dayTargetOverlay.classList.remove('open'));
+dayTargetOverlay.addEventListener('click', e => { if (e.target === dayTargetOverlay) dayTargetOverlay.classList.remove('open'); });
+
 /* Simple Clean Card for Browsing Library View (No set recorder rows here) */
 function buildExCard(cat,name,eq){
   const card = document.createElement('div'); card.className='ex-card-simple';
@@ -1505,11 +1581,7 @@ function buildExCard(cat,name,eq){
   `;
   card.querySelector('[data-act="quickadd"]').addEventListener('click', (e)=>{
     e.stopPropagation();
-    if(schedule.length === 0) {
-      alert('คุณยังไม่มีวันฝึกในหน้า "ตารางของฉัน" — สามารถกดสลับหน้า "ตารางของฉัน" เพื่อเลือกสร้างโปรแกรมสำเร็จรูปใน 1 คลิกได้เลยครับ!');
-    } else {
-      openPicker(schedule[0]);
-    }
+    openDayTargetPicker(cat, name, eq);
   });
   return card;
 }
