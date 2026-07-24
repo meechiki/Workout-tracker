@@ -257,10 +257,10 @@ h1 span {
   border-bottom-color: var(--accent-primary);
 }
 
-/* Hierarchical Two-Tier Category Filter System */
+/* Hierarchical Category & Equipment Filter Systems */
 .group-tabs {
   display: flex; gap: 5px; overflow-x: auto;
-  padding: 8px 0 4px; scrollbar-width: none;
+  padding: 6px 0 3px; scrollbar-width: none;
   max-width: 1280px; margin: 0 auto;
 }
 
@@ -268,11 +268,11 @@ h1 span {
 
 .group-chip {
   flex: none;
-  font-size: 12.5px; font-weight: 600;
+  font-size: 12px; font-weight: 600;
   background: var(--panel-solid);
   border: 1px solid var(--border-line);
   color: var(--text-muted);
-  padding: 4px 12px;
+  padding: 3px 11px;
   border-radius: var(--radius-full);
   cursor: pointer;
   white-space: nowrap;
@@ -288,7 +288,7 @@ h1 span {
 
 .sub-tabs {
   display: flex; gap: 5px; overflow-x: auto;
-  padding: 2px 0 6px; scrollbar-width: none;
+  padding: 2px 0 4px; scrollbar-width: none;
   max-width: 1280px; margin: 0 auto;
 }
 
@@ -300,7 +300,7 @@ h1 span {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   color: var(--text-muted);
-  padding: 3px 10px;
+  padding: 2px 9px;
   border-radius: var(--radius-full);
   cursor: pointer;
   white-space: nowrap;
@@ -313,6 +313,38 @@ h1 span {
   color: #ffffff;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(255, 94, 58, 0.3);
+}
+
+/* Equipment Filter Chips Bar */
+.eq-tabs {
+  display: flex; gap: 4px; overflow-x: auto;
+  padding: 2px 0 6px; scrollbar-width: none;
+  max-width: 1280px; margin: 0 auto;
+  border-top: 1px dashed var(--border-line);
+  margin-top: 4px;
+}
+
+.eq-tabs::-webkit-scrollbar { display: none; }
+
+.eq-chip {
+  flex: none;
+  font-size: 11px; font-weight: 500;
+  background: var(--panel-sub);
+  border: 1px solid var(--border-line);
+  color: var(--text-muted);
+  padding: 2px 9px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+}
+
+.eq-chip.active {
+  background: var(--panel-solid);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
 }
 
 /* Layout Wrapper for Zero Scroll */
@@ -335,7 +367,7 @@ h1 span {
 
 /* Left Scrollable Exercise List */
 #library-list-col {
-  max-height: calc(100vh - 195px);
+  max-height: calc(100vh - 215px);
   overflow-y: auto;
   padding-right: 6px;
 }
@@ -345,7 +377,7 @@ h1 span {
 /* Eye-Level Zero-Scroll 3D Muscle Panel */
 .anatomy-panel {
   position: sticky;
-  top: 135px;
+  top: 155px;
   background: var(--panel-bg);
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
@@ -353,7 +385,7 @@ h1 span {
   padding: 12px;
   box-shadow: var(--shadow-md);
   text-align: center;
-  max-height: calc(100vh - 145px);
+  max-height: calc(100vh - 165px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -409,8 +441,8 @@ h1 span {
   width: 100%;
   max-width: 220px;
   margin: 0 auto;
-  max-height: calc(100vh - 240px);
-  height: 400px;
+  max-height: calc(100vh - 260px);
+  height: 380px;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--panel-sub);
@@ -509,7 +541,9 @@ h1 span {
 }
 
 .ex-name { font-size: 14.5px; font-weight: 600; color: var(--text-main); }
-.ex-eq { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+.ex-tags-group { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.ex-eq { font-size: 11.5px; color: var(--text-muted); }
+.bench-tag { font-size: 10px; font-weight: 600; background: var(--accent-subtle); color: var(--accent-primary); padding: 1px 6px; border-radius: var(--radius-full); }
 
 /* Full Expandable Exercise Card for Schedule View */
 .ex-card {
@@ -992,6 +1026,9 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
   <!-- Hierarchical Two-Tier Category Filter Chips Bar -->
   <div class="group-tabs" id="groupTabs"></div>
   <div class="sub-tabs" id="subTabs"></div>
+  
+  <!-- Real-World Equipment Filter Chips Bar -->
+  <div class="eq-tabs" id="eqTabs"></div>
 </header>
 
 <div class="wrap">
@@ -1165,6 +1202,20 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
 </div>
 
 <script>
+/* ---------- Real-World Equipment Categories System ---------- */
+const EQUIPMENT_CATEGORIES = [
+  { id: "ALL", name: "🌐 อุปกรณ์ทั้งหมด" },
+  { id: "BARBELL", name: "🏋️‍♂️ บาร์เบล (Barbell)", match: ["บาร์เบล", "อีซี่บาร์"] },
+  { id: "DUMBBELL", name: "🧱 ดัมเบล (Dumbbell)", match: ["ดัมเบล"] },
+  { id: "MACHINE", name: "⚙️ เครื่องเล่น (Machine)", match: ["เครื่อง"] },
+  { id: "SMITH", name: "🔒 สมิธแมชชีน (Smith Machine)", match: ["สมิธแมชชีน"] },
+  { id: "CABLE", name: "🔌 เคเบิล (Cable)", match: ["เคเบิล"] },
+  { id: "KETTLEBELL", name: "🔔 เคทเทิลเบล (Kettlebell)", match: ["เคทเทิลเบล"] },
+  { id: "BODYWEIGHT", name: "🤸‍♂️ น้ำหนักตัว (Bodyweight)", match: ["น้ำหนักตัว", "บาร์โหน", "ล้อเอบ", "กล่องพลัยโอ", "เชือกกระโดด"] },
+  { id: "BAND", name: "🎗 ยางยืด (Resistance Band)", match: ["ยางยืด"] },
+  { id: "BENCH", name: "🛋️ ใช้เก้าอี้/ม้านั่ง (Requires Bench)", isBenchFilter: true }
+];
+
 /* ---------- Hierarchical Category Database ---------- */
 const CATEGORY_GROUPS = [
   {
@@ -1241,281 +1292,281 @@ const CATEGORY_GROUPS = [
 
 const DB = {
 "อกบน (Upper Chest)": [
-  ["Incline Barbell Bench Press","บาร์เบล"],
-  ["Incline Smith Machine Bench Press","สมิธแมชชีน"],
-  ["Incline Dumbbell Press","ดัมเบล"],
-  ["Incline Dumbbell Fly","ดัมเบล"],
-  ["Low-to-High Cable Fly","เคเบิล"],
-  ["Incline Machine Chest Press","เครื่อง"],
-  ["Incline Push-Up","น้ำหนักตัว"],
-  ["Feet-Elevated Decline Push-Up","น้ำหนักตัว"],
-  ["Incline Resistance Band Fly","ยางยืด"],
-  ["Reverse-Grip Incline Barbell Press","บาร์เบล"]
+  ["Incline Barbell Bench Press","บาร์เบล", true],
+  ["Incline Smith Machine Bench Press","สมิธแมชชีน", true],
+  ["Incline Dumbbell Press","ดัมเบล", true],
+  ["Incline Dumbbell Fly","ดัมเบล", true],
+  ["Low-to-High Cable Fly","เคเบิล", false],
+  ["Incline Machine Chest Press","เครื่อง", true],
+  ["Incline Push-Up","น้ำหนักตัว", true],
+  ["Feet-Elevated Decline Push-Up","น้ำหนักตัว", true],
+  ["Incline Resistance Band Fly","ยางยืด", false],
+  ["Reverse-Grip Incline Barbell Press","บาร์เบล", true]
 ],
 "อกล่าง (Lower Chest)": [
-  ["Decline Barbell Bench Press","บาร์เบล"],
-  ["Decline Smith Machine Bench Press","สมิธแมชชีน"],
-  ["Decline Dumbbell Press","ดัมเบล"],
-  ["Decline Dumbbell Fly","ดัมเบล"],
-  ["Dips (Chest-focused)","น้ำหนักตัว"],
-  ["Weighted Dips","แผ่นน้ำหนัก/น้ำหนักตัว"],
-  ["High-to-Low Cable Fly","เคเบิล"],
-  ["Decline Machine Chest Press","เครื่อง"],
-  ["Decline Push-Up","น้ำหนักตัว"],
-  ["Standing Cable Decline Press","เคเบิล"]
+  ["Decline Barbell Bench Press","บาร์เบล", true],
+  ["Decline Smith Machine Bench Press","สมิธแมชชีน", true],
+  ["Decline Dumbbell Press","ดัมเบล", true],
+  ["Decline Dumbbell Fly","ดัมเบล", true],
+  ["Dips (Chest-focused)","น้ำหนักตัว", false],
+  ["Weighted Dips","แผ่นน้ำหนัก/น้ำหนักตัว", false],
+  ["High-to-Low Cable Fly","เคเบิล", false],
+  ["Decline Machine Chest Press","เครื่อง", true],
+  ["Decline Push-Up","น้ำหนักตัว", false],
+  ["Standing Cable Decline Press","เคเบิล", false]
 ],
 "อก (Chest)": [
-  ["Barbell Bench Press","บาร์เบล"],
-  ["Smith Machine Bench Press","สมิธแมชชีน"],
-  ["Dumbbell Bench Press","ดัมเบล"],
-  ["Dumbbell Fly","ดัมเบล"],
-  ["Cable Crossover","เคเบิล"],
-  ["Seated Cable Chest Press","เคเบิล"],
-  ["Pec Deck Machine","เครื่อง"],
-  ["Machine Chest Press","เครื่อง"],
-  ["Chest Press Machine (Plate-Loaded)","เครื่อง"],
-  ["Standard Push-Up","น้ำหนักตัว"],
-  ["Wide-Grip Push-Up","น้ำหนักตัว"],
-  ["Resistance Band Chest Press","ยางยืด"],
-  ["Resistance Band Chest Fly","ยางยืด"],
-  ["Dumbbell Pullover (Chest-focused)","ดัมเบล"],
-  ["Floor Press (Dumbbell)","ดัมเบล"],
-  ["Floor Press (Barbell)","บาร์เบล"]
+  ["Barbell Bench Press","บาร์เบล", true],
+  ["Smith Machine Bench Press","สมิธแมชชีน", true],
+  ["Dumbbell Bench Press","ดัมเบล", true],
+  ["Dumbbell Fly","ดัมเบล", true],
+  ["Cable Crossover","เคเบิล", false],
+  ["Seated Cable Chest Press","เคเบิล", true],
+  ["Pec Deck Machine","เครื่อง", true],
+  ["Machine Chest Press","เครื่อง", true],
+  ["Chest Press Machine (Plate-Loaded)","เครื่อง", true],
+  ["Standard Push-Up","น้ำหนักตัว", false],
+  ["Wide-Grip Push-Up","น้ำหนักตัว", false],
+  ["Resistance Band Chest Press","ยางยืด", false],
+  ["Resistance Band Chest Fly","ยางยืด", false],
+  ["Dumbbell Pullover (Chest-focused)","ดัมเบล", true],
+  ["Floor Press (Dumbbell)","ดัมเบล", false],
+  ["Floor Press (Barbell)","บาร์เบล", false]
 ],
 "สะบัก (Traps)": [
-  ["Barbell Shrugs","บาร์เบล"],
-  ["Smith Machine Shrugs","สมิธแมชชีน"],
-  ["Dumbbell Shrugs","ดัมเบล"],
-  ["Incline Dumbbell Shrugs","ดัมเบล"],
-  ["Cable Shrugs","เคเบิล"],
-  ["Face Pull","เคเบิล"],
-  ["Upright Row (Barbell)","บาร์เบล"],
-  ["Upright Row (Dumbbell)","ดัมเบล"],
-  ["Upright Row (Cable)","เคเบิล"],
-  ["Trap Bar Shrugs","บาร์เบล"],
-  ["Overhead Barbell Shrugs","บาร์เบล"]
+  ["Barbell Shrugs","บาร์เบล", false],
+  ["Smith Machine Shrugs","สมิธแมชชีน", false],
+  ["Dumbbell Shrugs","ดัมเบล", false],
+  ["Incline Dumbbell Shrugs","ดัมเบล", true],
+  ["Cable Shrugs","เคเบิล", false],
+  ["Face Pull","เคเบิล", false],
+  ["Upright Row (Barbell)","บาร์เบล", false],
+  ["Upright Row (Dumbbell)","ดัมเบล", false],
+  ["Upright Row (Cable)","เคเบิล", false],
+  ["Trap Bar Shrugs","บาร์เบล", false],
+  ["Overhead Barbell Shrugs","บาร์เบล", false]
 ],
 "หลังบน (Upper Back)": [
-  ["Barbell Row (Bent-Over)","บาร์เบล"],
-  ["Pendlay Row","บาร์เบล"],
-  ["T-Bar Row (Chest-Supported)","เครื่อง"],
-  ["T-Bar Row (Landmine)","บาร์เบล"],
-  ["Smith Machine Bent-Over Row","สมิธแมชชีน"],
-  ["Seated Wide-Grip Cable Row","เคเบิล"],
-  ["Chest-Supported Dumbbell Row","ดัมเบล"],
-  ["Single-Arm Dumbbell Row","ดัมเบล"],
-  ["Inverted Row (Australian Pull-Up)","น้ำหนักตัว"],
-  ["Band Bent-Over Row","ยางยืด"],
-  ["Meadows Row","บาร์เบล"],
-  ["Seal Row","บาร์เบล/ดัมเบล"]
+  ["Barbell Row (Bent-Over)","บาร์เบล", false],
+  ["Pendlay Row","บาร์เบล", false],
+  ["T-Bar Row (Chest-Supported)","เครื่อง", true],
+  ["T-Bar Row (Landmine)","บาร์เบล", false],
+  ["Smith Machine Bent-Over Row","สมิธแมชชีน", false],
+  ["Seated Wide-Grip Cable Row","เคเบิล", true],
+  ["Chest-Supported Dumbbell Row","ดัมเบล", true],
+  ["Single-Arm Dumbbell Row","ดัมเบล", true],
+  ["Inverted Row (Australian Pull-Up)","น้ำหนักตัว", false],
+  ["Band Bent-Over Row","ยางยืด", false],
+  ["Meadows Row","บาร์เบล", false],
+  ["Seal Row","บาร์เบล/ดัมเบล", true]
 ],
 "ปีก (Lats)": [
-  ["Lat Pulldown (Wide Grip)","เคเบิล"],
-  ["Lat Pulldown (Close Neutral Grip)","เคเบิล"],
-  ["Single-Arm Cable Lat Pulldown","เคเบิล"],
-  ["Machine Lat Pulldown","เครื่อง"],
-  ["Pull-Up","น้ำหนักตัว"],
-  ["Weighted Pull-Up","น้ำหนักตัว/แผ่นน้ำหนัก"],
-  ["Chin-Up","น้ำหนักตัว"],
-  ["Single-Arm Dumbbell Row (Lat-focused)","ดัมเบล"],
-  ["Seated Cable Row (Neutral Grip)","เคเบิล"],
-  ["Straight-Arm Pulldown (Rope/Bar)","เคเบิล"],
-  ["Dumbbell Pullover (Lat-focused)","ดัมเบล"],
-  ["Resistance Band Lat Pulldown","ยางยืด"]
+  ["Lat Pulldown (Wide Grip)","เคเบิล", true],
+  ["Lat Pulldown (Close Neutral Grip)","เคเบิล", true],
+  ["Single-Arm Cable Lat Pulldown","เคเบิล", true],
+  ["Machine Lat Pulldown","เครื่อง", true],
+  ["Pull-Up","น้ำหนักตัว", false],
+  ["Weighted Pull-Up","น้ำหนักตัว/แผ่นน้ำหนัก", false],
+  ["Chin-Up","น้ำหนักตัว", false],
+  ["Single-Arm Dumbbell Row (Lat-focused)","ดัมเบล", true],
+  ["Seated Cable Row (Neutral Grip)","เคเบิล", true],
+  ["Straight-Arm Pulldown (Rope/Bar)","เคเบิล", false],
+  ["Dumbbell Pullover (Lat-focused)","ดัมเบล", true],
+  ["Resistance Band Lat Pulldown","ยางยืด", false]
 ],
 "หลังล่าง (Lower Back)": [
-  ["Deadlift (Conventional)","บาร์เบล"],
-  ["Deadlift (Sumo)","บาร์เบล"],
-  ["Trap Bar Deadlift","บาร์เบล"],
-  ["Rack Pull","บาร์เบล"],
-  ["Hyperextension (45-Degree Roman Chair)","เครื่อง/น้ำหนักตัว"],
-  ["Weighted Hyperextension","แผ่นน้ำหนัก"],
-  ["Good Morning (Barbell)","บาร์เบล"],
-  ["Good Morning (Band)","ยางยืด"],
-  ["Superman","น้ำหนักตัว"],
-  ["Bird Dog","น้ำหนักตัว"]
+  ["Deadlift (Conventional)","บาร์เบล", false],
+  ["Deadlift (Sumo)","บาร์เบล", false],
+  ["Trap Bar Deadlift","บาร์เบล", false],
+  ["Rack Pull","บาร์เบล", false],
+  ["Hyperextension (45-Degree Roman Chair)","เครื่อง/น้ำหนักตัว", true],
+  ["Weighted Hyperextension","แผ่นน้ำหนัก", true],
+  ["Good Morning (Barbell)","บาร์เบล", false],
+  ["Good Morning (Band)","ยางยืด", false],
+  ["Superman","น้ำหนักตัว", false],
+  ["Bird Dog","น้ำหนักตัว", false]
 ],
 "ไหล่หน้า (Front Delts)": [
-  ["Overhead Press (Military Press)","บาร์เบล"],
-  ["Smith Machine Overhead Press","สมิธแมชชีน"],
-  ["Seated Dumbbell Shoulder Press","ดัมเบล"],
-  ["Standing Dumbbell Shoulder Press","ดัมเบล"],
-  ["Arnold Press","ดัมเบล"],
-  ["Dumbbell Front Raise","ดัมเบล"],
-  ["Barbell Front Raise","บาร์เบล"],
-  ["Cable Front Raise","เคเบิล"],
-  ["Plate Front Raise","แผ่นน้ำหนัก"],
-  ["Push Press","บาร์เบล"],
-  ["Machine Shoulder Press","เครื่อง"],
-  ["Pike Push-Up","น้ำหนักตัว"]
+  ["Overhead Press (Military Press)","บาร์เบล", false],
+  ["Smith Machine Overhead Press","สมิธแมชชีน", true],
+  ["Seated Dumbbell Shoulder Press","ดัมเบล", true],
+  ["Standing Dumbbell Shoulder Press","ดัมเบล", false],
+  ["Arnold Press","ดัมเบล", true],
+  ["Dumbbell Front Raise","ดัมเบล", false],
+  ["Barbell Front Raise","บาร์เบล", false],
+  ["Cable Front Raise","เคเบิล", false],
+  ["Plate Front Raise","แผ่นน้ำหนัก", false],
+  ["Push Press","บาร์เบล", false],
+  ["Machine Shoulder Press","เครื่อง", true],
+  ["Pike Push-Up","น้ำหนักตัว", false]
 ],
 "ไหล่ข้าง (Side Delts)": [
-  ["Dumbbell Lateral Raise","ดัมเบล"],
-  ["Seated Dumbbell Lateral Raise","ดัมเบล"],
-  ["Cable Lateral Raise","เคเบิล"],
-  ["Behind-the-Back Cable Lateral Raise","เคเบิล"],
-  ["Machine Lateral Raise","เครื่อง"],
-  ["Resistance Band Lateral Raise","ยางยืด"],
-  ["Upright Row (Wide Grip)","บาร์เบล"],
-  ["Lean-Away Dumbbell Lateral Raise","ดัมเบล"]
+  ["Dumbbell Lateral Raise","ดัมเบล", false],
+  ["Seated Dumbbell Lateral Raise","ดัมเบล", true],
+  ["Cable Lateral Raise","เคเบิล", false],
+  ["Behind-the-Back Cable Lateral Raise","เคเบิล", false],
+  ["Machine Lateral Raise","เครื่อง", true],
+  ["Resistance Band Lateral Raise","ยางยืด", false],
+  ["Upright Row (Wide Grip)","บาร์เบล", false],
+  ["Lean-Away Dumbbell Lateral Raise","ดัมเบล", false]
 ],
 "ไหล่หลัง (Rear Delts)": [
-  ["Dumbbell Rear Delt Fly (Bent-Over)","ดัมเบล"],
-  ["Seated Rear Delt Fly","ดัมเบล"],
-  ["Cable Rear Delt Fly (Reverse Crossover)","เคเบิล"],
-  ["Face Pull (Rope)","เคเบิล"],
-  ["Reverse Pec Deck Machine","เครื่อง"],
-  ["Band Pull-Apart","ยางยืด"],
-  ["Incline Dumbbell Rear Delt Row","ดัมเบล"]
+  ["Dumbbell Rear Delt Fly (Bent-Over)","ดัมเบล", false],
+  ["Seated Rear Delt Fly","ดัมเบล", true],
+  ["Cable Rear Delt Fly (Reverse Crossover)","เคเบิล", false],
+  ["Face Pull (Rope)","เคเบิล", false],
+  ["Reverse Pec Deck Machine","เครื่อง", true],
+  ["Band Pull-Apart","ยางยืด", false],
+  ["Incline Dumbbell Rear Delt Row","ดัมเบล", true]
 ],
 "ไบเซ็ป (Biceps)": [
-  ["Barbell Curl (Standing)","บาร์เบล"],
-  ["EZ-Bar Curl","อีซี่บาร์"],
-  ["Dumbbell Bicep Curl (Alternating)","ดัมเบล"],
-  ["Dumbbell Hammer Curl","ดัมเบล"],
-  ["Incline Dumbbell Curl","ดัมเบล"],
-  ["Preacher Curl (EZ-Bar)","อีซี่บาร์"],
-  ["Preacher Curl (Dumbbell/Machine)","ดัมเบล/เครื่อง"],
-  ["Concentration Curl","ดัมเบล"],
-  ["Cable Bicep Curl","เคเบิล"],
-  ["Overhead Cable Curl","เคเบิล"],
-  ["Drag Curl","บาร์เบล/ดัมเบล"],
-  ["Reverse Grip Bicep Curl","บาร์เบล/อีซี่บาร์"],
-  ["Resistance Band Curl","ยางยืด"]
+  ["Barbell Curl (Standing)","บาร์เบล", false],
+  ["EZ-Bar Curl","อีซี่บาร์", false],
+  ["Dumbbell Bicep Curl (Alternating)","ดัมเบล", false],
+  ["Dumbbell Hammer Curl","ดัมเบล", false],
+  ["Incline Dumbbell Curl","ดัมเบล", true],
+  ["Preacher Curl (EZ-Bar)","อีซี่บาร์", true],
+  ["Preacher Curl (Dumbbell/Machine)","ดัมเบล/เครื่อง", true],
+  ["Concentration Curl","ดัมเบล", true],
+  ["Cable Bicep Curl","เคเบิล", false],
+  ["Overhead Cable Curl","เคเบิล", false],
+  ["Drag Curl","บาร์เบล/ดัมเบล", false],
+  ["Reverse Grip Bicep Curl","บาร์เบล/อีซี่บาร์", false],
+  ["Resistance Band Curl","ยางยืด", false]
 ],
 "ไตรเซ็ป (Triceps)": [
-  ["Close-Grip Barbell Bench Press","บาร์เบล"],
-  ["Tricep Rope Pushdown","เคเบิล"],
-  ["Tricep Straight-Bar Pushdown","เคเบิล"],
-  ["Single-Arm Cable Pushdown","เคเบิล"],
-  ["Overhead Dumbbell Tricep Extension","ดัมเบล"],
-  ["Overhead Cable Rope Extension","เคเบิล"],
-  ["Skull Crushers (EZ-Bar Extension)","อีซี่บาร์"],
-  ["Dumbbell Skull Crushers","ดัมเบล"],
-  ["Dips (Tricep-focused)","น้ำหนักตัว"],
-  ["Bench Dips","น้ำหนักตัว"],
-  ["Dumbbell Kickback","ดัมเบล"],
-  ["Cable Kickback","เคเบิล"],
-  ["Diamond Push-Up","น้ำหนักตัว"]
+  ["Close-Grip Barbell Bench Press","บาร์เบล", true],
+  ["Tricep Rope Pushdown","เคเบิล", false],
+  ["Tricep Straight-Bar Pushdown","เคเบิล", false],
+  ["Single-Arm Cable Pushdown","เคเบิล", false],
+  ["Overhead Dumbbell Tricep Extension","ดัมเบล", true],
+  ["Overhead Cable Rope Extension","เคเบิล", false],
+  ["Skull Crushers (EZ-Bar Extension)","อีซี่บาร์", true],
+  ["Dumbbell Skull Crushers","ดัมเบล", true],
+  ["Dips (Tricep-focused)","น้ำหนักตัว", false],
+  ["Bench Dips","น้ำหนักตัว", true],
+  ["Dumbbell Kickback","ดัมเบล", true],
+  ["Cable Kickback","เคเบิล", false],
+  ["Diamond Push-Up","น้ำหนักตัว", false]
 ],
 "ปลายแขน (Forearms)": [
-  ["Wrist Curl (Barbell/Dumbbell)","บาร์เบล/ดัมเบล"],
-  ["Reverse Wrist Curl","บาร์เบล/ดัมเบล"],
-  ["Reverse Barbell Curl","บาร์เบล/อีซี่บาร์"],
-  ["Farmer's Carry (Dumbbell/Kettlebell)","ดัมเบล/เคทเทิลเบล"],
-  ["Plate Pinch Hold","แผ่นน้ำหนัก"],
-  ["Dead Hang","บาร์โหน"],
-  ["Wrist Roller","เครื่อง/ดัมเบล"]
+  ["Wrist Curl (Barbell/Dumbbell)","บาร์เบล/ดัมเบล", true],
+  ["Reverse Wrist Curl","บาร์เบล/ดัมเบล", true],
+  ["Reverse Barbell Curl","บาร์เบล/อีซี่บาร์", false],
+  ["Farmer's Carry (Dumbbell/Kettlebell)","ดัมเบล/เคทเทิลเบล", false],
+  ["Plate Pinch Hold","แผ่นน้ำหนัก", false],
+  ["Dead Hang","บาร์โหน", false],
+  ["Wrist Roller","เครื่อง/ดัมเบล", false]
 ],
 "แกนกลางลำตัว (Abs/Core)": [
-  ["Plank (Standard)","น้ำหนักตัว"],
-  ["Weighted Plank","แผ่นน้ำหนัก"],
-  ["Ab Wheel Rollout","ล้อเอบ"],
-  ["Hanging Leg Raise","บาร์โหน"],
-  ["Hanging Knee Raise","บาร์โหน"],
-  ["Cable Crunch","เคเบิล"],
-  ["Floor Crunch","น้ำหนักตัว"],
-  ["Sit-Up","น้ำหนักตัว"],
-  ["Decline Sit-Up","น้ำหนักตัว/แผ่นน้ำหนัก"],
-  ["Reverse Crunch","น้ำหนักตัว"],
-  ["Mountain Climbers","น้ำหนักตัว"],
-  ["Dragon Flag","น้ำหนักตัว"],
-  ["L-Sit","น้ำหนักตัว/บาร์โหน"]
+  ["Plank (Standard)","น้ำหนักตัว", false],
+  ["Weighted Plank","แผ่นน้ำหนัก", false],
+  ["Ab Wheel Rollout","ล้อเอบ", false],
+  ["Hanging Leg Raise","บาร์โหน", false],
+  ["Hanging Knee Raise","บาร์โหน", false],
+  ["Cable Crunch","เคเบิล", false],
+  ["Floor Crunch","น้ำหนักตัว", false],
+  ["Sit-Up","น้ำหนักตัว", false],
+  ["Decline Sit-Up","น้ำหนักตัว/แผ่นน้ำหนัก", true],
+  ["Reverse Crunch","น้ำหนักตัว", false],
+  ["Mountain Climbers","น้ำหนักตัว", false],
+  ["Dragon Flag","น้ำหนักตัว", true],
+  ["L-Sit","น้ำหนักตัว/บาร์โหน", false]
 ],
 "หน้าท้องข้าง (Obliques)": [
-  ["Russian Twist (Weight/Dumbbell)","น้ำหนักตัว/ดัมเบล"],
-  ["Side Plank","น้ำหนักตัว"],
-  ["Bicycle Crunch","น้ำหนักตัว"],
-  ["Cable Woodchopper (High-to-Low)","เคเบิล"],
-  ["Cable Woodchopper (Low-to-High)","เคเบิล"],
-  ["Dumbbell Side Bend","ดัมเบล"],
-  ["Hanging Side Knee Raise","บาร์โหน"],
-  ["Windshield Wipers","บาร์โหน/น้ำหนักตัว"]
+  ["Russian Twist (Weight/Dumbbell)","น้ำหนักตัว/ดัมเบล", false],
+  ["Side Plank","น้ำหนักตัว", false],
+  ["Bicycle Crunch","น้ำหนักตัว", false],
+  ["Cable Woodchopper (High-to-Low)","เคเบิล", false],
+  ["Cable Woodchopper (Low-to-High)","เคเบิล", false],
+  ["Dumbbell Side Bend","ดัมเบล", false],
+  ["Hanging Side Knee Raise","บาร์โหน", false],
+  ["Windshield Wipers","บาร์โหน/น้ำหนักตัว", false]
 ],
 "ต้นขาหน้า (Quads)": [
-  ["Barbell Back Squat","บาร์เบล"],
-  ["Barbell Front Squat","บาร์เบล"],
-  ["Smith Machine Squat","สมิธแมชชีน"],
-  ["Hack Squat Machine","เครื่อง"],
-  ["Leg Press","เครื่อง"],
-  ["Leg Extension Machine","เครื่อง"],
-  ["Bulgarian Split Squat","ดัมเบล/บาร์เบล"],
-  ["Walking Lunge","ดัมเบล/บาร์เบล"],
-  ["Reverse Lunge","ดัมเบล/บาร์เบล"],
-  ["Goblet Squat","ดัมเบล/เคทเทิลเบล"],
-  ["Sissy Squat","น้ำหนักตัว/เครื่อง"],
-  ["Step-Up","ดัมเบล"],
-  ["Resistance Band Squat","ยางยืด"]
+  ["Barbell Back Squat","บาร์เบล", false],
+  ["Barbell Front Squat","บาร์เบล", false],
+  ["Smith Machine Squat","สมิธแมชชีน", false],
+  ["Hack Squat Machine","เครื่อง", true],
+  ["Leg Press","เครื่อง", true],
+  ["Leg Extension Machine","เครื่อง", true],
+  ["Bulgarian Split Squat","ดัมเบล/บาร์เบล", true],
+  ["Walking Lunge","ดัมเบล/บาร์เบล", false],
+  ["Reverse Lunge","ดัมเบล/บาร์เบล", false],
+  ["Goblet Squat","ดัมเบล/เคทเทิลเบล", false],
+  ["Sissy Squat","น้ำหนักตัว/เครื่อง", false],
+  ["Step-Up","ดัมเบล", true],
+  ["Resistance Band Squat","ยางยืด", false]
 ],
 "ต้นขาหลัง (Hamstrings)": [
-  ["Romanian Deadlift (Barbell)","บาร์เบล"],
-  ["Romanian Deadlift (Dumbbell)","ดัมเบล"],
-  ["Single-Leg Romanian Deadlift","ดัมเบล"],
-  ["Lying Leg Curl Machine","เครื่อง"],
-  ["Seated Leg Curl Machine","เครื่อง"],
-  ["Standing Single-Leg Curl","เครื่อง/เคเบิล"],
-  ["Stiff-Leg Deadlift","บาร์เบล"],
-  ["Good Morning (Barbell)","บาร์เบล"],
-  ["Nordic Hamstring Curl","น้ำหนักตัว"],
-  ["Swiss Ball Leg Curl","น้ำหนักตัว"]
+  ["Romanian Deadlift (Barbell)","บาร์เบล", false],
+  ["Romanian Deadlift (Dumbbell)","ดัมเบล", false],
+  ["Single-Leg Romanian Deadlift","ดัมเบล", false],
+  ["Lying Leg Curl Machine","เครื่อง", true],
+  ["Seated Leg Curl Machine","เครื่อง", true],
+  ["Standing Single-Leg Curl","เครื่อง/เคเบิล", false],
+  ["Stiff-Leg Deadlift","บาร์เบล", false],
+  ["Good Morning (Barbell)","บาร์เบล", false],
+  ["Nordic Hamstring Curl","น้ำหนักตัว", false],
+  ["Swiss Ball Leg Curl","น้ำหนักตัว", false]
 ],
 "สะโพก (Glutes)": [
-  ["Barbell Hip Thrust","บาร์เบล"],
-  ["Dumbbell Hip Thrust","ดัมเบล"],
-  ["Glute Bridge","บาร์เบล/น้ำหนักตัว"],
-  ["Cable Glute Kickback","เคเบิล"],
-  ["Machine Glute Drive / Thrust","เครื่อง"],
-  ["Sumo Deadlift","บาร์เบล"],
-  ["Frog Pumps","น้ำหนักตัว"],
-  ["Cable Pull-Through","เคเบิล"],
-  ["Step-Up (Glute-Focused)","ดัมเบล"]
+  ["Barbell Hip Thrust","บาร์เบล", true],
+  ["Dumbbell Hip Thrust","ดัมเบล", true],
+  ["Glute Bridge","บาร์เบล/น้ำหนักตัว", false],
+  ["Cable Glute Kickback","เคเบิล", false],
+  ["Machine Glute Drive / Thrust","เครื่อง", true],
+  ["Sumo Deadlift","บาร์เบล", false],
+  ["Frog Pumps","น้ำหนักตัว", false],
+  ["Cable Pull-Through","เคเบิล", false],
+  ["Step-Up (Glute-Focused)","ดัมเบล", true]
 ],
 "สะโพกด้านข้าง (Hip Abduction)": [
-  ["Seated Hip Abduction Machine","เครื่อง"],
-  ["Standing Cable Hip Abduction","เคเบิล"],
-  ["Clamshell with Band","ยางยืด"],
-  ["Side-Lying Leg Raise","น้ำหนักตัว"],
-  ["Monster Walk with Band","ยางยืด"],
-  ["Banded Hip Abduction","ยางยืด"]
+  ["Seated Hip Abduction Machine","เครื่อง", true],
+  ["Standing Cable Hip Abduction","เคเบิล", false],
+  ["Clamshell with Band","ยางยืด", false],
+  ["Side-Lying Leg Raise","น้ำหนักตัว", false],
+  ["Monster Walk with Band","ยางยืด", false],
+  ["Banded Hip Abduction","ยางยืด", false]
 ],
 "ต้นขาด้านใน (Hip Adduction)": [
-  ["Seated Hip Adduction Machine","เครื่อง"],
-  ["Standing Cable Hip Adduction","เคเบิล"],
-  ["Sumo Squat (Barbell/Dumbbell)","บาร์เบล/ดัมเบล"],
-  ["Side Lunge / Cossack Squat","ดัมเบล/น้ำหนักตัว"],
-  ["Copenhagen Adductor Plank","น้ำหนักตัว"]
+  ["Seated Hip Adduction Machine","เครื่อง", true],
+  ["Standing Cable Hip Adduction","เคเบิล", false],
+  ["Sumo Squat (Barbell/Dumbbell)","บาร์เบล/ดัมเบล", false],
+  ["Side Lunge / Cossack Squat","ดัมเบล/น้ำหนักตัว", false],
+  ["Copenhagen Adductor Plank","น้ำหนักตัว", true]
 ],
 "น่อง (Calves)": [
-  ["Standing Barbell Calf Raise","บาร์เบล"],
-  ["Standing Calf Raise Machine","เครื่อง"],
-  ["Smith Machine Calf Raise","สมิธแมชชีน"],
-  ["Seated Calf Raise Machine","เครื่อง"],
-  ["Single-Leg Dumbbell Calf Raise","ดัมเบล"],
-  ["Donkey Calf Raise","เครื่อง/น้ำหนักตัว"],
-  ["Leg Press Calf Press","เครื่อง"]
+  ["Standing Barbell Calf Raise","บาร์เบล", false],
+  ["Standing Calf Raise Machine","เครื่อง", false],
+  ["Smith Machine Calf Raise","สมิธแมชชีน", false],
+  ["Seated Calf Raise Machine","เครื่อง", true],
+  ["Single-Leg Dumbbell Calf Raise","ดัมเบล", false],
+  ["Donkey Calf Raise","เครื่อง/น้ำหนักตัว", false],
+  ["Leg Press Calf Press","เครื่อง", true]
 ],
 "คาร์ดิโอ/พลัยโอ (Cardio & Plyo)": [
-  ["Treadmill Running / Sprinting","เครื่อง"],
-  ["Elliptical Trainer","เครื่อง"],
-  ["Stationary Bike / Spin Bike","เครื่อง"],
-  ["Assault Air Bike","เครื่อง"],
-  ["Rowing Machine","เครื่อง"],
-  ["SkiErg Ergometer","เครื่อง"],
-  ["Jump Rope / Speed Rope","เชือกกระโดด"],
-  ["Burpee","น้ำหนักตัว"],
-  ["Box Jump","กล่องพลัยโอ"],
-  ["Jumping Jacks","น้ำหนักตัว"],
-  ["High Knees","น้ำหนักตัว"],
-  ["Kettlebell Swing","เคทเทิลเบล"]
+  ["Treadmill Running / Sprinting","เครื่อง", false],
+  ["Elliptical Trainer","เครื่อง", false],
+  ["Stationary Bike / Spin Bike","เครื่อง", true],
+  ["Assault Air Bike","เครื่อง", true],
+  ["Rowing Machine","เครื่อง", true],
+  ["SkiErg Ergometer","เครื่อง", false],
+  ["Jump Rope / Speed Rope","เชือกกระโดด", false],
+  ["Burpee","น้ำหนักตัว", false],
+  ["Box Jump","กล่องพลัยโอ", true],
+  ["Jumping Jacks","น้ำหนักตัว", false],
+  ["High Knees","น้ำหนักตัว", false],
+  ["Kettlebell Swing","เคทเทิลเบล", false]
 ],
 "โอลิมปิก/พลัง (Olympic & Power)": [
-  ["Clean and Jerk","บาร์เบล"],
-  ["Snatch","บาร์เบล"],
-  ["Power Clean","บาร์เบล"],
-  ["Hang Clean","บาร์เบล"],
-  ["Push Press","บาร์เบล"],
-  ["Kettlebell Snatch","เคทเทิลเบล"],
-  ["Kettlebell Clean & Press","เคทเทิลเบล"]
+  ["Clean and Jerk","บาร์เบล", false],
+  ["Snatch","บาร์เบล", false],
+  ["Power Clean","บาร์เบล", false],
+  ["Hang Clean","บาร์เบล", false],
+  ["Push Press","บาร์เบล", false],
+  ["Kettlebell Snatch","เคทเทิลเบล", false],
+  ["Kettlebell Clean & Press","เคทเทิลเบล", false]
 ]
 };
 
@@ -1609,7 +1660,7 @@ const PRESETS = [
 ];
 
 const FLAT = [];
-Object.entries(DB).forEach(([cat,list])=> list.forEach(([name,eq])=> FLAT.push({cat,name,eq})));
+Object.entries(DB).forEach(([cat,list])=> list.forEach(([name,eq,bench])=> FLAT.push({cat,name,eq,bench:!!bench})));
 
 /* ---------- Theme Switcher ---------- */
 const themeBtn = document.getElementById('themeToggle');
@@ -1653,6 +1704,7 @@ function switchTab(viewName) {
   document.getElementById('view-' + viewName).classList.add('active');
   document.getElementById('groupTabs').style.display = viewName === 'library' ? 'flex' : 'none';
   document.getElementById('subTabs').style.display = viewName === 'library' ? 'flex' : 'none';
+  document.getElementById('eqTabs').style.display = viewName === 'library' ? 'flex' : 'none';
   document.querySelector('.search-wrap').style.display = viewName === 'library' ? 'block' : 'none';
 }
 
@@ -1664,12 +1716,15 @@ document.querySelectorAll('.main-tab').forEach(t => {
 /* ================= LIBRARY VIEW ================= */
 const groupTabsEl = document.getElementById('groupTabs');
 const subTabsEl = document.getElementById('subTabs');
+const eqTabsEl = document.getElementById('eqTabs');
 const libView = document.getElementById('library-list-col');
 
 let activeGroupId = 'ALL';
 let activeCat = 'ALL';
+let activeEqId = 'ALL';
 
 function renderHierarchicalFilterUI() {
+  /* Render Level 1 Category Group Tabs */
   groupTabsEl.innerHTML = '';
   CATEGORY_GROUPS.forEach(g => {
     const chip = document.createElement('div');
@@ -1688,6 +1743,7 @@ function renderHierarchicalFilterUI() {
     groupTabsEl.appendChild(chip);
   });
 
+  /* Render Level 2 Sub-Category Tabs */
   subTabsEl.innerHTML = '';
   const currentGroup = CATEGORY_GROUPS.find(g => g.id === activeGroupId);
   if (currentGroup && currentGroup.subs.length > 0) {
@@ -1704,6 +1760,20 @@ function renderHierarchicalFilterUI() {
   } else {
     subTabsEl.style.display = 'none';
   }
+
+  /* Render Real-World Equipment Category Chips */
+  eqTabsEl.innerHTML = '';
+  EQUIPMENT_CATEGORIES.forEach(eqCat => {
+    const chip = document.createElement('div');
+    chip.className = 'eq-chip' + (eqCat.id === activeEqId ? ' active' : '');
+    chip.textContent = eqCat.name;
+    chip.addEventListener('click', () => {
+      activeEqId = eqCat.id;
+      renderHierarchicalFilterUI();
+      renderLibrary();
+    });
+    eqTabsEl.appendChild(chip);
+  });
 }
 
 function selectCategory(catName, updateGroup = true) {
@@ -1735,23 +1805,37 @@ function selectCategory(catName, updateGroup = true) {
   renderLibrary();
 }
 
+function matchesEquipmentFilter(eqStr, benchBool, eqObj) {
+  if (!eqObj || eqObj.id === 'ALL') return true;
+  if (eqObj.isBenchFilter) return benchBool === true;
+  if (eqObj.match && eqObj.match.length > 0) {
+    return eqObj.match.some(m => eqStr.includes(m));
+  }
+  return true;
+}
+
 function renderLibrary(){
   const q = document.getElementById('search').value.trim().toLowerCase();
   libView.innerHTML = '';
   let any = false;
 
+  const currentEqObj = EQUIPMENT_CATEGORIES.find(e => e.id === activeEqId);
   const catsToRender = Object.keys(DB);
 
   catsToRender.forEach(cat => {
     if (activeCat !== 'ALL' && activeCat !== cat) return;
-    const exs = DB[cat].filter(([name]) => !q || name.toLowerCase().includes(q));
+    const exs = DB[cat].filter(([name, eq, bench]) => {
+      const matchSearch = !q || name.toLowerCase().includes(q) || eq.toLowerCase().includes(q);
+      const matchEq = matchesEquipmentFilter(eq, bench, currentEqObj);
+      return matchSearch && matchEq;
+    });
     if (exs.length === 0) return;
     any = true;
     const h = document.createElement('div'); h.className = 'cat-title'; h.textContent = cat;
     libView.appendChild(h);
-    exs.forEach(([name, eq]) => libView.appendChild(buildExCard(cat, name, eq)));
+    exs.forEach(([name, eq, bench]) => libView.appendChild(buildExCard(cat, name, eq, bench)));
   });
-  if (!any) libView.innerHTML = '<div class="empty">ไม่พบท่าออกกำลังกายที่คุณค้นหา ลองคำอื่นดูครับ</div>';
+  if (!any) libView.innerHTML = '<div class="empty">ไม่พบท่าออกกำลังกายที่ตรงกับตัวกรองของคุณ ลองเปลี่ยนตัวกรองดูครับ</div>';
 }
 
 /* Modal Selector for Day Target */
@@ -1810,12 +1894,15 @@ document.getElementById('dayTargetClose').addEventListener('click', () => dayTar
 dayTargetOverlay.addEventListener('click', e => { if (e.target === dayTargetOverlay) dayTargetOverlay.classList.remove('open'); });
 
 /* Simple Clean Card for Browsing Library View (No set recorder rows here) */
-function buildExCard(cat,name,eq){
+function buildExCard(cat, name, eq, bench){
   const card = document.createElement('div'); card.className='ex-card-simple';
   card.innerHTML = `
     <div>
       <div class="ex-name">${name}</div>
-      <div class="ex-eq">${eq}</div>
+      <div class="ex-tags-group">
+        <div class="ex-eq">${eq}</div>
+        ${bench ? `<span class="bench-tag">🛋️ มีม้านั่ง</span>` : ''}
+      </div>
     </div>
     <button class="btn-mini accent" data-act="quickadd" title="เพิ่มท่านี้เข้าตารางฝึก">+ เพิ่มเข้าตาราง</button>
   `;
@@ -2534,8 +2621,9 @@ function paintPicker(){
       btn.textContent='เพิ่มแล้ว'; btn.disabled=true;
       renderSchedule();
       setTimeout(()=>{
-        const allCards = document.querySelectorAll('.day-card');
-        allCards.forEach(c=>{ if(c.querySelector('.day-name').textContent===pickerTargetDay.name) c.classList.add('open'); });
+        const allCards = document.createElement('div');
+        const allCardsList = document.querySelectorAll('.day-card');
+        allCardsList.forEach(c=>{ if(c.querySelector('.day-name').textContent===pickerTargetDay.name) c.classList.add('open'); });
       },0);
     });
     pickerList.appendChild(row);
