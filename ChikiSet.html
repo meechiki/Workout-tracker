@@ -6,16 +6,16 @@
 <title>ChikiSet — 3D Muscle Anatomy Workout Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Soft Cloud Theme */
-  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  --panel-bg: rgba(255, 255, 255, 0.88);
+  /* FLIXO-Inspired Modern Clean Theme */
+  --bg-gradient: #f8fafc;
+  --panel-bg: rgba(255, 255, 255, 0.92);
   --panel-solid: #ffffff;
-  --panel-sub: rgba(241, 245, 249, 0.9);
-  --border-color: rgba(255, 255, 255, 0.85);
-  --border-line: rgba(226, 232, 240, 0.9);
+  --panel-sub: #f1f5f9;
+  --border-color: rgba(226, 232, 240, 0.8);
+  --border-line: #e2e8f0;
   
   --text-main: #0f172a;
   --text-muted: #64748b;
@@ -25,40 +25,40 @@
   --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
   --accent-orange: #ff5e3a;
   --accent-orange-grad: linear-gradient(135deg, #ff7e5f 0%, #ff5e3a 100%);
-  --accent-subtle: rgba(2, 132, 199, 0.12);
-  --accent-glow: rgba(2, 132, 199, 0.25);
+  --accent-subtle: rgba(2, 132, 199, 0.08);
+  --accent-glow: rgba(2, 132, 199, 0.18);
   
   --good-green: #10b981;
-  --good-bg: rgba(16, 185, 129, 0.12);
+  --good-bg: rgba(16, 185, 129, 0.1);
   
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 16px 30px -8px rgba(15, 23, 42, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 6px 16px -4px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 24px -6px rgba(15, 23, 42, 0.1);
   
-  --glass-blur: blur(16px);
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  --glass-blur: blur(12px);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
   --radius-full: 999px;
   
-  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] {
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  --panel-bg: rgba(30, 41, 59, 0.85);
+  --bg-gradient: #0f172a;
+  --panel-bg: rgba(30, 41, 59, 0.9);
   --panel-solid: #1e293b;
-  --panel-sub: rgba(15, 23, 42, 0.7);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-line: rgba(51, 65, 85, 0.6);
+  --panel-sub: #0f172a;
+  --border-color: rgba(51, 65, 85, 0.6);
+  --border-line: #334155;
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-light: #64748b;
   
   --accent-primary: #38bdf8;
-  --accent-subtle: rgba(56, 189, 248, 0.15);
-  --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+  --accent-subtle: rgba(56, 189, 248, 0.12);
+  --shadow-md: 0 8px 20px -4px rgba(0, 0, 0, 0.25);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,9 +66,8 @@
 body {
   min-height: 100vh;
   background: var(--bg-gradient);
-  background-attachment: fixed;
   color: var(--text-main);
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Kanit', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   padding-bottom: 20px;
   overflow-x: hidden;
@@ -79,7 +78,7 @@ body {
   color: #ffffff;
 }
 
-/* Header Compact for Zero Scroll */
+/* Header Minimalist FLIXO Clean */
 header {
   position: sticky;
   top: 0;
@@ -88,7 +87,7 @@ header {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--border-color);
-  padding: 10px 24px 0;
+  padding: 10px 20px 6px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -109,25 +108,25 @@ header {
 }
 
 .logo-badge {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   background: var(--accent-orange-grad);
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 17px;
-  box-shadow: 0 4px 12px rgba(255, 94, 58, 0.3);
+  font-size: 16px;
+  box-shadow: 0 3px 10px rgba(255, 94, 58, 0.25);
 }
 
 h1 {
   font-family: 'Kanit', sans-serif;
   font-weight: 700;
-  font-size: 22px;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
 
@@ -137,7 +136,7 @@ h1 span {
   -webkit-text-fill-color: transparent;
 }
 
-.tagline { color: var(--text-muted); font-size: 11.5px; font-weight: 400; }
+.tagline { color: var(--text-muted); font-size: 11px; font-weight: 400; }
 
 /* Integrated Header Rest Timer */
 .header-timer-bar {
@@ -150,11 +149,11 @@ h1 span {
   padding: 3px 10px;
 }
 
-.timer-label-text { font-size: 11.5px; font-weight: 600; color: var(--text-muted); }
+.timer-label-text { font-size: 11px; font-weight: 500; color: var(--text-muted); }
 
 .timer-display {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--accent-orange);
   min-width: 44px;
@@ -162,7 +161,7 @@ h1 span {
 
 .timer-btn {
   font-family: 'Kanit', sans-serif;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   border: none;
   background: var(--accent-orange-grad);
@@ -170,13 +169,13 @@ h1 span {
   padding: 3px 10px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(255, 94, 58, 0.25);
+  box-shadow: 0 2px 6px rgba(255, 94, 58, 0.2);
   transition: var(--transition-smooth);
 }
 
 .timer-preset {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
+  font-size: 10px;
   background: var(--panel-solid);
   border: 1px solid var(--border-line);
   color: var(--text-muted);
@@ -198,17 +197,17 @@ h1 span {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   border-radius: var(--radius-full);
-  padding: 6px 14px 6px 32px;
+  padding: 5px 12px 5px 30px;
   color: var(--text-main);
   font-family: 'Kanit', sans-serif;
-  font-size: 13px;
-  width: 190px;
+  font-size: 12.5px;
+  width: 180px;
   outline: none;
   transition: var(--transition-smooth);
 }
 
 .search:focus {
-  width: 210px;
+  width: 200px;
   background: var(--panel-solid);
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px var(--accent-subtle);
@@ -216,7 +215,7 @@ h1 span {
 
 .search-icon {
   position: absolute;
-  left: 11px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-light);
@@ -225,25 +224,25 @@ h1 span {
 }
 
 .icon-btn {
-  width: 32px; height: 32px;
+  width: 30px; height: 30px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-line);
   background: var(--panel-sub);
   color: var(--text-main);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 14px;
+  cursor: pointer; font-size: 13px;
 }
 
-/* Nav & Filter Chips Bar */
-.nav-wrap { max-width: 1280px; margin: 8px auto 0; }
+/* Nav Bar FLIXO Clean */
+.nav-wrap { max-width: 1280px; margin: 6px auto 0; }
 
-.main-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border-line); }
+.main-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border-line); }
 
 .main-tab {
   font-family: 'Kanit', sans-serif;
   font-weight: 500;
-  font-size: 14px;
-  padding: 6px 14px;
+  font-size: 13.5px;
+  padding: 5px 14px;
   color: var(--text-muted);
   cursor: pointer;
   border-bottom: 2px solid transparent;
@@ -257,22 +256,28 @@ h1 span {
   border-bottom-color: var(--accent-primary);
 }
 
-/* Hierarchical Category & Equipment Filter Systems */
-.group-tabs {
-  display: flex; gap: 5px; overflow-x: auto;
-  padding: 6px 0 3px; scrollbar-width: none;
-  max-width: 1280px; margin: 0 auto;
+/* Clean FLIXO Filter Bars (No Numbers, Soft Minimalist Styling) */
+.filter-container {
+  max-width: 1280px;
+  margin: 6px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
+.group-tabs {
+  display: flex; gap: 4px; overflow-x: auto;
+  padding: 2px 0; scrollbar-width: none;
+}
 .group-tabs::-webkit-scrollbar { display: none; }
 
 .group-chip {
   flex: none;
-  font-size: 12px; font-weight: 600;
+  font-size: 12px; font-weight: 500;
   background: var(--panel-solid);
   border: 1px solid var(--border-line);
   color: var(--text-muted);
-  padding: 3px 11px;
+  padding: 3px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
   white-space: nowrap;
@@ -283,15 +288,24 @@ h1 span {
   background: var(--accent-primary);
   border-color: var(--accent-primary);
   color: #ffffff;
-  box-shadow: 0 3px 10px var(--accent-glow);
+  font-weight: 600;
+  box-shadow: 0 2px 8px var(--accent-glow);
 }
+
+.sub-eq-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sub-eq-row::-webkit-scrollbar { display: none; }
 
 .sub-tabs {
-  display: flex; gap: 5px; overflow-x: auto;
-  padding: 2px 0 4px; scrollbar-width: none;
-  max-width: 1280px; margin: 0 auto;
+  display: flex; gap: 4px; overflow-x: auto;
+  scrollbar-width: none; flex: 1;
 }
-
 .sub-tabs::-webkit-scrollbar { display: none; }
 
 .sub-chip {
@@ -300,7 +314,7 @@ h1 span {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   color: var(--text-muted);
-  padding: 2px 9px;
+  padding: 2px 10px;
   border-radius: var(--radius-full);
   cursor: pointer;
   white-space: nowrap;
@@ -312,18 +326,12 @@ h1 span {
   border-color: transparent;
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(255, 94, 58, 0.3);
 }
 
-/* Equipment Filter Chips Bar */
 .eq-tabs {
   display: flex; gap: 4px; overflow-x: auto;
-  padding: 2px 0 6px; scrollbar-width: none;
-  max-width: 1280px; margin: 0 auto;
-  border-top: 1px dashed var(--border-line);
-  margin-top: 4px;
+  scrollbar-width: none;
 }
-
 .eq-tabs::-webkit-scrollbar { display: none; }
 
 .eq-chip {
@@ -344,15 +352,14 @@ h1 span {
   border-color: var(--accent-primary);
   color: var(--accent-primary);
   font-weight: 600;
-  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
 }
 
 /* Layout Wrapper for Zero Scroll */
-.wrap { max-width: 1280px; margin: 12px auto 0; padding: 0 16px; }
+.wrap { max-width: 1280px; margin: 10px auto 0; padding: 0 16px; }
 
 .split-container {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 310px;
   gap: 16px;
   align-items: start;
 }
@@ -367,17 +374,17 @@ h1 span {
 
 /* Left Scrollable Exercise List */
 #library-list-col {
-  max-height: calc(100vh - 215px);
+  max-height: calc(100vh - 180px);
   overflow-y: auto;
   padding-right: 6px;
 }
-#library-list-col::-webkit-scrollbar { width: 5px; }
+#library-list-col::-webkit-scrollbar { width: 4px; }
 #library-list-col::-webkit-scrollbar-thumb { background: var(--border-line); border-radius: 99px; }
 
 /* Eye-Level Zero-Scroll 3D Muscle Panel */
 .anatomy-panel {
   position: sticky;
-  top: 155px;
+  top: 135px;
   background: var(--panel-bg);
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
@@ -385,7 +392,7 @@ h1 span {
   padding: 12px;
   box-shadow: var(--shadow-md);
   text-align: center;
-  max-height: calc(100vh - 165px);
+  max-height: calc(100vh - 145px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -399,7 +406,7 @@ h1 span {
 }
 
 .anatomy-title {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-main);
   display: flex;
@@ -422,7 +429,7 @@ h1 span {
   border: none;
   background: transparent;
   color: var(--text-muted);
-  padding: 3px 11px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -439,9 +446,9 @@ h1 span {
 .blue-anatomy-container {
   position: relative;
   width: 100%;
-  max-width: 220px;
+  max-width: 210px;
   margin: 0 auto;
-  max-height: calc(100vh - 260px);
+  max-height: calc(100vh - 240px);
   height: 380px;
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -500,15 +507,15 @@ h1 span {
   padding: 4px 12px;
   border-radius: var(--radius-full);
   margin-top: 8px;
-  box-shadow: 0 4px 12px rgba(255, 94, 58, 0.3);
+  box-shadow: 0 3px 10px rgba(255, 94, 58, 0.25);
 }
 
-/* Cards & Exercise Lists */
+/* Cards & Exercise Lists FLIXO Style */
 .cat-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--accent-primary);
-  margin: 14px 0 8px;
+  margin: 12px 0 6px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -523,10 +530,9 @@ h1 span {
 /* Simple Clean Exercise Card for Library View */
 .ex-card-simple {
   background: var(--panel-bg);
-  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   padding: 10px 14px;
   display: flex;
   align-items: center;
@@ -540,15 +546,14 @@ h1 span {
   border-color: rgba(2, 132, 199, 0.3);
 }
 
-.ex-name { font-size: 14.5px; font-weight: 600; color: var(--text-main); }
+.ex-name { font-size: 14px; font-weight: 600; color: var(--text-main); }
 .ex-tags-group { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
-.ex-eq { font-size: 11.5px; color: var(--text-muted); }
-.bench-tag { font-size: 10px; font-weight: 600; background: var(--accent-subtle); color: var(--accent-primary); padding: 1px 6px; border-radius: var(--radius-full); }
+.ex-eq { font-size: 11px; color: var(--text-muted); }
+.bench-tag { font-size: 10px; font-weight: 500; background: var(--accent-subtle); color: var(--accent-primary); padding: 1px 6px; border-radius: var(--radius-full); }
 
 /* Full Expandable Exercise Card for Schedule View */
 .ex-card {
   background: var(--panel-bg);
-  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   margin-bottom: 8px;
@@ -573,7 +578,7 @@ h1 span {
 
 .set-count {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--accent-primary);
   background: var(--accent-subtle);
@@ -625,8 +630,8 @@ h1 span {
   border: 1px solid var(--border-line);
   border-radius: var(--radius-sm);
   color: var(--text-main);
-  padding: 6px 8px;
-  font-size: 13px;
+  padding: 5px 8px;
+  font-size: 12.5px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 500;
   width: 100%;
@@ -658,7 +663,7 @@ h1 span {
   font-size: 12px;
   font-weight: 500;
   border-radius: var(--radius-sm);
-  padding: 6px 11px;
+  padding: 5px 11px;
   cursor: pointer;
   border: 1px solid var(--border-line);
   background: var(--panel-solid);
@@ -671,7 +676,7 @@ h1 span {
   border-color: transparent;
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 3px 10px var(--accent-glow);
+  box-shadow: 0 2px 8px var(--accent-glow);
 }
 
 .btn-recommend {
@@ -679,28 +684,28 @@ h1 span {
   border: none;
   color: #ffffff;
   font-family: 'Kanit', sans-serif;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 7px 15px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 94, 58, 0.3);
+  box-shadow: 0 3px 10px rgba(255, 94, 58, 0.25);
   transition: var(--transition-smooth);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .btn-recommend:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(255, 94, 58, 0.4);
+  box-shadow: 0 5px 14px rgba(255, 94, 58, 0.35);
 }
 
 .empty {
   color: var(--text-muted);
-  font-size: 13.5px;
+  font-size: 13px;
   text-align: center;
-  padding: 30px 16px;
+  padding: 24px 16px;
   background: var(--panel-bg);
   border: 1px dashed var(--border-line);
   border-radius: var(--radius-lg);
@@ -709,11 +714,10 @@ h1 span {
 /* Schedule UI Enhancements */
 .sched-toolbar {
   background: var(--panel-bg);
-  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 14px;
+  margin-bottom: 14px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -725,10 +729,10 @@ h1 span {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   border-radius: var(--radius-md);
-  padding: 9px 14px;
+  padding: 8px 12px;
   color: var(--text-main);
   font-family: 'Kanit', sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   outline: none;
 }
 
@@ -739,17 +743,16 @@ h1 span {
 
 .preset-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
-  margin-top: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .preset-card {
   background: var(--panel-bg);
-  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: 14px;
   cursor: pointer;
   transition: var(--transition-smooth);
   box-shadow: var(--shadow-sm);
@@ -764,17 +767,17 @@ h1 span {
   box-shadow: var(--shadow-md);
 }
 
-.preset-icon { font-size: 24px; margin-bottom: 6px; }
-.preset-name { font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 3px; }
-.preset-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; }
+.preset-icon { font-size: 22px; margin-bottom: 4px; }
+.preset-name { font-size: 14.5px; font-weight: 600; color: var(--text-main); margin-bottom: 2px; }
+.preset-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
 
 .preset-btn {
   font-family: 'Kanit', sans-serif;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--accent-primary);
   background: var(--accent-subtle);
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: var(--radius-full);
   text-align: center;
   align-self: flex-start;
@@ -782,10 +785,9 @@ h1 span {
 
 .day-card {
   background: var(--panel-bg);
-  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
@@ -794,41 +796,41 @@ h1 span {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 12px 14px;
   cursor: pointer;
   gap: 10px;
 }
 
-.day-name { font-size: 16px; font-weight: 600; color: var(--text-main); }
-.day-sub { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+.day-name { font-size: 15px; font-weight: 600; color: var(--text-main); }
+.day-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
-.day-del { background: none; border: none; color: var(--text-light); font-size: 15px; cursor: pointer; padding: 4px; }
+.day-del { background: none; border: none; color: var(--text-light); font-size: 14px; cursor: pointer; padding: 4px; }
 .day-del:hover { color: #ef4444; }
 
-.day-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border-line); background: var(--panel-sub); }
+.day-body { display: none; padding: 0 14px 14px; border-top: 1px solid var(--border-line); background: var(--panel-sub); }
 .day-card.open .day-body { display: block; }
 
-.date-row { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+.date-row { display: flex; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
 
 .date-row input[type="date"] {
   background: var(--panel-solid);
   border: 1px solid var(--border-line);
   border-radius: var(--radius-sm);
   color: var(--text-main);
-  padding: 5px 8px;
+  padding: 4px 8px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
+  font-size: 12px;
 }
 
-.history-chips { display: flex; gap: 5px; flex-wrap: wrap; margin: 8px 0 4px; }
+.history-chips { display: flex; gap: 4px; flex-wrap: wrap; margin: 6px 0 4px; }
 
 .chip {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
+  font-size: 10px;
   background: var(--panel-solid);
   border: 1px solid var(--border-line);
   color: var(--text-muted);
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: var(--radius-full);
   cursor: pointer;
 }
@@ -836,7 +838,7 @@ h1 span {
 .chip.today { border-color: var(--good-green); color: var(--good-green); background: var(--good-bg); }
 .chip.active { background: var(--accent-primary); border-color: var(--accent-primary); color: #ffffff; }
 
-.streak-strip { display: flex; gap: 4px; margin-top: 12px; }
+.streak-strip { display: flex; gap: 4px; margin-top: 10px; }
 
 .streak-day {
   flex: 1;
@@ -844,7 +846,7 @@ h1 span {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: var(--text-muted);
-  padding: 5px 0;
+  padding: 4px 0;
   border-radius: var(--radius-sm);
   background: var(--panel-solid);
   border: 1px solid var(--border-line);
@@ -857,35 +859,35 @@ h1 span {
   background: var(--panel-solid);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  width: 100%; max-width: 580px;
-  padding: 22px; max-height: 88vh; overflow-y: auto;
+  width: 100%; max-width: 540px;
+  padding: 20px; max-height: 88vh; overflow-y: auto;
   box-shadow: var(--shadow-lg);
 }
 
 .quiz-step-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .quiz-step-desc {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .quiz-options {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .quiz-opt-btn {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   border-radius: var(--radius-md);
-  padding: 12px 16px;
+  padding: 10px 14px;
   text-align: left;
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -901,26 +903,26 @@ h1 span {
 
 .quiz-opt-btn.selected {
   border-color: var(--accent-orange);
-  background: rgba(255, 94, 58, 0.12);
+  background: rgba(255, 94, 58, 0.1);
 }
 
 .quiz-opt-btn .opt-title {
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text-main);
 }
 
 .quiz-opt-btn .opt-sub {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .quiz-nav {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  padding-top: 14px;
+  margin-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-line);
 }
 
@@ -942,12 +944,12 @@ h1 span {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   width: 100%; max-width: 440px;
-  padding: 18px; max-height: 80vh; overflow-y: auto;
+  padding: 16px; max-height: 80vh; overflow-y: auto;
   box-shadow: var(--shadow-lg);
 }
 
-.picker-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.picker-head h3 { font-size: 16.5px; font-weight: 600; color: var(--text-main); }
+.picker-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.picker-head h3 { font-size: 15.5px; font-weight: 600; color: var(--text-main); }
 .picker-close { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
 
 .picker-search {
@@ -955,23 +957,23 @@ h1 span {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   border-radius: var(--radius-md);
-  padding: 8px 11px;
+  padding: 7px 10px;
   color: var(--text-main);
   font-family: 'Kanit', sans-serif;
-  font-size: 13.5px;
-  margin-bottom: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
   outline: none;
 }
 
-.pick-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 6px; border-bottom: 1px solid var(--border-line); font-size: 13px; }
-.pick-item .p-cat { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.pick-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--border-line); font-size: 12.5px; }
+.pick-item .p-cat { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
 
 .pick-add {
   background: var(--panel-sub);
   border: 1px solid var(--border-line);
   color: var(--text-main);
   border-radius: var(--radius-sm);
-  padding: 5px 12px; font-size: 12px; cursor: pointer;
+  padding: 4px 10px; font-size: 11.5px; cursor: pointer;
   transition: var(--transition-smooth);
 }
 
@@ -981,7 +983,7 @@ h1 span {
   border-color: transparent;
 }
 
-footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--text-muted); font-size: 11px; text-align: center; }
+footer { max-width: 1280px; margin: 16px auto 0; padding: 0 16px; color: var(--text-muted); font-size: 11px; text-align: center; }
 
 </style>
 </head>
@@ -1023,12 +1025,14 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
     </div>
   </div>
 
-  <!-- Hierarchical Two-Tier Category Filter Chips Bar -->
-  <div class="group-tabs" id="groupTabs"></div>
-  <div class="sub-tabs" id="subTabs"></div>
-  
-  <!-- Real-World Equipment Filter Chips Bar -->
-  <div class="eq-tabs" id="eqTabs"></div>
+  <!-- Clean Minimalist FLIXO Filter Bars (No Numbers, Clean Spacing) -->
+  <div class="filter-container" id="filterContainer">
+    <div class="group-tabs" id="groupTabs"></div>
+    <div class="sub-eq-row">
+      <div class="sub-tabs" id="subTabs"></div>
+      <div class="eq-tabs" id="eqTabs"></div>
+    </div>
+  </div>
 </header>
 
 <div class="wrap">
@@ -1202,90 +1206,90 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
 </div>
 
 <script>
-/* ---------- Real-World Equipment Categories System ---------- */
+/* ---------- Clean FLIXO Equipment Categories System (No Number Prefixes) ---------- */
 const EQUIPMENT_CATEGORIES = [
-  { id: "ALL", name: "🌐 อุปกรณ์ทั้งหมด" },
-  { id: "BARBELL", name: "🏋️‍♂️ บาร์เบล (Barbell)", match: ["บาร์เบล", "อีซี่บาร์"] },
-  { id: "DUMBBELL", name: "🧱 ดัมเบล (Dumbbell)", match: ["ดัมเบล"] },
-  { id: "MACHINE", name: "⚙️ เครื่องเล่น (Machine)", match: ["เครื่อง"] },
-  { id: "SMITH", name: "🔒 สมิธแมชชีน (Smith Machine)", match: ["สมิธแมชชีน"] },
-  { id: "CABLE", name: "🔌 เคเบิล (Cable)", match: ["เคเบิล"] },
-  { id: "KETTLEBELL", name: "🔔 เคทเทิลเบล (Kettlebell)", match: ["เคทเทิลเบล"] },
-  { id: "BODYWEIGHT", name: "🤸‍♂️ น้ำหนักตัว (Bodyweight)", match: ["น้ำหนักตัว", "บาร์โหน", "ล้อเอบ", "กล่องพลัยโอ", "เชือกกระโดด"] },
-  { id: "BAND", name: "🎗 ยางยืด (Resistance Band)", match: ["ยางยืด"] },
-  { id: "BENCH", name: "🛋️ ใช้เก้าอี้/ม้านั่ง (Requires Bench)", isBenchFilter: true }
+  { id: "ALL", name: "อุปกรณ์ทั้งหมด" },
+  { id: "BARBELL", name: "บาร์เบล", match: ["บาร์เบล", "อีซี่บาร์"] },
+  { id: "DUMBBELL", name: "ดัมเบล", match: ["ดัมเบล"] },
+  { id: "MACHINE", name: "เครื่องเล่น", match: ["เครื่อง"] },
+  { id: "SMITH", name: "สมิธแมชชีน", match: ["สมิธแมชชีน"] },
+  { id: "CABLE", name: "เคเบิล", match: ["เคเบิล"] },
+  { id: "KETTLEBELL", name: "เคทเทิลเบล", match: ["เคทเทิลเบล"] },
+  { id: "BODYWEIGHT", name: "น้ำหนักตัว", match: ["น้ำหนักตัว", "บาร์โหน", "ล้อเอบ", "กล่องพลัยโอ", "เชือกกระโดด"] },
+  { id: "BAND", name: "ยางยืด", match: ["ยางยืด"] },
+  { id: "BENCH", name: "ม้านั่ง/เก้าอี้", isBenchFilter: true }
 ];
 
-/* ---------- Hierarchical Category Database ---------- */
+/* ---------- Clean FLIXO Hierarchical Category System (No Number Prefixes) ---------- */
 const CATEGORY_GROUPS = [
   {
     id: "ALL",
-    name: "ทั้งหมด (All)",
+    name: "ทั้งหมด",
     subs: []
   },
   {
     id: "ARMS",
-    name: "1. แขน (Arms)",
+    name: "แขน",
     subs: [
-      { name: "1.1 ไบเซ็ป (Biceps)", key: "ไบเซ็ป (Biceps)" },
-      { name: "1.2 ไตรเซ็ป (Triceps)", key: "ไตรเซ็ป (Triceps)" },
-      { name: "1.3 ปลายแขน (Forearms)", key: "ปลายแขน (Forearms)" }
+      { name: "ไบเซ็ป (Biceps)", key: "ไบเซ็ป (Biceps)" },
+      { name: "ไตรเซ็ป (Triceps)", key: "ไตรเซ็ป (Triceps)" },
+      { name: "ปลายแขน (Forearms)", key: "ปลายแขน (Forearms)" }
     ]
   },
   {
     id: "CHEST",
-    name: "2. อก (Chest)",
+    name: "อก",
     subs: [
-      { name: "2.1 อกบน (Upper Chest)", key: "อกบน (Upper Chest)" },
-      { name: "2.2 อกกลาง (Chest)", key: "อก (Chest)" },
-      { name: "2.3 อกล่าง (Lower Chest)", key: "อกล่าง (Lower Chest)" }
+      { name: "อกบน (Upper Chest)", key: "อกบน (Upper Chest)" },
+      { name: "อกกลาง (Chest)", key: "อก (Chest)" },
+      { name: "อกล่าง (Lower Chest)", key: "อกล่าง (Lower Chest)" }
     ]
   },
   {
     id: "BACK",
-    name: "3. หลัง (Back)",
+    name: "หลัง",
     subs: [
-      { name: "3.1 สะบัก/คอ (Traps)", key: "สะบัก (Traps)" },
-      { name: "3.2 หลังบน (Upper Back)", key: "หลังบน (Upper Back)" },
-      { name: "3.3 ปีก (Lats)", key: "ปีก (Lats)" },
-      { name: "3.4 หลังล่าง (Lower Back)", key: "หลังล่าง (Lower Back)" }
+      { name: "สะบัก (Traps)", key: "สะบัก (Traps)" },
+      { name: "หลังบน (Upper Back)", key: "หลังบน (Upper Back)" },
+      { name: "ปีก (Lats)", key: "ปีก (Lats)" },
+      { name: "หลังล่าง (Lower Back)", key: "หลังล่าง (Lower Back)" }
     ]
   },
   {
     id: "SHOULDERS",
-    name: "4. ไหล่ (Shoulders)",
+    name: "ไหล่",
     subs: [
-      { name: "4.1 ไหล่หน้า (Front Delts)", key: "ไหล่หน้า (Front Delts)" },
-      { name: "4.2 ไหล่ข้าง (Side Delts)", key: "ไหล่ข้าง (Side Delts)" },
-      { name: "4.3 ไหล่หลัง (Rear Delts)", key: "ไหล่หลัง (Rear Delts)" }
+      { name: "ไหล่หน้า (Front Delts)", key: "ไหล่หน้า (Front Delts)" },
+      { name: "ไหล่ข้าง (Side Delts)", key: "ไหล่ข้าง (Side Delts)" },
+      { name: "ไหล่หลัง (Rear Delts)", key: "ไหล่หลัง (Rear Delts)" }
     ]
   },
   {
     id: "CORE",
-    name: "5. หน้าท้อง/แกนกลาง (Core)",
+    name: "หน้าท้อง",
     subs: [
-      { name: "5.1 หน้าท้องตรงกลาง (Abs/Core)", key: "แกนกลางลำตัว (Abs/Core)" },
-      { name: "5.2 หน้าท้องข้าง (Obliques)", key: "หน้าท้องข้าง (Obliques)" }
+      { name: "หน้าท้องกลาง (Abs)", key: "แกนกลางลำตัว (Abs/Core)" },
+      { name: "หน้าท้องข้าง (Obliques)", key: "หน้าท้องข้าง (Obliques)" }
     ]
   },
   {
     id: "LEGS",
-    name: "6. ขา & สะโพก (Legs)",
+    name: "ขา & สะโพก",
     subs: [
-      { name: "6.1 ต้นขาหน้า (Quads)", key: "ต้นขาหน้า (Quads)" },
-      { name: "6.2 ต้นขาหลัง (Hamstrings)", key: "ต้นขาหลัง (Hamstrings)" },
-      { name: "6.3 ต้นขาด้านใน (Hip Adduction)", key: "ต้นขาด้านใน (Hip Adduction)" },
-      { name: "6.4 สะโพก (Glutes)", key: "สะโพก (Glutes)" },
-      { name: "6.5 สะโพกด้านข้าง (Hip Abduction)", key: "สะโพกด้านข้าง (Hip Abduction)" },
-      { name: "6.6 น่อง (Calves)", key: "น่อง (Calves)" }
+      { name: "ต้นขาหน้า (Quads)", key: "ต้นขาหน้า (Quads)" },
+      { name: "ต้นขาหลัง (Hamstrings)", key: "ต้นขาหลัง (Hamstrings)" },
+      { name: "ต้นขาด้านใน (Adduction)", key: "ต้นขาด้านใน (Hip Adduction)" },
+      { name: "สะโพก (Glutes)", key: "สะโพก (Glutes)" },
+      { name: "สะโพกข้าง (Abduction)", key: "สะโพกด้านข้าง (Hip Abduction)" },
+      { name: "น่อง (Calves)", key: "น่อง (Calves)" }
     ]
   },
   {
     id: "OTHER",
-    name: "7. อื่นๆ (Other)",
+    name: "อื่นๆ",
     subs: [
-      { name: "7.1 คาร์ดิโอ/พลัยโอ (Cardio)", key: "คาร์ดิโอ/พลัยโอ (Cardio & Plyo)" },
-      { name: "7.2 โอลิมปิก/พลัง (Power)", key: "โอลิมปิก/พลัง (Olympic & Power)" }
+      { name: "คาร์ดิโอ/พลัยโอ", key: "คาร์ดิโอ/พลัยโอ (Cardio & Plyo)" },
+      { name: "โอลิมปิก/พลัง", key: "โอลิมปิก/พลัง (Olympic & Power)" }
     ]
   }
 ];
@@ -1702,9 +1706,7 @@ function switchTab(viewName) {
 
   document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
   document.getElementById('view-' + viewName).classList.add('active');
-  document.getElementById('groupTabs').style.display = viewName === 'library' ? 'flex' : 'none';
-  document.getElementById('subTabs').style.display = viewName === 'library' ? 'flex' : 'none';
-  document.getElementById('eqTabs').style.display = viewName === 'library' ? 'flex' : 'none';
+  document.getElementById('filterContainer').style.display = viewName === 'library' ? 'flex' : 'none';
   document.querySelector('.search-wrap').style.display = viewName === 'library' ? 'block' : 'none';
 }
 
@@ -1870,7 +1872,7 @@ function openDayTargetPicker(cat, name, eq) {
       row.className = 'pick-item';
       row.innerHTML = `
         <div>
-          <div style="font-weight:600;font-size:14px;color:var(--text-main);">${day.name}</div>
+          <div style="font-weight:600;font-size:13.5px;color:var(--text-main);">${day.name}</div>
           <div class="p-cat">${day.exercises.length} ท่าที่มีอยู่ในวันนี้</div>
         </div>
         <button class="pick-add">${alreadyHas ? 'มีแล้ว ✓' : '+ เพิ่มเข้าวันนี้'}</button>
@@ -1901,7 +1903,7 @@ function buildExCard(cat, name, eq, bench){
       <div class="ex-name">${name}</div>
       <div class="ex-tags-group">
         <div class="ex-eq">${eq}</div>
-        ${bench ? `<span class="bench-tag">🛋️ มีม้านั่ง</span>` : ''}
+        ${bench ? `<span class="bench-tag">ม้านั่ง</span>` : ''}
       </div>
     </div>
     <button class="btn-mini accent" data-act="quickadd" title="เพิ่มท่านี้เข้าตารางฝึก">+ เพิ่มเข้าตาราง</button>
@@ -2409,33 +2411,33 @@ function generatePersonalizedProgram() {
 
   quizContent.innerHTML = `
     <div style="padding:4px 0;">
-      <div style="text-align:center;margin-bottom:14px;">
-        <div style="font-size:36px;margin-bottom:4px;">🏋️‍♂️</div>
-        <div style="font-size:18px;font-weight:700;color:var(--accent-orange);margin-bottom:2px;">${recName}</div>
-        <div style="font-size:12.5px;color:var(--text-muted);line-height:1.4;">${recDesc}</div>
+      <div style="text-align:center;margin-bottom:12px;">
+        <div style="font-size:32px;margin-bottom:2px;">🏋️‍♂️</div>
+        <div style="font-size:16.5px;font-weight:700;color:var(--accent-orange);margin-bottom:2px;">${recName}</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.4;">${recDesc}</div>
       </div>
       
       <!-- Personal Trainer Advice Card -->
-      <div style="background:var(--accent-subtle);border:1px solid var(--accent-primary);border-radius:var(--radius-md);padding:14px;margin-bottom:16px;">
-        <div style="font-size:13.5px;font-weight:700;color:var(--accent-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+      <div style="background:var(--accent-subtle);border:1px solid var(--accent-primary);border-radius:var(--radius-md);padding:12px;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--accent-primary);margin-bottom:6px;display:flex;align-items:center;gap:5px;">
           <span>📋</span> คำแนะนำ & วิเคราะห์จากเทรนเนอร์ส่วนตัว:
         </div>
-        <div style="font-size:12px;color:var(--text-main);line-height:1.6;display:flex;flex-direction:column;gap:6px;">
+        <div style="font-size:11.5px;color:var(--text-main);line-height:1.5;display:flex;flex-direction:column;gap:5px;">
           ${trainerAdvice.map(a => `<div>${a}</div>`).join('')}
         </div>
       </div>
 
-      <div style="background:var(--panel-sub);border:1px solid var(--border-line);border-radius:var(--radius-md);padding:14px;text-align:left;margin-bottom:18px;max-height:200px;overflow-y:auto;">
-        <div style="font-size:13px;font-weight:600;color:var(--text-main);margin-bottom:8px;">รายการวันฝึกในโปรแกรมนี้:</div>
+      <div style="background:var(--panel-sub);border:1px solid var(--border-line);border-radius:var(--radius-md);padding:12px;text-align:left;margin-bottom:16px;max-height:180px;overflow-y:auto;">
+        <div style="font-size:12.5px;font-weight:600;color:var(--text-main);margin-bottom:6px;">รายการวันฝึกในโปรแกรมนี้:</div>
         ${generatedDays.map(d => `
-          <div style="font-size:12.5px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border-line);">
+          <div style="font-size:12px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px dashed var(--border-line);">
             <div style="font-weight:600;color:var(--accent-primary);">${d.name}</div>
-            <div style="color:var(--text-muted);font-size:11.5px;">${d.exercises.map(e=>e.name).join(', ')}</div>
+            <div style="color:var(--text-muted);font-size:11px;">${d.exercises.map(e=>e.name).join(', ')}</div>
           </div>
         `).join('')}
       </div>
 
-      <button class="btn-recommend" style="width:100%;justify-content:center;padding:12px;font-size:14px;" id="applyQuizProgramBtn">
+      <button class="btn-recommend" style="width:100%;justify-content:center;padding:10px;font-size:13.5px;" id="applyQuizProgramBtn">
         🚀 ยืนยันสร้างตารางตามคำแนะนำเทรนเนอร์
       </button>
     </div>
@@ -2508,8 +2510,8 @@ function renderSchedule(){
     emptyBox.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
         <div>
-          <div style="font-size:16px;font-weight:600;color:var(--text-main);margin-bottom:2px;">✨ ยังไม่มีวันฝึกของคุณ</div>
-          <div style="font-size:13px;color:var(--text-muted);">เลือก **ตารางฝึกสำเร็จรูป** ด้านล่าง หรือใช้ **ระบบแนะนำเฉพาะบุคคล** ด้านขวาเพื่อจัดตารางที่ตรงกับคุณที่สุด!</div>
+          <div style="font-size:15px;font-weight:600;color:var(--text-main);margin-bottom:2px;">✨ ยังไม่มีวันฝึกของคุณ</div>
+          <div style="font-size:12.5px;color:var(--text-muted);">เลือก **ตารางฝึกสำเร็จรูป** ด้านล่าง หรือใช้ **ระบบแนะนำเฉพาะบุคคล** ด้านขวาเพื่อจัดตารางที่ตรงกับคุณที่สุด!</div>
         </div>
         <button class="btn-recommend" id="emptyQuizBtn">🤖 ทำแบบสอบถามแนะนำโปรแกรมเฉพาะคุณ</button>
       </div>
@@ -2569,7 +2571,7 @@ function buildDayCard(day){
 
     body.innerHTML = `
       <div class="date-row">
-        <label style="font-size:13px;color:var(--text-muted);font-weight:500;">เลือกวันที่ฝึก:</label>
+        <label style="font-size:12.5px;color:var(--text-muted);font-weight:500;">เลือกวันที่ฝึก:</label>
         <input type="date" id="dateInput-${day.id}" value="${currentDate}">
         <button class="btn-mini accent" data-act="addex">+ เพิ่มท่าในวันนี้</button>
       </div>
