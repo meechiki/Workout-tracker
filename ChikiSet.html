@@ -1175,7 +1175,7 @@ footer { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; color: var(--t
 </div>
 
 <footer>
-  รายการท่าออกกำลังกายครอบคลุมท่าหลักในยิม (~140 ท่า) | บันทึกประวัติและตารางในเบราว์เซอร์อัตโนมัติ (localStorage)
+  รายการท่าออกกำลังกายครอบคลุมท่าหลักในยิม & โฮมยิม (~220+ ท่า) | บันทึกประวัติและตารางในเบราว์เซอร์อัตโนมัติ (localStorage)
 </footer>
 
 <!-- Modal Personalized Recommendation Quiz -->
@@ -1289,102 +1289,281 @@ const CATEGORY_GROUPS = [
 
 const DB = {
 "อกบน (Upper Chest)": [
-  ["Incline Barbell Bench Press","บาร์เบล"],["Incline Dumbbell Press","ดัมเบล"],
-  ["Incline Dumbbell Fly","ดัมเบล"],["Low-to-High Cable Fly","เคเบิล"],
-  ["Incline Push-Up","น้ำหนักตัว"]
+  ["Incline Barbell Bench Press","บาร์เบล"],
+  ["Incline Smith Machine Bench Press","สมิธแมชชีน"],
+  ["Incline Dumbbell Press","ดัมเบล"],
+  ["Incline Dumbbell Fly","ดัมเบล"],
+  ["Low-to-High Cable Fly","เคเบิล"],
+  ["Incline Machine Chest Press","เครื่อง"],
+  ["Incline Push-Up","น้ำหนักตัว"],
+  ["Feet-Elevated Decline Push-Up","น้ำหนักตัว"],
+  ["Incline Resistance Band Fly","ยางยืด"],
+  ["Reverse-Grip Incline Barbell Press","บาร์เบล"]
 ],
 "อกล่าง (Lower Chest)": [
-  ["Decline Barbell Bench Press","บาร์เบล"],["Decline Dumbbell Press","ดัมเบล"],
-  ["Dips (Chest-focused)","น้ำหนักตัว"],["High-to-Low Cable Fly","เคเบิล"],
-  ["Decline Push-Up","น้ำหนักตัว"]
+  ["Decline Barbell Bench Press","บาร์เบล"],
+  ["Decline Smith Machine Bench Press","สมิธแมชชีน"],
+  ["Decline Dumbbell Press","ดัมเบล"],
+  ["Decline Dumbbell Fly","ดัมเบล"],
+  ["Dips (Chest-focused)","น้ำหนักตัว"],
+  ["Weighted Dips","แผ่นน้ำหนัก/น้ำหนักตัว"],
+  ["High-to-Low Cable Fly","เคเบิล"],
+  ["Decline Machine Chest Press","เครื่อง"],
+  ["Decline Push-Up","น้ำหนักตัว"],
+  ["Standing Cable Decline Press","เคเบิล"]
 ],
 "อก (Chest)": [
-  ["Barbell Bench Press","บาร์เบล"],["Dumbbell Bench Press","ดัมเบล"],
-  ["Dumbbell Fly","ดัมเบล"],["Cable Crossover","เคเบิล"],
-  ["Pec Deck Machine","เครื่อง"],["Push-Up","น้ำหนักตัว"]
+  ["Barbell Bench Press","บาร์เบล"],
+  ["Smith Machine Bench Press","สมิธแมชชีน"],
+  ["Dumbbell Bench Press","ดัมเบล"],
+  ["Dumbbell Fly","ดัมเบล"],
+  ["Cable Crossover","เคเบิล"],
+  ["Seated Cable Chest Press","เคเบิล"],
+  ["Pec Deck Machine","เครื่อง"],
+  ["Machine Chest Press","เครื่อง"],
+  ["Chest Press Machine (Plate-Loaded)","เครื่อง"],
+  ["Standard Push-Up","น้ำหนักตัว"],
+  ["Wide-Grip Push-Up","น้ำหนักตัว"],
+  ["Resistance Band Chest Press","ยางยืด"],
+  ["Resistance Band Chest Fly","ยางยืด"],
+  ["Dumbbell Pullover (Chest-focused)","ดัมเบล"],
+  ["Floor Press (Dumbbell)","ดัมเบล"],
+  ["Floor Press (Barbell)","บาร์เบล"]
 ],
 "สะบัก (Traps)": [
-  ["Barbell Shrugs","บาร์เบล"],["Dumbbell Shrugs","ดัมเบล"],
-  ["Face Pull","เคเบิล"],["Upright Row","บาร์เบล"]
+  ["Barbell Shrugs","บาร์เบล"],
+  ["Smith Machine Shrugs","สมิธแมชชีน"],
+  ["Dumbbell Shrugs","ดัมเบล"],
+  ["Incline Dumbbell Shrugs","ดัมเบล"],
+  ["Cable Shrugs","เคเบิล"],
+  ["Face Pull","เคเบิล"],
+  ["Upright Row (Barbell)","บาร์เบล"],
+  ["Upright Row (Dumbbell)","ดัมเบล"],
+  ["Upright Row (Cable)","เคเบิล"],
+  ["Trap Bar Shrugs","บาร์เบล"],
+  ["Overhead Barbell Shrugs","บาร์เบล"]
 ],
 "หลังบน (Upper Back)": [
-  ["Barbell Row","บาร์เบล"],["Pendlay Row","บาร์เบล"],["T-Bar Row","เครื่อง"],
-  ["Seated Wide-Grip Cable Row","เคเบิล"],["Chest-Supported Row","เครื่อง/ดัมเบล"]
+  ["Barbell Row (Bent-Over)","บาร์เบล"],
+  ["Pendlay Row","บาร์เบล"],
+  ["T-Bar Row (Chest-Supported)","เครื่อง"],
+  ["T-Bar Row (Landmine)","บาร์เบล"],
+  ["Smith Machine Bent-Over Row","สมิธแมชชีน"],
+  ["Seated Wide-Grip Cable Row","เคเบิล"],
+  ["Chest-Supported Dumbbell Row","ดัมเบล"],
+  ["Single-Arm Dumbbell Row","ดัมเบล"],
+  ["Inverted Row (Australian Pull-Up)","น้ำหนักตัว"],
+  ["Band Bent-Over Row","ยางยืด"],
+  ["Meadows Row","บาร์เบล"],
+  ["Seal Row","บาร์เบล/ดัมเบล"]
 ],
 "ปีก (Lats)": [
-  ["Lat Pulldown","เคเบิล"],["Pull-Up","น้ำหนักตัว"],["Chin-Up","น้ำหนักตัว"],
-  ["Dumbbell Row","ดัมเบล"],["Seated Cable Row","เคเบิล"],["Straight-Arm Pulldown","เคเบิล"]
+  ["Lat Pulldown (Wide Grip)","เคเบิล"],
+  ["Lat Pulldown (Close Neutral Grip)","เคเบิล"],
+  ["Single-Arm Cable Lat Pulldown","เคเบิล"],
+  ["Machine Lat Pulldown","เครื่อง"],
+  ["Pull-Up","น้ำหนักตัว"],
+  ["Weighted Pull-Up","น้ำหนักตัว/แผ่นน้ำหนัก"],
+  ["Chin-Up","น้ำหนักตัว"],
+  ["Single-Arm Dumbbell Row (Lat-focused)","ดัมเบล"],
+  ["Seated Cable Row (Neutral Grip)","เคเบิล"],
+  ["Straight-Arm Pulldown (Rope/Bar)","เคเบิล"],
+  ["Dumbbell Pullover (Lat-focused)","ดัมเบล"],
+  ["Resistance Band Lat Pulldown","ยางยืด"]
 ],
 "หลังล่าง (Lower Back)": [
-  ["Deadlift","บาร์เบล"],["Rack Pull","บาร์เบล"],["Hyperextension","เครื่อง/น้ำหนักตัว"],["Good Morning","บาร์เบล"]
+  ["Deadlift (Conventional)","บาร์เบล"],
+  ["Deadlift (Sumo)","บาร์เบล"],
+  ["Trap Bar Deadlift","บาร์เบล"],
+  ["Rack Pull","บาร์เบล"],
+  ["Hyperextension (45-Degree Roman Chair)","เครื่อง/น้ำหนักตัว"],
+  ["Weighted Hyperextension","แผ่นน้ำหนัก"],
+  ["Good Morning (Barbell)","บาร์เบล"],
+  ["Good Morning (Band)","ยางยืด"],
+  ["Superman","น้ำหนักตัว"],
+  ["Bird Dog","น้ำหนักตัว"]
 ],
 "ไหล่หน้า (Front Delts)": [
-  ["Overhead Press (Barbell)","บาร์เบล"],["Dumbbell Shoulder Press","ดัมเบล"],
-  ["Arnold Press","ดัมเบล"],["Front Raise","ดัมเบล"],["Push Press","บาร์เบล"]
+  ["Overhead Press (Military Press)","บาร์เบล"],
+  ["Smith Machine Overhead Press","สมิธแมชชีน"],
+  ["Seated Dumbbell Shoulder Press","ดัมเบล"],
+  ["Standing Dumbbell Shoulder Press","ดัมเบล"],
+  ["Arnold Press","ดัมเบล"],
+  ["Dumbbell Front Raise","ดัมเบล"],
+  ["Barbell Front Raise","บาร์เบล"],
+  ["Cable Front Raise","เคเบิล"],
+  ["Plate Front Raise","แผ่นน้ำหนัก"],
+  ["Push Press","บาร์เบล"],
+  ["Machine Shoulder Press","เครื่อง"],
+  ["Pike Push-Up","น้ำหนักตัว"]
 ],
 "ไหล่ข้าง (Side Delts)": [
-  ["Lateral Raise","ดัมเบล"],["Cable Lateral Raise","เคเบิล"],["Upright Row","บาร์เบล"]
+  ["Dumbbell Lateral Raise","ดัมเบล"],
+  ["Seated Dumbbell Lateral Raise","ดัมเบล"],
+  ["Cable Lateral Raise","เคเบิล"],
+  ["Behind-the-Back Cable Lateral Raise","เคเบิล"],
+  ["Machine Lateral Raise","เครื่อง"],
+  ["Resistance Band Lateral Raise","ยางยืด"],
+  ["Upright Row (Wide Grip)","บาร์เบล"],
+  ["Lean-Away Dumbbell Lateral Raise","ดัมเบล"]
 ],
 "ไหล่หลัง (Rear Delts)": [
-  ["Rear Delt Fly","ดัมเบล"],["Face Pull","เคเบิล"],["Reverse Pec Deck","เครื่อง"]
+  ["Dumbbell Rear Delt Fly (Bent-Over)","ดัมเบล"],
+  ["Seated Rear Delt Fly","ดัมเบล"],
+  ["Cable Rear Delt Fly (Reverse Crossover)","เคเบิล"],
+  ["Face Pull (Rope)","เคเบิล"],
+  ["Reverse Pec Deck Machine","เครื่อง"],
+  ["Band Pull-Apart","ยางยืด"],
+  ["Incline Dumbbell Rear Delt Row","ดัมเบล"]
 ],
 "ไบเซ็ป (Biceps)": [
-  ["Barbell Curl","บาร์เบล"],["Dumbbell Curl","ดัมเบล"],["Hammer Curl","ดัมเบล"],
-  ["Preacher Curl","บาร์เบล/เครื่อง"],["Concentration Curl","ดัมเบล"],["Cable Curl","เคเบิล"],
-  ["EZ-Bar Curl","อีซี่บาร์"]
+  ["Barbell Curl (Standing)","บาร์เบล"],
+  ["EZ-Bar Curl","อีซี่บาร์"],
+  ["Dumbbell Bicep Curl (Alternating)","ดัมเบล"],
+  ["Dumbbell Hammer Curl","ดัมเบล"],
+  ["Incline Dumbbell Curl","ดัมเบล"],
+  ["Preacher Curl (EZ-Bar)","อีซี่บาร์"],
+  ["Preacher Curl (Dumbbell/Machine)","ดัมเบล/เครื่อง"],
+  ["Concentration Curl","ดัมเบล"],
+  ["Cable Bicep Curl","เคเบิล"],
+  ["Overhead Cable Curl","เคเบิล"],
+  ["Drag Curl","บาร์เบล/ดัมเบล"],
+  ["Reverse Grip Bicep Curl","บาร์เบล/อีซี่บาร์"],
+  ["Resistance Band Curl","ยางยืด"]
 ],
 "ไตรเซ็ป (Triceps)": [
-  ["Close-Grip Bench Press","บาร์เบล"],["Tricep Pushdown","เคเบิล"],
-  ["Overhead Tricep Extension","ดัมเบล"],["Skull Crushers","อีซี่บาร์"],
-  ["Dips (Tricep-focused)","น้ำหนักตัว"],["Rope Pushdown","เคเบิล"]
+  ["Close-Grip Barbell Bench Press","บาร์เบล"],
+  ["Tricep Rope Pushdown","เคเบิล"],
+  ["Tricep Straight-Bar Pushdown","เคเบิล"],
+  ["Single-Arm Cable Pushdown","เคเบิล"],
+  ["Overhead Dumbbell Tricep Extension","ดัมเบล"],
+  ["Overhead Cable Rope Extension","เคเบิล"],
+  ["Skull Crushers (EZ-Bar Extension)","อีซี่บาร์"],
+  ["Dumbbell Skull Crushers","ดัมเบล"],
+  ["Dips (Tricep-focused)","น้ำหนักตัว"],
+  ["Bench Dips","น้ำหนักตัว"],
+  ["Dumbbell Kickback","ดัมเบล"],
+  ["Cable Kickback","เคเบิล"],
+  ["Diamond Push-Up","น้ำหนักตัว"]
 ],
 "ปลายแขน (Forearms)": [
-  ["Wrist Curl","บาร์เบล/ดัมเบล"],["Reverse Wrist Curl","บาร์เบล/ดัมเบล"],
-  ["Farmer's Carry","ดัมเบล/เคทเทิลเบล"],["Plate Pinch","แผ่นน้ำหนัก"],["Dead Hang","บาร์โหน"]
+  ["Wrist Curl (Barbell/Dumbbell)","บาร์เบล/ดัมเบล"],
+  ["Reverse Wrist Curl","บาร์เบล/ดัมเบล"],
+  ["Reverse Barbell Curl","บาร์เบล/อีซี่บาร์"],
+  ["Farmer's Carry (Dumbbell/Kettlebell)","ดัมเบล/เคทเทิลเบล"],
+  ["Plate Pinch Hold","แผ่นน้ำหนัก"],
+  ["Dead Hang","บาร์โหน"],
+  ["Wrist Roller","เครื่อง/ดัมเบล"]
 ],
 "แกนกลางลำตัว (Abs/Core)": [
-  ["Plank","น้ำหนักตัว"],["Crunch","น้ำหนักตัว"],["Sit-Up","น้ำหนักตัว"],
-  ["Hanging Leg Raise","บาร์โหน"],["Cable Crunch","เคเบิล"],["Ab Wheel Rollout","ล้อเอบ"]
+  ["Plank (Standard)","น้ำหนักตัว"],
+  ["Weighted Plank","แผ่นน้ำหนัก"],
+  ["Ab Wheel Rollout","ล้อเอบ"],
+  ["Hanging Leg Raise","บาร์โหน"],
+  ["Hanging Knee Raise","บาร์โหน"],
+  ["Cable Crunch","เคเบิล"],
+  ["Floor Crunch","น้ำหนักตัว"],
+  ["Sit-Up","น้ำหนักตัว"],
+  ["Decline Sit-Up","น้ำหนักตัว/แผ่นน้ำหนัก"],
+  ["Reverse Crunch","น้ำหนักตัว"],
+  ["Mountain Climbers","น้ำหนักตัว"],
+  ["Dragon Flag","น้ำหนักตัว"],
+  ["L-Sit","น้ำหนักตัว/บาร์โหน"]
 ],
 "หน้าท้องข้าง (Obliques)": [
-  ["Russian Twist","น้ำหนักตัว/ดัมเบล"],["Side Plank","น้ำหนักตัว"],
-  ["Bicycle Crunch","น้ำหนักตัว"],["Cable Woodchopper","เคเบิล"],
-  ["Hanging Side Leg Raise","บาร์โหน"]
+  ["Russian Twist (Weight/Dumbbell)","น้ำหนักตัว/ดัมเบล"],
+  ["Side Plank","น้ำหนักตัว"],
+  ["Bicycle Crunch","น้ำหนักตัว"],
+  ["Cable Woodchopper (High-to-Low)","เคเบิล"],
+  ["Cable Woodchopper (Low-to-High)","เคเบิล"],
+  ["Dumbbell Side Bend","ดัมเบล"],
+  ["Hanging Side Knee Raise","บาร์โหน"],
+  ["Windshield Wipers","บาร์โหน/น้ำหนักตัว"]
 ],
 "ต้นขาหน้า (Quads)": [
-  ["Back Squat","บาร์เบล"],["Front Squat","บาร์เบล"],["Leg Press","เครื่อง"],
-  ["Leg Extension","เครื่อง"],["Bulgarian Split Squat","ดัมเบล"],["Walking Lunge","ดัมเบล"],
-  ["Goblet Squat","ดัมเบล/เคทเทิลเบล"]
+  ["Barbell Back Squat","บาร์เบล"],
+  ["Barbell Front Squat","บาร์เบล"],
+  ["Smith Machine Squat","สมิธแมชชีน"],
+  ["Hack Squat Machine","เครื่อง"],
+  ["Leg Press","เครื่อง"],
+  ["Leg Extension Machine","เครื่อง"],
+  ["Bulgarian Split Squat","ดัมเบล/บาร์เบล"],
+  ["Walking Lunge","ดัมเบล/บาร์เบล"],
+  ["Reverse Lunge","ดัมเบล/บาร์เบล"],
+  ["Goblet Squat","ดัมเบล/เคทเทิลเบล"],
+  ["Sissy Squat","น้ำหนักตัว/เครื่อง"],
+  ["Step-Up","ดัมเบล"],
+  ["Resistance Band Squat","ยางยืด"]
 ],
 "ต้นขาหลัง (Hamstrings)": [
-  ["Romanian Deadlift","บาร์เบล"],["Lying Leg Curl","เครื่อง"],["Good Morning","บาร์เบล"],
-  ["Stiff-Leg Deadlift","บาร์เบล"],["Nordic Curl","น้ำหนักตัว"]
+  ["Romanian Deadlift (Barbell)","บาร์เบล"],
+  ["Romanian Deadlift (Dumbbell)","ดัมเบล"],
+  ["Single-Leg Romanian Deadlift","ดัมเบล"],
+  ["Lying Leg Curl Machine","เครื่อง"],
+  ["Seated Leg Curl Machine","เครื่อง"],
+  ["Standing Single-Leg Curl","เครื่อง/เคเบิล"],
+  ["Stiff-Leg Deadlift","บาร์เบล"],
+  ["Good Morning (Barbell)","บาร์เบล"],
+  ["Nordic Hamstring Curl","น้ำหนักตัว"],
+  ["Swiss Ball Leg Curl","น้ำหนักตัว"]
 ],
 "สะโพก (Glutes)": [
-  ["Hip Thrust","บาร์เบล"],["Glute Bridge","บาร์เบล/น้ำหนักตัว"],["Cable Glute Kickback","เคเบิล"],
-  ["Sumo Deadlift","บาร์เบล"]
+  ["Barbell Hip Thrust","บาร์เบล"],
+  ["Dumbbell Hip Thrust","ดัมเบล"],
+  ["Glute Bridge","บาร์เบล/น้ำหนักตัว"],
+  ["Cable Glute Kickback","เคเบิล"],
+  ["Machine Glute Drive / Thrust","เครื่อง"],
+  ["Sumo Deadlift","บาร์เบล"],
+  ["Frog Pumps","น้ำหนักตัว"],
+  ["Cable Pull-Through","เคเบิล"],
+  ["Step-Up (Glute-Focused)","ดัมเบล"]
 ],
 "สะโพกด้านข้าง (Hip Abduction)": [
-  ["Seated Hip Abduction Machine","เครื่อง"],["Cable Hip Abduction","เคเบิล"],
-  ["Clamshell with Band","ยางยืด"],["Side-Lying Leg Raise","น้ำหนักตัว"],
-  ["Monster Walk with Band","ยางยืด"]
+  ["Seated Hip Abduction Machine","เครื่อง"],
+  ["Standing Cable Hip Abduction","เคเบิล"],
+  ["Clamshell with Band","ยางยืด"],
+  ["Side-Lying Leg Raise","น้ำหนักตัว"],
+  ["Monster Walk with Band","ยางยืด"],
+  ["Banded Hip Abduction","ยางยืด"]
 ],
 "ต้นขาด้านใน (Hip Adduction)": [
-  ["Seated Hip Adduction Machine","เครื่อง"],["Cable Hip Adduction","เคเบิล"],
-  ["Sumo Squat","บาร์เบล/ดัมเบล"],["Side Lunge","ดัมเบล"],
-  ["Copenhagen Plank","น้ำหนักตัว"]
+  ["Seated Hip Adduction Machine","เครื่อง"],
+  ["Standing Cable Hip Adduction","เคเบิล"],
+  ["Sumo Squat (Barbell/Dumbbell)","บาร์เบล/ดัมเบล"],
+  ["Side Lunge / Cossack Squat","ดัมเบล/น้ำหนักตัว"],
+  ["Copenhagen Adductor Plank","น้ำหนักตัว"]
 ],
 "น่อง (Calves)": [
-  ["Standing Calf Raise","เครื่อง/บาร์เบล"],["Seated Calf Raise","เครื่อง"],
-  ["Donkey Calf Raise","เครื่อง"]
+  ["Standing Barbell Calf Raise","บาร์เบล"],
+  ["Standing Calf Raise Machine","เครื่อง"],
+  ["Smith Machine Calf Raise","สมิธแมชชีน"],
+  ["Seated Calf Raise Machine","เครื่อง"],
+  ["Single-Leg Dumbbell Calf Raise","ดัมเบล"],
+  ["Donkey Calf Raise","เครื่อง/น้ำหนักตัว"],
+  ["Leg Press Calf Press","เครื่อง"]
 ],
 "คาร์ดิโอ/พลัยโอ (Cardio & Plyo)": [
-  ["Treadmill Run","เครื่อง"],["Rowing Machine","เครื่อง"],["Jump Rope","เชือกกระโดด"],
-  ["Burpee","น้ำหนักตัว"],["Assault Bike","เครื่อง"]
+  ["Treadmill Running / Sprinting","เครื่อง"],
+  ["Elliptical Trainer","เครื่อง"],
+  ["Stationary Bike / Spin Bike","เครื่อง"],
+  ["Assault Air Bike","เครื่อง"],
+  ["Rowing Machine","เครื่อง"],
+  ["SkiErg Ergometer","เครื่อง"],
+  ["Jump Rope / Speed Rope","เชือกกระโดด"],
+  ["Burpee","น้ำหนักตัว"],
+  ["Box Jump","กล่องพลัยโอ"],
+  ["Jumping Jacks","น้ำหนักตัว"],
+  ["High Knees","น้ำหนักตัว"],
+  ["Kettlebell Swing","เคทเทิลเบล"]
 ],
 "โอลิมปิก/พลัง (Olympic & Power)": [
-  ["Clean and Jerk","บาร์เบล"],["Snatch","บาร์เบล"],["Power Clean","บาร์เบล"],
-  ["Kettlebell Swing","เคทเทิลเบล"]
+  ["Clean and Jerk","บาร์เบล"],
+  ["Snatch","บาร์เบล"],
+  ["Power Clean","บาร์เบล"],
+  ["Hang Clean","บาร์เบล"],
+  ["Push Press","บาร์เบล"],
+  ["Kettlebell Snatch","เคทเทิลเบล"],
+  ["Kettlebell Clean & Press","เคทเทิลเบล"]
 ]
 };
 
@@ -1399,31 +1578,31 @@ const PRESETS = [
         name: "Push (อก/ไหล่/ไตรเซ็ป)",
         exercises: [
           {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
           {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Lateral Raise", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
         ]
       },
       {
         name: "Pull (หลัง/ปีก/ไบเซ็ป)",
         exercises: [
-          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
-          {cat:"หลังบน (Upper Back)", name:"Barbell Row", eq:"บาร์เบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull", eq:"เคเบิล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl", eq:"บาร์เบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Hammer Curl", eq:"ดัมเบล"}
+          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Hammer Curl", eq:"ดัมเบล"}
         ]
       },
       {
         name: "Legs & Core (ขา/แกนกลาง)",
         exercises: [
-          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension", eq:"เครื่อง"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl", eq:"เครื่อง"},
-          {cat:"น่อง (Calves)", name:"Standing Calf Raise", eq:"เครื่อง/บาร์เบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension Machine", eq:"เครื่อง"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl Machine", eq:"เครื่อง"},
+          {cat:"น่อง (Calves)", name:"Standing Calf Raise Machine", eq:"เครื่อง"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
         ]
       }
     ]
@@ -1437,21 +1616,21 @@ const PRESETS = [
         name: "Upper Body (ร่างกายส่วนบน)",
         exercises: [
           {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
-          {cat:"หลังบน (Upper Back)", name:"Barbell Row", eq:"บาร์เบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Curl", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Bicep Curl (Alternating)", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
         ]
       },
       {
         name: "Lower Body & Core (ร่างกายส่วนล่าง)",
         exercises: [
-          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
           {cat:"ต้นขาหน้า (Quads)", name:"Leg Press", eq:"เครื่อง"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl", eq:"เครื่อง"},
-          {cat:"น่อง (Calves)", name:"Standing Calf Raise", eq:"เครื่อง/บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl Machine", eq:"เครื่อง"},
+          {cat:"น่อง (Calves)", name:"Standing Calf Raise Machine", eq:"เครื่อง"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Hanging Leg Raise", eq:"บาร์โหน"}
         ]
       }
@@ -1465,12 +1644,12 @@ const PRESETS = [
       {
         name: "Full Body (เล่นครบทุกมัด)",
         exercises: [
-          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
           {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
         ]
       }
     ]
@@ -1937,48 +2116,48 @@ function generatePersonalizedProgram() {
         name: "Day 1 - Full Body A (อก/หลัง/ขา)",
         exercises: isHome ? [
           {cat:"อก (Chest)", name:"Dumbbell Bench Press", eq:"ดัมเบล"},
-          {cat:"ปีก (Lats)", name:"Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"ปีก (Lats)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
           {cat:"ต้นขาหน้า (Quads)", name:"Goblet Squat", eq:"ดัมเบล/เคทเทิลเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Dumbbell Shoulder Press", eq:"ดัมเบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
         ] : [
           {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
+          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Hanging Leg Raise", eq:"บาร์โหน"}
         ]
       },
       {
         name: "Day 2 - Full Body B (ขาหลัง/ไหล่/แขน)",
         exercises: isHome ? [
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล/ดัมเบล"},
-          {cat:"หลังบน (Upper Back)", name:"Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Lateral Raise", eq:"ดัมเบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Curl", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Tricep Extension", eq:"ดัมเบล"}
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
+          {cat:"หลังบน (Upper Back)", name:"Chest-Supported Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Bicep Curl (Alternating)", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Dumbbell Tricep Extension", eq:"ดัมเบล"}
         ] : [
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
           {cat:"หลังบน (Upper Back)", name:"Seated Wide-Grip Cable Row", eq:"เคเบิล"},
           {cat:"ไหล่ข้าง (Side Delts)", name:"Cable Lateral Raise", eq:"เคเบิล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl", eq:"บาร์เบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
         ]
       },
       {
         name: "Day 3 - Full Body C (เก็บมัดสร้างทรง)",
         exercises: isHome ? [
           {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล/บาร์เบล"},
           {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Rear Delt Fly", eq:"ดัมเบล"},
-          {cat:"หน้าท้องข้าง (Obliques)", name:"Russian Twist", eq:"น้ำหนักตัว/ดัมเบล"}
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Dumbbell Rear Delt Fly (Bent-Over)", eq:"ดัมเบล"},
+          {cat:"หน้าท้องข้าง (Obliques)", name:"Russian Twist (Weight/Dumbbell)", eq:"น้ำหนักตัว/ดัมเบล"}
         ] : [
           {cat:"อกบน (Upper Chest)", name:"Incline Barbell Bench Press", eq:"บาร์เบล"},
           {cat:"ต้นขาหน้า (Quads)", name:"Leg Press", eq:"เครื่อง"},
           {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull", eq:"เคเบิล"},
-          {cat:"หน้าท้องข้าง (Obliques)", name:"Cable Woodchopper", eq:"เคเบิล"}
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
+          {cat:"หน้าท้องข้าง (Obliques)", name:"Cable Woodchopper (High-to-Low)", eq:"เคเบิล"}
         ]
       }
     ];
@@ -1991,59 +2170,59 @@ function generatePersonalizedProgram() {
         name: "Day 1 - Upper Body A (เน้นอก/ปีก)",
         exercises: isHome ? [
           {cat:"อก (Chest)", name:"Dumbbell Bench Press", eq:"ดัมเบล"},
-          {cat:"ปีก (Lats)", name:"Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Dumbbell Shoulder Press", eq:"ดัมเบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Hammer Curl", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Tricep Extension", eq:"ดัมเบล"}
+          {cat:"ปีก (Lats)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Hammer Curl", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Dumbbell Tricep Extension", eq:"ดัมเบล"}
         ] : [
           {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl", eq:"บาร์เบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
         ]
       },
       {
         name: "Day 2 - Lower Body A (เน้นต้นขาหน้า/ก้น)",
         exercises: isHome ? [
           {cat:"ต้นขาหน้า (Quads)", name:"Goblet Squat", eq:"ดัมเบล/เคทเทิลเบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Walking Lunge", eq:"ดัมเบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Walking Lunge", eq:"ดัมเบล/บาร์เบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
         ] : [
-          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension", eq:"เครื่อง"},
-          {cat:"น่อง (Calves)", name:"Standing Calf Raise", eq:"เครื่อง/บาร์เบล"}
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension Machine", eq:"เครื่อง"},
+          {cat:"น่อง (Calves)", name:"Standing Calf Raise Machine", eq:"เครื่อง"}
         ]
       },
       {
         name: "Day 3 - Upper Body B (เน้นหลังบน/ไหล่ข้าง)",
         exercises: isHome ? [
           {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"หลังบน (Upper Back)", name:"Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Lateral Raise", eq:"ดัมเบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Rear Delt Fly", eq:"ดัมเบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Curl", eq:"ดัมเบล"}
+          {cat:"หลังบน (Upper Back)", name:"Chest-Supported Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Dumbbell Rear Delt Fly (Bent-Over)", eq:"ดัมเบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Bicep Curl (Alternating)", eq:"ดัมเบล"}
         ] : [
           {cat:"อกบน (Upper Chest)", name:"Incline Barbell Bench Press", eq:"บาร์เบล"},
-          {cat:"หลังบน (Upper Back)", name:"Barbell Row", eq:"บาร์เบล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
           {cat:"ไหล่ข้าง (Side Delts)", name:"Cable Lateral Raise", eq:"เคเบิล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull", eq:"เคเบิล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Close-Grip Bench Press", eq:"บาร์เบล"}
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Close-Grip Barbell Bench Press", eq:"บาร์เบล"}
         ]
       },
       {
         name: "Day 4 - Lower Body B (เน้นต้นขาหลัง/แกนกลาง)",
         exercises: isHome ? [
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล"},
-          {cat:"สะโพก (Glutes)", name:"Glute Bridge", eq:"ดัมเบล/น้ำหนักตัว"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล/บาร์เบล"},
+          {cat:"สะโพก (Glutes)", name:"Glute Bridge", eq:"บาร์เบล/น้ำหนักตัว"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Ab Wheel Rollout", eq:"ล้อเอบ"}
         ] : [
-          {cat:"หลังล่าง (Lower Back)", name:"Deadlift", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl", eq:"เครื่อง"},
-          {cat:"สะโพก (Glutes)", name:"Hip Thrust", eq:"บาร์เบล"},
+          {cat:"หลังล่าง (Lower Back)", name:"Deadlift (Conventional)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl Machine", eq:"เครื่อง"},
+          {cat:"สะโพก (Glutes)", name:"Barbell Hip Thrust", eq:"บาร์เบล"},
           {cat:"แกนกลางลำตัว (Abs/Core)", name:"Hanging Leg Raise", eq:"บาร์โหน"}
         ]
       }
@@ -2058,46 +2237,46 @@ function generatePersonalizedProgram() {
         exercises: isHome ? [
           {cat:"อก (Chest)", name:"Dumbbell Bench Press", eq:"ดัมเบล"},
           {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Dumbbell Shoulder Press", eq:"ดัมเบล"},
-          {cat:"ไหล่ข้าง (Side Delts)", name:"Lateral Raise", eq:"ดัมเบล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Tricep Extension", eq:"ดัมเบล"}
+          {cat:"ไหล่หน้า (Front Delts)", name:"Seated Dumbbell Shoulder Press", eq:"ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Dumbbell Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Overhead Dumbbell Tricep Extension", eq:"ดัมเบล"}
         ] : [
           {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
           {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
-          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Military Press)", eq:"บาร์เบล"},
           {cat:"ไหล่ข้าง (Side Delts)", name:"Cable Lateral Raise", eq:"เคเบิล"},
-          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Rope Pushdown", eq:"เคเบิล"}
         ]
       },
       {
         name: "Day 2 - Pull (หลัง/ปีก/ไหล่หลัง/ไบเซ็ป)",
         exercises: isHome ? [
           {cat:"ปีก (Lats)", name:"Pull-Up", eq:"น้ำหนักตัว"},
-          {cat:"หลังบน (Upper Back)", name:"Dumbbell Row", eq:"ดัมเบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Rear Delt Fly", eq:"ดัมเบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl", eq:"บาร์เบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Hammer Curl", eq:"ดัมเบล"}
+          {cat:"หลังบน (Upper Back)", name:"Single-Arm Dumbbell Row", eq:"ดัมเบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Dumbbell Rear Delt Fly (Bent-Over)", eq:"ดัมเบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Hammer Curl", eq:"ดัมเบล"}
         ] : [
-          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
-          {cat:"หลังบน (Upper Back)", name:"Barbell Row", eq:"บาร์เบล"},
-          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull", eq:"เคเบิล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl", eq:"บาร์เบล"},
-          {cat:"ไบเซ็ป (Biceps)", name:"Preacher Curl", eq:"บาร์เบล/เครื่อง"}
+          {cat:"ปีก (Lats)", name:"Lat Pulldown (Wide Grip)", eq:"เคเบิล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row (Bent-Over)", eq:"บาร์เบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull (Rope)", eq:"เคเบิล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl (Standing)", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Preacher Curl (EZ-Bar)", eq:"อีซี่บาร์"}
         ]
       },
       {
         name: "Day 3 - Legs & Abs (ขา/ท้อง)",
         exercises: isHome ? [
           {cat:"ต้นขาหน้า (Quads)", name:"Goblet Squat", eq:"ดัมเบล/เคทเทิลเบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"ดัมเบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล"},
-          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Dumbbell)", eq:"ดัมเบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Bulgarian Split Squat", eq:"ดัมเบล/บาร์เบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank (Standard)", eq:"น้ำหนักตัว"}
         ] : [
-          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
-          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension", eq:"เครื่อง"},
-          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl", eq:"เครื่อง"},
-          {cat:"น่อง (Calves)", name:"Standing Calf Raise", eq:"เครื่อง/บาร์เบล"}
+          {cat:"ต้นขาหน้า (Quads)", name:"Barbell Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift (Barbell)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension Machine", eq:"เครื่อง"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl Machine", eq:"เครื่อง"},
+          {cat:"น่อง (Calves)", name:"Standing Calf Raise Machine", eq:"เครื่อง"}
         ]
       }
     ];
