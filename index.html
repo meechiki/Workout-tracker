@@ -601,27 +601,139 @@ h1 span {
   border-radius: var(--radius-lg);
 }
 
-/* Schedule UI */
+/* Schedule UI Enhancements */
 .sched-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  gap: 10px; flex-wrap: wrap;
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
 }
 
-.new-day-form { display: flex; gap: 6px; width: 100%; max-width: 440px; }
+.new-day-form { display: flex; gap: 8px; width: 100%; flex-wrap: wrap; }
 
 .new-day-form input {
   flex: 1;
-  background: var(--panel-bg);
-  border: 1px solid var(--border-color);
+  min-width: 220px;
+  background: var(--panel-sub);
+  border: 1px solid var(--border-line);
   border-radius: var(--radius-md);
-  padding: 8px 12px;
+  padding: 9px 14px;
   color: var(--text-main);
   font-family: 'Kanit', sans-serif;
   font-size: 13.5px;
   outline: none;
+}
+
+.new-day-form input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+/* Preset Template Quick-Create Section */
+.template-section {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-line);
+}
+
+.template-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.template-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tmpl-chip {
+  font-family: 'Kanit', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--panel-sub);
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tmpl-chip:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Big Preset Template Cards for Empty State */
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.preset-card {
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.preset-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.preset-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.preset-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 3px;
+}
+
+.preset-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.preset-btn {
+  font-family: 'Kanit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: var(--accent-subtle);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  text-align: center;
+  align-self: flex-start;
 }
 
 .day-card {
@@ -1043,6 +1155,95 @@ const DB = {
 ]
 };
 
+/* Program Templates Preset Programs */
+const PRESETS = [
+  {
+    icon: "🔥",
+    name: "Push / Pull / Legs (PPL)",
+    desc: "ตารางยอดฮิต 3 วัน (Push = อก/ไหล่/ไตรเซ็ป, Pull = หลัง/ปีก/ไบเซ็ป, Legs = ขา/ท้อง)",
+    days: [
+      {
+        name: "Push (อก/ไหล่/ไตรเซ็ป)",
+        exercises: [
+          {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
+          {cat:"อกบน (Upper Chest)", name:"Incline Dumbbell Press", eq:"ดัมเบล"},
+          {cat:"ไหล่ข้าง (Side Delts)", name:"Lateral Raise", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+        ]
+      },
+      {
+        name: "Pull (หลัง/ปีก/ไบเซ็ป)",
+        exercises: [
+          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row", eq:"บาร์เบล"},
+          {cat:"ไหล่หลัง (Rear Delts)", name:"Face Pull", eq:"เคเบิล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Barbell Curl", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Hammer Curl", eq:"ดัมเบล"}
+        ]
+      },
+      {
+        name: "Legs & Core (ขา/แกนกลาง)",
+        exercises: [
+          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Leg Extension", eq:"เครื่อง"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl", eq:"เครื่อง"},
+          {cat:"น่อง (Calves)", name:"Standing Calf Raise", eq:"เครื่อง/บาร์เบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+        ]
+      }
+    ]
+  },
+  {
+    icon: "⚡",
+    name: "Upper / Lower Split",
+    desc: "ตารางแบ่งส่วนบนส่วนล่าง 2 วัน เหมาะสำหรับผู้เล่น 2-4 วันต่อสัปดาห์",
+    days: [
+      {
+        name: "Upper Body (ร่างกายส่วนบน)",
+        exercises: [
+          {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
+          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
+          {cat:"หลังบน (Upper Back)", name:"Barbell Row", eq:"บาร์เบล"},
+          {cat:"ไบเซ็ป (Biceps)", name:"Dumbbell Curl", eq:"ดัมเบล"},
+          {cat:"ไตรเซ็ป (Triceps)", name:"Tricep Pushdown", eq:"เคเบิล"}
+        ]
+      },
+      {
+        name: "Lower Body & Core (ร่างกายส่วนล่าง)",
+        exercises: [
+          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
+          {cat:"ต้นขาหน้า (Quads)", name:"Leg Press", eq:"เครื่อง"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Lying Leg Curl", eq:"เครื่อง"},
+          {cat:"น่อง (Calves)", name:"Standing Calf Raise", eq:"เครื่อง/บาร์เบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Hanging Leg Raise", eq:"บาร์โหน"}
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🏆",
+    name: "Full Body (เล่นทั่วร่างกาย)",
+    desc: "ตารางเล่นครบทุกส่วนในวันเดียว เหมาะสำหรับผู้มีเวลาน้อย ฝึก 2-3 วันต่อสัปดาห์",
+    days: [
+      {
+        name: "Full Body (เล่นครบทุกมัด)",
+        exercises: [
+          {cat:"ต้นขาหน้า (Quads)", name:"Back Squat", eq:"บาร์เบล"},
+          {cat:"อก (Chest)", name:"Barbell Bench Press", eq:"บาร์เบล"},
+          {cat:"ปีก (Lats)", name:"Lat Pulldown", eq:"เคเบิล"},
+          {cat:"ไหล่หน้า (Front Delts)", name:"Overhead Press (Barbell)", eq:"บาร์เบล"},
+          {cat:"ต้นขาหลัง (Hamstrings)", name:"Romanian Deadlift", eq:"บาร์เบล"},
+          {cat:"แกนกลางลำตัว (Abs/Core)", name:"Plank", eq:"น้ำหนักตัว"}
+        ]
+      }
+    ]
+  }
+];
+
 const FLAT = [];
 Object.entries(DB).forEach(([cat,list])=> list.forEach(([name,eq])=> FLAT.push({cat,name,eq})));
 
@@ -1278,30 +1479,93 @@ headerTimerBtn.addEventListener('click', () => {
 const schedView = document.getElementById('view-schedule');
 let pickerTargetDay = null;
 
+function applyPreset(presetIndex) {
+  const p = PRESETS[presetIndex];
+  if(!p) return;
+  p.days.forEach(d => {
+    schedule.push({
+      id: 'd' + Date.now() + Math.random().toString(36).substr(2,4),
+      name: d.name,
+      exercises: [...d.exercises]
+    });
+  });
+  saveSchedule();
+  renderSchedule();
+}
+
+function createQuickDay(nameStr) {
+  schedule.push({
+    id: 'd' + Date.now(),
+    name: nameStr,
+    exercises: []
+  });
+  saveSchedule();
+  renderSchedule();
+}
+
 function renderSchedule(){
   schedView.innerHTML = '';
+  
+  // Toolbar Section
   const toolbar = document.createElement('div'); toolbar.className='sched-toolbar';
   toolbar.innerHTML = `
     <div class="new-day-form">
-      <input id="newDayName" placeholder="สร้างชื่อวันฝึกใหม่ เช่น Day 1 - อก/ไตรเซ็ป">
+      <input id="newDayName" placeholder="พิมพ์ชื่อวันฝึกใหม่ เช่น Day 1 - อก/ไตรเซ็ป...">
       <button class="btn-mini accent" id="addDayBtn">+ สร้างวันใหม่</button>
+    </div>
+    <div class="template-section">
+      <div class="template-title">⚡ ปุ่มลัดสร้างชื่อวันฝึกแบบเร็ว:</div>
+      <div class="template-chips">
+        <button class="tmpl-chip" data-name="Upper Body (ส่วนบน)">💪 Upper Body</button>
+        <button class="tmpl-chip" data-name="Lower Body (ส่วนล่าง)">🦵 Lower Body</button>
+        <button class="tmpl-chip" data-name="Push (อก/ไหล่/ไตรเซ็ป)">🔥 Push</button>
+        <button class="tmpl-chip" data-name="Pull (หลัง/ปีก/ไบเซ็ป)">🎯 Pull</button>
+        <button class="tmpl-chip" data-name="Legs (ขา/ท้อง)">🦵 Legs</button>
+        <button class="tmpl-chip" data-name="Full Body (รวมทุกส่วน)">🏆 Full Body</button>
+      </div>
     </div>`;
   schedView.appendChild(toolbar);
+
   document.getElementById('addDayBtn').addEventListener('click', ()=>{
     const inp = document.getElementById('newDayName');
     const name = inp.value.trim();
     if(!name) return;
-    schedule.push({id: 'd'+Date.now(), name, exercises:[]});
-    saveSchedule(); inp.value=''; renderSchedule();
+    createQuickDay(name);
+    inp.value='';
   });
 
+  toolbar.querySelectorAll('.tmpl-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      createQuickDay(btn.dataset.name);
+    });
+  });
+
+  // Empty State with Preset Program Cards
   if(schedule.length===0){
-    const e = document.createElement('div'); e.className='empty';
-    e.textContent = 'ยังไม่มีวันฝึก — เริ่มต้นสร้างวันฝึกวันแรกของคุณได้เลยข้างบนนี้!';
-    schedView.appendChild(e); return;
+    const emptyBox = document.createElement('div'); emptyBox.className='empty';
+    emptyBox.style.textAlign = 'left';
+    emptyBox.innerHTML = `
+      <div style="font-size:16px;font-weight:600;color:var(--text-main);margin-bottom:4px;">✨ ยังไม่มีวันฝึกของคุณ</div>
+      <div style="font-size:13px;color:var(--text-muted);">คุณสามารถพิมพ์สร้างวันใหม่ด้านบน หรือเลือก **ตารางฝึกสำเร็จรูป (Presets)** ด้านล่างนี้เพื่อสร้างโปรแกรมพร้อมท่าให้ทันทีใน 1 คลิก!</div>
+      
+      <div class="preset-grid">
+        ${PRESETS.map((p, i) => `
+          <div class="preset-card" onclick="applyPreset(${i})">
+            <div>
+              <div class="preset-icon">${p.icon}</div>
+              <div class="preset-name">${p.name}</div>
+              <div class="preset-desc">${p.desc}</div>
+            </div>
+            <div class="preset-btn">+ สร้างโปรแกรมนี้</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    schedView.appendChild(emptyBox);
+    return;
   }
 
-  schedule.forEach(day=> schedView.appendChild(buildDayCard(day)));
+  schedule.forEach(day => schedView.appendChild(buildDayCard(day)));
 }
 
 function buildDayCard(day){
